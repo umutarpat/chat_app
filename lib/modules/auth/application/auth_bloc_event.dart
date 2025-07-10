@@ -1,6 +1,6 @@
 sealed class AuthBlocEvent {}
 
-final class SetupEvent extends AuthBlocEvent {}
+final class SetupUserEvent extends AuthBlocEvent {}
 
 final class LoginEvent extends AuthBlocEvent {
   final String email;

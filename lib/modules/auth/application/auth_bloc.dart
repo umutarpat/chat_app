@@ -6,10 +6,10 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
-  final AuthBlocSetupUseCase setupApp;
+  final AuthBlocSetupUserUseCase setupApp;
 
   AuthBloc(this.setupApp) : super(AuthBlocState(isLoading: true)) {
-    on<SetupEvent>((event, emit) {
+    on<SetupUserEvent>((event, emit) {
       emit(state.copyWith(isLoading: true));
       setupApp.call();
       emit(state.copyWith(isLoading: false));

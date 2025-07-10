@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage>
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<AuthBloc>(context).add(SetupEvent());
+    BlocProvider.of<AuthBloc>(context).add(SetupUserEvent());
 
     _animationController = AnimationController(
       duration: Duration(milliseconds: 500),

@@ -2,10 +2,10 @@ import 'package:chat_app/modules/auth/domain/repositories/auth_repository_interf
 import 'package:injectable/injectable.dart';
 
 @injectable
-class AuthBlocSetupUseCase {
+class AuthBlocSetupUserUseCase {
   final AuthRepositoryInterface repository;
 
-  AuthBlocSetupUseCase(this.repository);
+  AuthBlocSetupUserUseCase(this.repository);
 
   Future<void> call() async {
     await repository.setup();

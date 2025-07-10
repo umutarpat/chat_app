@@ -28,11 +28,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i517.AuthRepositoryInterface>(
       () => _i715.AuthRepository(),
     );
-    gh.factory<_i762.AuthBlocSetupUseCase>(
-      () => _i762.AuthBlocSetupUseCase(gh<_i517.AuthRepositoryInterface>()),
+    gh.factory<_i762.AuthBlocSetupUserUseCase>(
+      () => _i762.AuthBlocSetupUserUseCase(gh<_i517.AuthRepositoryInterface>()),
     );
     gh.factory<_i826.AuthBloc>(
-      () => _i826.AuthBloc(gh<_i762.AuthBlocSetupUseCase>()),
+      () => _i826.AuthBloc(gh<_i762.AuthBlocSetupUserUseCase>()),
     );
     return this;
   }
