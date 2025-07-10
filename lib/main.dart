@@ -18,6 +18,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Clusterix Chat App',
       theme: lightTheme(context),
+      builder: (context, widget) {
+        return GestureDetector(
+          onTap: () {
+            // makes keyboards go away when tapping outside of text fields
+            WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+          },
+          child: widget!,
+        );
+      },
     );
   }
 }
