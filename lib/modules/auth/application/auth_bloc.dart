@@ -9,9 +9,9 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final AuthBlocSetupUserUseCase setupApp;
 
   AuthBloc(this.setupApp) : super(AuthBlocState(isLoading: true)) {
-    on<SetupUserEvent>((event, emit) {
+    on<SetupUserEvent>((event, emit) async {
       emit(state.copyWith(isLoading: true));
-      setupApp.call();
+      await setupApp.call();
       emit(state.copyWith(isLoading: false));
     });
   }
