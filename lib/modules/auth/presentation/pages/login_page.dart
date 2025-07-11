@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   bool _showTextFields = false;
+  bool _obscurePassword = true;
   late AnimationController _animationController;
   late Animation<double> _heightAnimation;
   final Color _cardColor = Color.fromARGB(255, 232, 235, 240);
@@ -45,6 +46,12 @@ class _LoginPageState extends State<LoginPage>
       _showTextFields = true;
     });
     _animationController.forward();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscurePassword = !_obscurePassword;
+    });
   }
 
   final _formKey = GlobalKey<FormBuilderState>();
@@ -121,6 +128,7 @@ class _LoginPageState extends State<LoginPage>
                                     ),
                                     FormBuilderTextField(
                                       name: "password",
+                                      obscureText: _obscurePassword,
                                       decoration: InputDecoration(
                                         hintText: "Password",
                                         filled: true,
@@ -131,6 +139,14 @@ class _LoginPageState extends State<LoginPage>
                                           ),
                                           borderSide: BorderSide(
                                             color: Colors.grey.shade300,
+                                          ),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          onPressed: _togglePasswordVisibility,
+                                          icon: Icon(
+                                            _obscurePassword
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
                                           ),
                                         ),
                                       ),
