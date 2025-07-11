@@ -12,6 +12,8 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import 'global/domain/entities/database/database.dart' as _i605;
+import 'global/injection/app_module.dart' as _i212;
 import 'modules/auth/application/auth_bloc.dart' as _i826;
 import 'modules/auth/application/auth_bloc_usecase.dart' as _i762;
 import 'modules/auth/data/auth_repository.dart' as _i715;
@@ -30,11 +32,13 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.lazySingleton<_i831.SettingsRepository>(
-      () => _i831.SettingsRepository(),
-    );
+    final appModule = _$AppModule();
+    gh.lazySingleton<_i605.AppDatabase>(() => appModule.provideAppDatabase());
     gh.lazySingleton<_i517.AuthRepositoryInterface>(
-      () => _i715.AuthRepository(),
+      () => _i715.AuthRepository(gh<_i605.AppDatabase>()),
+    );
+    gh.lazySingleton<_i510.SettingsRepositoryInterface>(
+      () => _i831.SettingsRepository(gh<_i605.AppDatabase>()),
     );
     gh.factory<_i1066.SettingsBlocLogoutUseCase>(
       () => _i1066.SettingsBlocLogoutUseCase(
@@ -70,3 +74,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$AppModule extends _i212.AppModule {}

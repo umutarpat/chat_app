@@ -10,7 +10,8 @@ class SettingsBloc extends Bloc<SettingsBlocEvent, SettingsBlocState> {
 
   SettingsBloc(this.logoutUseCase) : super(SettingsBlocState()) {
     on<LogoutEvent>((event, emit) async {
-      await logoutUseCase.call();
+      final result = await logoutUseCase.call(event.isLoggedIn);
+      emit(state.copyWith(logoutResult: result));
     });
   }
 }

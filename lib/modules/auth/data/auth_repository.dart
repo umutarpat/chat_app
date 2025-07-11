@@ -8,11 +8,14 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: AuthRepositoryInterface)
 class AuthRepository extends AuthRepositoryInterface {
-  final _database = AppDatabase();
+  final AppDatabase database;
+
+  AuthRepository(this.database);
+
   @override
   Future<void> setupUser() async {
-    await _database
-        .into(_database.usersTable)
+    await database
+        .into(database.usersTable)
         .insertOnConflictUpdate(
           UsersTableCompanion(
             id: const Value(1),
@@ -21,7 +24,7 @@ class AuthRepository extends AuthRepositoryInterface {
           ),
         );
 
-    final result = await _database.usersTable.select().getSingle();
+    final result = await database.usersTable.select().getSingle();
 
     logIt().d("User setup: $result");
   }
@@ -29,7 +32,7 @@ class AuthRepository extends AuthRepositoryInterface {
   @override
   Future<LoginResult> login(String email, String password) async {
     final user =
-        await (_database.select(_database.usersTable)..where(
+        await (database.select(database.usersTable)..where(
               (u) => u.email.equals(email) & u.password.equals(password),
             ))
             .getSingleOrNull();
@@ -42,8 +45,8 @@ class AuthRepository extends AuthRepositoryInterface {
 
   @override
   Future<ForgotPasswordResult> resetPassword(String email) async {
-    final user = await (_database.select(
-      _database.usersTable,
+    final user = await (database.select(
+      database.usersTable,
     )..where((u) => u.email.equals(email))).getSingleOrNull();
 
     if (user == null) return ForgotPasswordUserDoesntExist();
@@ -55,8 +58,8 @@ class AuthRepository extends AuthRepositoryInterface {
 
   @override
   Future<void> setLoggedIn(bool isLoggedIn) async {
-    await _database
-        .into(_database.settingsTable)
+    await database
+        .into(database.settingsTable)
         .insertOnConflictUpdate(
           SettingsTableCompanion(
             id: const Value(1),
@@ -64,7 +67,7 @@ class AuthRepository extends AuthRepositoryInterface {
           ),
         );
 
-    final result = await _database.settingsTable.select().getSingle();
+    final result = await database.settingsTable.select().getSingle();
 
     logIt().d("User logged in state has been set on database: $result");
   }

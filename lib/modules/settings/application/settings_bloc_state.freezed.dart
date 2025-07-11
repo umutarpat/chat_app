@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SettingsBlocState {
 
- bool? get isLoading;
+ LogoutResult? get logoutResult;
 /// Create a copy of SettingsBlocState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SettingsBlocStateCopyWith<SettingsBlocState> get copyWith => _$SettingsBlocStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsBlocState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsBlocState&&(identical(other.logoutResult, logoutResult) || other.logoutResult == logoutResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading);
+int get hashCode => Object.hash(runtimeType,logoutResult);
 
 @override
 String toString() {
-  return 'SettingsBlocState(isLoading: $isLoading)';
+  return 'SettingsBlocState(logoutResult: $logoutResult)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SettingsBlocStateCopyWith<$Res>  {
   factory $SettingsBlocStateCopyWith(SettingsBlocState value, $Res Function(SettingsBlocState) _then) = _$SettingsBlocStateCopyWithImpl;
 @useResult
 $Res call({
- bool? isLoading
+ LogoutResult? logoutResult
 });
 
 
@@ -62,10 +62,10 @@ class _$SettingsBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? logoutResult = freezed,}) {
   return _then(_self.copyWith(
-isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool?,
+logoutResult: freezed == logoutResult ? _self.logoutResult : logoutResult // ignore: cast_nullable_to_non_nullable
+as LogoutResult?,
   ));
 }
 
@@ -150,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool? isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LogoutResult? logoutResult)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SettingsBlocState() when $default != null:
-return $default(_that.isLoading);case _:
+return $default(_that.logoutResult);case _:
   return orElse();
 
 }
@@ -171,10 +171,10 @@ return $default(_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool? isLoading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LogoutResult? logoutResult)  $default,) {final _that = this;
 switch (_that) {
 case _SettingsBlocState():
-return $default(_that.isLoading);case _:
+return $default(_that.logoutResult);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +191,10 @@ return $default(_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool? isLoading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LogoutResult? logoutResult)?  $default,) {final _that = this;
 switch (_that) {
 case _SettingsBlocState() when $default != null:
-return $default(_that.isLoading);case _:
+return $default(_that.logoutResult);case _:
   return null;
 
 }
@@ -206,10 +206,10 @@ return $default(_that.isLoading);case _:
 
 
 class _SettingsBlocState implements SettingsBlocState {
-   _SettingsBlocState({this.isLoading});
+   _SettingsBlocState({this.logoutResult});
   
 
-@override final  bool? isLoading;
+@override final  LogoutResult? logoutResult;
 
 /// Create a copy of SettingsBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +221,16 @@ _$SettingsBlocStateCopyWith<_SettingsBlocState> get copyWith => __$SettingsBlocS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsBlocState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsBlocState&&(identical(other.logoutResult, logoutResult) || other.logoutResult == logoutResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading);
+int get hashCode => Object.hash(runtimeType,logoutResult);
 
 @override
 String toString() {
-  return 'SettingsBlocState(isLoading: $isLoading)';
+  return 'SettingsBlocState(logoutResult: $logoutResult)';
 }
 
 
@@ -241,7 +241,7 @@ abstract mixin class _$SettingsBlocStateCopyWith<$Res> implements $SettingsBlocS
   factory _$SettingsBlocStateCopyWith(_SettingsBlocState value, $Res Function(_SettingsBlocState) _then) = __$SettingsBlocStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool? isLoading
+ LogoutResult? logoutResult
 });
 
 
@@ -258,10 +258,10 @@ class __$SettingsBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsBlocState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? logoutResult = freezed,}) {
   return _then(_SettingsBlocState(
-isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool?,
+logoutResult: freezed == logoutResult ? _self.logoutResult : logoutResult // ignore: cast_nullable_to_non_nullable
+as LogoutResult?,
   ));
 }
 
