@@ -1,4 +1,5 @@
 import 'package:chat_app/global/utils/logger.dart';
+import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_event.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_state.dart';
@@ -58,6 +59,8 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: _cardColor,
       body: SafeArea(
@@ -113,7 +116,7 @@ class _LoginPageState extends State<LoginPage>
                                     FormBuilderTextField(
                                       name: "email",
                                       decoration: InputDecoration(
-                                        hintText: "Email",
+                                        hintText: l10n.email,
                                         filled: true,
                                         fillColor: Colors.white,
                                         enabledBorder: OutlineInputBorder(
@@ -130,7 +133,7 @@ class _LoginPageState extends State<LoginPage>
                                       name: "password",
                                       obscureText: _obscurePassword,
                                       decoration: InputDecoration(
-                                        hintText: "Password",
+                                        hintText: l10n.password,
                                         filled: true,
                                         fillColor: Colors.white,
                                         enabledBorder: OutlineInputBorder(
@@ -183,7 +186,7 @@ class _LoginPageState extends State<LoginPage>
                                       height: 45,
                                       child: Center(
                                         child: Text(
-                                          "Log in",
+                                          l10n.login,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium!
@@ -214,7 +217,7 @@ class _LoginPageState extends State<LoginPage>
                                       height: 45,
                                       child: Center(
                                         child: Text(
-                                          "Sign up",
+                                          l10n.signup,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium!

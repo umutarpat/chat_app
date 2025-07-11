@@ -4,6 +4,9 @@ import 'package:chat_app/injection.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +25,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: router,
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'), // English
+          Locale('de'), // German
+        ],
+        locale: Locale('en'),
         title: 'Clusterix Chat App',
         theme: lightTheme(context),
         builder: (context, widget) {
