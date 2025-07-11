@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -24,6 +25,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
   }
 
   final _formKey = GlobalKey<FormBuilderState>();
+  final Color backgroundImageFillColor = const Color.fromARGB(255, 28, 97, 218);
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +37,20 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
 
     return Scaffold(
       backgroundColor: cardColor,
+      appBar: AppBar(
+        backgroundColor: backgroundImageFillColor,
+        leading: IconButton(
+          onPressed: () => context.pop(context),
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+        ),
+      ),
       body: SafeArea(
         top: false,
         child: Stack(
           children: [
             Positioned.fill(
               child: Container(
-                color: const Color.fromARGB(255, 28, 97, 218),
+                color: backgroundImageFillColor,
                 width: double.infinity,
               ),
             ),

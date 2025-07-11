@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage>
                                   child: InkWell(
                                     onTap: () {
                                       logIt().d("Forgot password clicked");
-                                      context.goNamed(
+                                      context.pushNamed(
                                         '/${AppRoute.forgotPassword.name}',
                                       );
                                     },
