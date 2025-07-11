@@ -1,6 +1,7 @@
 import 'package:chat_app/global/core/routes.dart';
 import 'package:chat_app/global/themes/extensions/design_colors.dart';
 import 'package:chat_app/global/utils/logger.dart';
+import 'package:chat_app/global/utils/validations/input_formatters.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_event.dart';
@@ -168,12 +169,18 @@ class _LoginPageState extends State<LoginPage>
                                   spacing: 16,
                                   children: [
                                     FormBuilderTextField(
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
                                       validator: FormBuilderValidators.compose([
                                         FormBuilderValidators.required(
                                           errorText: l10n.emailProvideValid,
                                         ),
                                         FormBuilderValidators.email(
                                           errorText: l10n.emailInvalid,
+                                        ),
+                                        FormBuilderValidators.maxLength(
+                                          32,
+                                          errorText: l10n.maxThirdyTwoChars,
                                         ),
                                       ]),
                                       name: "email",
@@ -184,11 +191,21 @@ class _LoginPageState extends State<LoginPage>
                                       ),
                                     ),
                                     FormBuilderTextField(
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
                                       validator: FormBuilderValidators.compose([
                                         FormBuilderValidators.required(
                                           errorText: l10n.passwordProvideValid,
                                         ),
+                                        FormBuilderValidators.maxLength(
+                                          32,
+                                          errorText: l10n.maxThirdyTwoChars,
+                                        ),
                                       ]),
+                                      inputFormatters: [
+                                        dontAllowSpaceInputFormatter,
+                                        dontAllowEmojiInputFormatter,
+                                      ],
                                       name: "password",
                                       obscureText: _obscurePassword,
                                       decoration: InputDecoration(
@@ -273,7 +290,12 @@ class _LoginPageState extends State<LoginPage>
                                     ),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      logIt().d("Signup clicked");
+                                      context.pushNamed(
+                                        '/${AppRoute.signup.name}',
+                                      );
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
                                       foregroundColor: Theme.of(

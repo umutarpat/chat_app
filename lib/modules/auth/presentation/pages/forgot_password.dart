@@ -10,22 +10,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
-class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({super.key});
-
-  @override
-  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
-}
-
-class _ForgotPasswordPageState extends State<ForgotPasswordPage>
-    with SingleTickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class ForgotPasswordPage extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
   final Color backgroundImageFillColor = const Color.fromARGB(255, 28, 97, 218);
+
+  ForgotPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -125,12 +114,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
                               spacing: 16,
                               children: [
                                 FormBuilderTextField(
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                   validator: FormBuilderValidators.compose([
                                     FormBuilderValidators.required(
                                       errorText: l10n.emailProvideValid,
                                     ),
                                     FormBuilderValidators.email(
                                       errorText: l10n.emailInvalid,
+                                    ),
+                                    FormBuilderValidators.maxLength(
+                                      32,
+                                      errorText: l10n.maxThirdyTwoChars,
                                     ),
                                   ]),
                                   name: "email",
@@ -143,41 +138,32 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
                               ],
                             ),
 
-                            Column(
-                              spacing: 16,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState!
-                                        .saveAndValidate()) {
-                                      final formData =
-                                          _formKey.currentState!.value;
+                            ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.saveAndValidate()) {
+                                  final formData = _formKey.currentState!.value;
 
-                                      context.read<AuthBloc>().add(
-                                        ResetPasswordEvent(
-                                          email: formData['email'],
-                                        ),
-                                      );
-                                    }
-                                  },
-
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    height: 45,
-                                    child: Center(
-                                      child: Text(
-                                        l10n.sendResetPasswordEmail,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium!
-                                            .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
+                                  context.read<AuthBloc>().add(
+                                    ResetPasswordEvent(
+                                      email: formData['email'],
                                     ),
+                                  );
+                                }
+                              },
+
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 45,
+                                child: Center(
+                                  child: Text(
+                                    l10n.sendResetPasswordEmail,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           ],
                         );

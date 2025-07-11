@@ -1,7 +1,10 @@
 import 'package:chat_app/global/themes/extensions/design_colors.dart';
+import 'package:chat_app/global/themes/extensions/design_text_styles.dart';
 import 'package:flutter/material.dart';
 
 const _primaryColor = Colors.blue;
+const _fieldHintTextStyle = TextStyle(color: Colors.grey, fontSize: 16);
+const _fieldErrorTextStyle = TextStyle(color: Colors.red, fontSize: 12);
 
 ThemeData lightTheme(BuildContext context) {
   return ThemeData(
@@ -23,6 +26,10 @@ ThemeData lightTheme(BuildContext context) {
         cardSuccessColor: Colors.green.withOpacity(0.8),
         cardErrorColor: Colors.red.withOpacity(0.8),
       ),
+      DesignTextStyles(
+        fieldHintTextStyle: _fieldHintTextStyle,
+        fieldErrorTextStyle: _fieldErrorTextStyle,
+      ),
     ],
     textTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.black, fontSize: 12),
@@ -43,7 +50,8 @@ ThemeData lightTheme(BuildContext context) {
     ),
     iconTheme: IconThemeData(color: Colors.blue),
     inputDecorationTheme: InputDecorationTheme(
-      hintStyle: TextStyle(color: Colors.grey),
+      hintStyle: _fieldHintTextStyle,
+      errorStyle: _fieldErrorTextStyle,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
         borderSide: BorderSide(color: Colors.grey.shade300),

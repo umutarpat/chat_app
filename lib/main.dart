@@ -1,6 +1,6 @@
 import 'package:chat_app/global/core/routes.dart';
+import 'package:chat_app/global/injection/injection.dart';
 import 'package:chat_app/global/themes/light/light_theme.dart';
-import 'package:chat_app/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

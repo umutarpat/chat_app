@@ -47,6 +47,8 @@ dependencies:
   form_builder_validators: ^11.2.0
   flutter_localizations:
     sdk: flutter
+  form_builder_phone_field: ^3.0.0
+  phone_numbers_parser: ^9.0.3
 
 dev_dependencies:
   flutter_test:

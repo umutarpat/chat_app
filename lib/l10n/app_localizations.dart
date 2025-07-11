@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get password;
 
+  /// No description provided for @repeatPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat Password'**
+  String get repeatPassword;
+
   /// No description provided for @emailProvideValid.
   ///
   /// In en, this message translates to:
@@ -149,7 +155,7 @@ abstract class AppLocalizations {
   /// No description provided for @sendResetPasswordEmail.
   ///
   /// In en, this message translates to:
-  /// **'Send reset password email.'**
+  /// **'Send reset password email'**
   String get sendResetPasswordEmail;
 
   /// No description provided for @emailNotRegistered.
@@ -181,6 +187,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// No description provided for @firstname.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstname;
+
+  /// No description provided for @lastname.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastname;
+
+  /// No description provided for @cannotBeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be empty.'**
+  String get cannotBeEmpty;
+
+  /// No description provided for @lettersOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Should be letters only.'**
+  String get lettersOnly;
+
+  /// No description provided for @atLeastEightChars.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 8 characters.'**
+  String get atLeastEightChars;
+
+  /// No description provided for @atLeastOneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 1 number.'**
+  String get atLeastOneNumber;
+
+  /// No description provided for @atLeastOneCapitalLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 1 capital letter.'**
+  String get atLeastOneCapitalLetter;
+
+  /// No description provided for @atLeastOneSpecialChar.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 1 special character (+/*#)'**
+  String get atLeastOneSpecialChar;
+
+  /// No description provided for @maxThirdyTwoChars.
+  ///
+  /// In en, this message translates to:
+  /// **'Max 32 characters.'**
+  String get maxThirdyTwoChars;
+
+  /// No description provided for @passwordDontMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords don\'t match.'**
+  String get passwordDontMatch;
+
+  /// No description provided for @accountType.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Type'**
+  String get accountType;
+
+  /// No description provided for @accountTypePersonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal'**
+  String get accountTypePersonal;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// No description provided for @phoneNumberNotValid.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid phone number'**
+  String get phoneNumberNotValid;
 }
 
 class _AppLocalizationsDelegate

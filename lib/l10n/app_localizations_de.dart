@@ -21,6 +21,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get password => 'Password';
 
   @override
+  String get repeatPassword => 'Repeat Password';
+
+  @override
   String get emailProvideValid => 'Please provide a valid email.';
 
   @override
@@ -33,7 +36,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get forgotPassword => 'Forgot password?';
 
   @override
-  String get sendResetPasswordEmail => 'Send reset password email.';
+  String get sendResetPasswordEmail => 'Send reset password email';
 
   @override
   String get emailNotRegistered => 'Email not registered.';
@@ -49,4 +52,46 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
+  @override
+  String get firstname => 'First Name';
+
+  @override
+  String get lastname => 'Last Name';
+
+  @override
+  String get cannotBeEmpty => 'Cannot be empty.';
+
+  @override
+  String get lettersOnly => 'Should be letters only.';
+
+  @override
+  String get atLeastEightChars => 'At least 8 characters.';
+
+  @override
+  String get atLeastOneNumber => 'At least 1 number.';
+
+  @override
+  String get atLeastOneCapitalLetter => 'At least 1 capital letter.';
+
+  @override
+  String get atLeastOneSpecialChar => 'At least 1 special character (+/*#)';
+
+  @override
+  String get maxThirdyTwoChars => 'Max 32 characters.';
+
+  @override
+  String get passwordDontMatch => 'Passwords don\'t match.';
+
+  @override
+  String get accountType => 'Account Type';
+
+  @override
+  String get accountTypePersonal => 'Personal';
+
+  @override
+  String get phoneNumber => 'Phone Number';
+
+  @override
+  String get phoneNumberNotValid => 'Invalid phone number';
 }

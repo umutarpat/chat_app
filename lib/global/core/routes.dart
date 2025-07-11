@@ -1,8 +1,9 @@
 import 'package:chat_app/global/domain/entities/database/database.dart';
-import 'package:chat_app/injection.dart';
+import 'package:chat_app/global/injection/injection.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/presentation/pages/forgot_password.dart';
 import 'package:chat_app/modules/auth/presentation/pages/login_page.dart';
+import 'package:chat_app/modules/auth/presentation/pages/signup/signup_page.dart';
 import 'package:chat_app/modules/chat/presentation/chat_page.dart';
 import 'package:chat_app/modules/settings/application/settings_bloc.dart';
 import 'package:chat_app/modules/settings/presentation/settings_page.dart';
@@ -10,7 +11,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-enum AppRoute { login, forgotPassword, chat, settings }
+enum AppRoute { login, forgotPassword, chat, settings, signup }
 
 final router = GoRouter(
   initialLocation: '/${AppRoute.login.name}',
@@ -39,6 +40,14 @@ final router = GoRouter(
       builder: (context, state) => BlocProvider(
         create: (context) => getIt<AuthBloc>(),
         child: ForgotPasswordPage(),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRoute.signup.name}',
+      name: '/${AppRoute.signup.name}',
+      builder: (context, state) => BlocProvider(
+        create: (context) => getIt<AuthBloc>(),
+        child: SignupPage(),
       ),
     ),
     GoRoute(
