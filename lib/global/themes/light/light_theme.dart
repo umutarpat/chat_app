@@ -26,7 +26,7 @@ ThemeData lightTheme(BuildContext context) {
     textTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.black, fontSize: 12),
       titleMedium: TextStyle(fontSize: 16, color: Colors.white),
-      titleLarge: TextStyle(color: Colors.black, fontSize: 18),
+      titleLarge: TextStyle(color: Colors.black, fontSize: 20),
       bodyLarge: TextStyle(fontSize: 16, color: Colors.black),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

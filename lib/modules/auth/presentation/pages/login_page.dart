@@ -93,7 +93,11 @@ class _LoginPageState extends State<LoginPage>
                         "Bloc listener:Login state: ${state.loginResult}",
                       );
                       if (state.loginResult is LoginSuccess) {
-                        // context.goNamed(AppRoute.home.name);
+                        Future.delayed(Duration(seconds: 2), () {
+                          if (mounted) {
+                            context.goNamed('/${AppRoute.chat.name}');
+                          }
+                        });
                       }
                     },
                     builder: (context, state) => FormBuilder(
