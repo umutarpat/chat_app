@@ -1,7 +1,10 @@
+import 'package:chat_app/global/utils/logger.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_event.dart';
+import 'package:chat_app/modules/auth/application/auth_bloc_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,12 +40,14 @@ class _LoginPageState extends State<LoginPage>
     super.dispose();
   }
 
-  void _onLoginPressed() {
+  void _startTextFieldAnimation() {
     setState(() {
       _showTextFields = true;
     });
     _animationController.forward();
   }
+
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -65,118 +70,153 @@ class _LoginPageState extends State<LoginPage>
               child: AnimatedBuilder(
                 animation: _heightAnimation,
                 builder: (context, child) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: _cardColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                    padding: EdgeInsets.all(0),
-                    width: double.infinity,
-                    height: _heightAnimation.value,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 48,
-                        right: 48,
-                        top: 48,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          if (_showTextFields)
-                            Column(
-                              spacing: 16,
-                              children: [
-                                TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "Email",
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide(
-                                        color: Colors.grey.shade300,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "Password",
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide(
-                                        color: Colors.grey.shade300,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          SizedBox(height: 16),
-                          Column(
-                            spacing: 16,
+                  return BlocListener<AuthBloc, AuthBlocState>(
+                    listener: (context, state) {
+                      logIt().d(
+                        "Bloc listener:Login state: ${state.loginSuccessful}",
+                      );
+                      if (state.loginSuccessful ?? false) {}
+                    },
+                    child: FormBuilder(
+                      key: _formKey,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: _cardColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        padding: EdgeInsets.all(0),
+                        width: double.infinity,
+                        height: _heightAnimation.value,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 48,
+                            right: 48,
+                            top: 48,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
                             children: [
-                              ElevatedButton(
-                                onPressed: _onLoginPressed,
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  height: 45,
-                                  child: Center(
-                                    child: Text(
-                                      "Log in",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .copyWith(
-                                            fontWeight: FontWeight.bold,
+                              if (_showTextFields)
+                                Column(
+                                  spacing: 16,
+                                  children: [
+                                    FormBuilderTextField(
+                                      name: "email",
+                                      decoration: InputDecoration(
+                                        hintText: "Email",
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            5,
                                           ),
+                                          borderSide: BorderSide(
+                                            color: Colors.grey.shade300,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    FormBuilderTextField(
+                                      name: "password",
+                                      decoration: InputDecoration(
+                                        hintText: "Password",
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            5,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.grey.shade300,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                              SizedBox(height: 16),
+                              Column(
+                                spacing: 16,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      if (_showTextFields == false) {
+                                        _startTextFieldAnimation();
+                                        return;
+                                      }
+                                      if (_formKey.currentState!
+                                          .saveAndValidate()) {
+                                        final formData =
+                                            _formKey.currentState!.value;
+
+                                        context.read<AuthBloc>().add(
+                                          LoginEvent(
+                                            email: formData['email'],
+                                            password: formData['password'],
+                                          ),
+                                        );
+                                      }
+                                    },
+
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height: 45,
+                                      child: Center(
+                                        child: Text(
+                                          "Log in",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
-                                  foregroundColor: Theme.of(
-                                    context,
-                                  ).primaryColor,
-                                  shadowColor: Colors.transparent,
-                                  side: BorderSide(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSurface,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  height: 45,
-                                  child: Center(
-                                    child: Text(
-                                      "Sign up",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: Theme.of(
-                                              context,
-                                            ).colorScheme.onSurface,
-                                          ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      foregroundColor: Theme.of(
+                                        context,
+                                      ).primaryColor,
+                                      shadowColor: Colors.transparent,
+                                      side: BorderSide(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height: 45,
+                                      child: Center(
+                                        child: Text(
+                                          "Sign up",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.onSurface,
+                                              ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   );

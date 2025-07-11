@@ -1,5 +1,7 @@
-abstract class AuthRepositoryInterface {
-  Future<void> setup();
+import 'package:chat_app/modules/auth/domain/entities/login_result.dart';
 
-  Future<void> login(String email, String password);
+abstract class AuthRepositoryInterface {
+  Future<void> setupUser();
+
+  Future<LoginResult> login(String email, String password);
 }
