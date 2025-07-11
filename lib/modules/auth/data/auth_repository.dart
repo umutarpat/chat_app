@@ -52,4 +52,20 @@ class AuthRepository extends AuthRepositoryInterface {
 
     return ForgotPasswordSuccess();
   }
+
+  @override
+  Future<void> setLoggedIn(bool isLoggedIn) async {
+    await _database
+        .into(_database.settingsTable)
+        .insertOnConflictUpdate(
+          SettingsTableCompanion(
+            id: const Value(1),
+            isLoggedIn: Value(isLoggedIn),
+          ),
+        );
+
+    final result = await _database.settingsTable.select().getSingle();
+
+    logIt().d("User logged in state has been set on database: $result");
+  }
 }

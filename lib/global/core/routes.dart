@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 enum AppRoute { login, forgotPassword, chat, settings }
 
 final router = GoRouter(
-  initialLocation: '/${AppRoute.chat.name}',
+  initialLocation: '/${AppRoute.login.name}',
   routes: [
     GoRoute(
       path: '/${AppRoute.login.name}',

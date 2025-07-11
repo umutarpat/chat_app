@@ -7,6 +7,7 @@ part 'database.g.dart';
 class SettingsTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get language => text().withDefault(const Constant('en'))();
+  BoolColumn get isLoggedIn => boolean().withDefault(const Constant(false))();
   DateTimeColumn get createdAt => dateTime().nullable()();
 }
 

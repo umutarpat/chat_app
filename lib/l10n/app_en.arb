@@ -11,5 +11,6 @@
   "emailNotRegistered": "Email not registered.",
   "resetPasswordEmailSent": "Reset password email has been sent.",
   "loginSuccessful": "Trying to login...",
-  "loginError": "Email or password doesnt exist."
+  "loginError": "Email or password doesnt exist.",
+  "logout": "Logout"
 }

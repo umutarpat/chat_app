@@ -26,6 +26,17 @@ class AuthBlocLoginUseCase {
 }
 
 @injectable
+class AuthBlocSetLoggedInUseCase {
+  final AuthRepositoryInterface repository;
+
+  AuthBlocSetLoggedInUseCase(this.repository);
+
+  Future<void> call(bool isLoggedIn) async {
+    return await repository.setLoggedIn(isLoggedIn);
+  }
+}
+
+@injectable
 class AuthBlocResetPasswordUseCase {
   final AuthRepositoryInterface repository;
 

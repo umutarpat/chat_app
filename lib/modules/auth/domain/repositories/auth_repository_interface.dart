@@ -7,4 +7,6 @@ abstract class AuthRepositoryInterface {
   Future<LoginResult> login(String email, String password);
 
   Future<ForgotPasswordResult> resetPassword(String email);
+
+  Future<void> setLoggedIn(bool isLoggedIn);
 }

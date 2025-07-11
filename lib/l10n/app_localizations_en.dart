@@ -46,4 +46,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginError => 'Email or password doesnt exist.';
+
+  @override
+  String get logout => 'Logout';
 }

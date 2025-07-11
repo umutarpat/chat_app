@@ -34,6 +34,21 @@ class $SettingsTableTable extends SettingsTable
     requiredDuringInsert: false,
     defaultValue: const Constant('en'),
   );
+  static const VerificationMeta _isLoggedInMeta = const VerificationMeta(
+    'isLoggedIn',
+  );
+  @override
+  late final GeneratedColumn<bool> isLoggedIn = GeneratedColumn<bool>(
+    'is_logged_in',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_logged_in" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
   );
@@ -46,7 +61,7 @@ class $SettingsTableTable extends SettingsTable
     requiredDuringInsert: false,
   );
   @override
-  List<GeneratedColumn> get $columns => [id, language, createdAt];
+  List<GeneratedColumn> get $columns => [id, language, isLoggedIn, createdAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -66,6 +81,15 @@ class $SettingsTableTable extends SettingsTable
       context.handle(
         _languageMeta,
         language.isAcceptableOrUnknown(data['language']!, _languageMeta),
+      );
+    }
+    if (data.containsKey('is_logged_in')) {
+      context.handle(
+        _isLoggedInMeta,
+        isLoggedIn.isAcceptableOrUnknown(
+          data['is_logged_in']!,
+          _isLoggedInMeta,
+        ),
       );
     }
     if (data.containsKey('created_at')) {
@@ -91,6 +115,10 @@ class $SettingsTableTable extends SettingsTable
         DriftSqlType.string,
         data['${effectivePrefix}language'],
       )!,
+      isLoggedIn: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_logged_in'],
+      )!,
       createdAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}created_at'],
@@ -108,10 +136,12 @@ class SettingsTableData extends DataClass
     implements Insertable<SettingsTableData> {
   final int id;
   final String language;
+  final bool isLoggedIn;
   final DateTime? createdAt;
   const SettingsTableData({
     required this.id,
     required this.language,
+    required this.isLoggedIn,
     this.createdAt,
   });
   @override
@@ -119,6 +149,7 @@ class SettingsTableData extends DataClass
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['language'] = Variable<String>(language);
+    map['is_logged_in'] = Variable<bool>(isLoggedIn);
     if (!nullToAbsent || createdAt != null) {
       map['created_at'] = Variable<DateTime>(createdAt);
     }
@@ -129,6 +160,7 @@ class SettingsTableData extends DataClass
     return SettingsTableCompanion(
       id: Value(id),
       language: Value(language),
+      isLoggedIn: Value(isLoggedIn),
       createdAt: createdAt == null && nullToAbsent
           ? const Value.absent()
           : Value(createdAt),
@@ -143,6 +175,7 @@ class SettingsTableData extends DataClass
     return SettingsTableData(
       id: serializer.fromJson<int>(json['id']),
       language: serializer.fromJson<String>(json['language']),
+      isLoggedIn: serializer.fromJson<bool>(json['isLoggedIn']),
       createdAt: serializer.fromJson<DateTime?>(json['createdAt']),
     );
   }
@@ -152,6 +185,7 @@ class SettingsTableData extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'language': serializer.toJson<String>(language),
+      'isLoggedIn': serializer.toJson<bool>(isLoggedIn),
       'createdAt': serializer.toJson<DateTime?>(createdAt),
     };
   }
@@ -159,16 +193,21 @@ class SettingsTableData extends DataClass
   SettingsTableData copyWith({
     int? id,
     String? language,
+    bool? isLoggedIn,
     Value<DateTime?> createdAt = const Value.absent(),
   }) => SettingsTableData(
     id: id ?? this.id,
     language: language ?? this.language,
+    isLoggedIn: isLoggedIn ?? this.isLoggedIn,
     createdAt: createdAt.present ? createdAt.value : this.createdAt,
   );
   SettingsTableData copyWithCompanion(SettingsTableCompanion data) {
     return SettingsTableData(
       id: data.id.present ? data.id.value : this.id,
       language: data.language.present ? data.language.value : this.language,
+      isLoggedIn: data.isLoggedIn.present
+          ? data.isLoggedIn.value
+          : this.isLoggedIn,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
     );
   }
@@ -178,44 +217,51 @@ class SettingsTableData extends DataClass
     return (StringBuffer('SettingsTableData(')
           ..write('id: $id, ')
           ..write('language: $language, ')
+          ..write('isLoggedIn: $isLoggedIn, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, language, createdAt);
+  int get hashCode => Object.hash(id, language, isLoggedIn, createdAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is SettingsTableData &&
           other.id == this.id &&
           other.language == this.language &&
+          other.isLoggedIn == this.isLoggedIn &&
           other.createdAt == this.createdAt);
 }
 
 class SettingsTableCompanion extends UpdateCompanion<SettingsTableData> {
   final Value<int> id;
   final Value<String> language;
+  final Value<bool> isLoggedIn;
   final Value<DateTime?> createdAt;
   const SettingsTableCompanion({
     this.id = const Value.absent(),
     this.language = const Value.absent(),
+    this.isLoggedIn = const Value.absent(),
     this.createdAt = const Value.absent(),
   });
   SettingsTableCompanion.insert({
     this.id = const Value.absent(),
     this.language = const Value.absent(),
+    this.isLoggedIn = const Value.absent(),
     this.createdAt = const Value.absent(),
   });
   static Insertable<SettingsTableData> custom({
     Expression<int>? id,
     Expression<String>? language,
+    Expression<bool>? isLoggedIn,
     Expression<DateTime>? createdAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (language != null) 'language': language,
+      if (isLoggedIn != null) 'is_logged_in': isLoggedIn,
       if (createdAt != null) 'created_at': createdAt,
     });
   }
@@ -223,11 +269,13 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsTableData> {
   SettingsTableCompanion copyWith({
     Value<int>? id,
     Value<String>? language,
+    Value<bool>? isLoggedIn,
     Value<DateTime?>? createdAt,
   }) {
     return SettingsTableCompanion(
       id: id ?? this.id,
       language: language ?? this.language,
+      isLoggedIn: isLoggedIn ?? this.isLoggedIn,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -241,6 +289,9 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsTableData> {
     if (language.present) {
       map['language'] = Variable<String>(language.value);
     }
+    if (isLoggedIn.present) {
+      map['is_logged_in'] = Variable<bool>(isLoggedIn.value);
+    }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
@@ -252,6 +303,7 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsTableData> {
     return (StringBuffer('SettingsTableCompanion(')
           ..write('id: $id, ')
           ..write('language: $language, ')
+          ..write('isLoggedIn: $isLoggedIn, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
@@ -573,12 +625,14 @@ typedef $$SettingsTableTableCreateCompanionBuilder =
     SettingsTableCompanion Function({
       Value<int> id,
       Value<String> language,
+      Value<bool> isLoggedIn,
       Value<DateTime?> createdAt,
     });
 typedef $$SettingsTableTableUpdateCompanionBuilder =
     SettingsTableCompanion Function({
       Value<int> id,
       Value<String> language,
+      Value<bool> isLoggedIn,
       Value<DateTime?> createdAt,
     });
 
@@ -598,6 +652,11 @@ class $$SettingsTableTableFilterComposer
 
   ColumnFilters<String> get language => $composableBuilder(
     column: $table.language,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isLoggedIn => $composableBuilder(
+    column: $table.isLoggedIn,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -626,6 +685,11 @@ class $$SettingsTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<bool> get isLoggedIn => $composableBuilder(
+    column: $table.isLoggedIn,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
     builder: (column) => ColumnOrderings(column),
@@ -646,6 +710,11 @@ class $$SettingsTableTableAnnotationComposer
 
   GeneratedColumn<String> get language =>
       $composableBuilder(column: $table.language, builder: (column) => column);
+
+  GeneratedColumn<bool> get isLoggedIn => $composableBuilder(
+    column: $table.isLoggedIn,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -688,20 +757,24 @@ class $$SettingsTableTableTableManager
               ({
                 Value<int> id = const Value.absent(),
                 Value<String> language = const Value.absent(),
+                Value<bool> isLoggedIn = const Value.absent(),
                 Value<DateTime?> createdAt = const Value.absent(),
               }) => SettingsTableCompanion(
                 id: id,
                 language: language,
+                isLoggedIn: isLoggedIn,
                 createdAt: createdAt,
               ),
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
                 Value<String> language = const Value.absent(),
+                Value<bool> isLoggedIn = const Value.absent(),
                 Value<DateTime?> createdAt = const Value.absent(),
               }) => SettingsTableCompanion.insert(
                 id: id,
                 language: language,
+                isLoggedIn: isLoggedIn,
                 createdAt: createdAt,
               ),
           withReferenceMapper: (p0) => p0

@@ -50,6 +50,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i762.AuthBlocLoginUseCase>(
       () => _i762.AuthBlocLoginUseCase(gh<_i517.AuthRepositoryInterface>()),
     );
+    gh.factory<_i762.AuthBlocSetLoggedInUseCase>(
+      () =>
+          _i762.AuthBlocSetLoggedInUseCase(gh<_i517.AuthRepositoryInterface>()),
+    );
     gh.factory<_i762.AuthBlocResetPasswordUseCase>(
       () => _i762.AuthBlocResetPasswordUseCase(
         gh<_i517.AuthRepositoryInterface>(),
@@ -60,6 +64,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i762.AuthBlocSetupUserUseCase>(),
         gh<_i762.AuthBlocLoginUseCase>(),
         gh<_i762.AuthBlocResetPasswordUseCase>(),
+        gh<_i762.AuthBlocSetLoggedInUseCase>(),
       ),
     );
     return this;

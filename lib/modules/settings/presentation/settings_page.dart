@@ -1,3 +1,4 @@
+import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -5,6 +6,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,7 +28,7 @@ class SettingsPage extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 ),
                 title: Text(
-                  "Logout",
+                  l10n.logout,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
