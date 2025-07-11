@@ -18,7 +18,12 @@ final router = GoRouter(
   redirect: (context, state) async {
     final database = getIt<AppDatabase>();
 
-    final result = await database.settingsTable.select().getSingle();
+    final result = await database.settingsTable.select().getSingleOrNull();
+
+    if (result == null) {
+      return "/${AppRoute.login.name}";
+    }
+
     // if user is logged in and starts from login page (when opens the app) route user to chat page
     if (result.isLoggedIn && state.fullPath == '/${AppRoute.login.name}') {
       return '/${AppRoute.chat.name}';
