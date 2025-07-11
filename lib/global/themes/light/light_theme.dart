@@ -17,7 +17,11 @@ ThemeData lightTheme(BuildContext context) {
     // if gets the font through assets, this way online internet connection will not be necessary if we change the font in future.
     fontFamily: 'roboto',
     extensions: <ThemeExtension<dynamic>>[
-      DesignColors(cardColor: Color.fromARGB(255, 232, 235, 240)),
+      DesignColors(
+        cardColor: Color.fromARGB(255, 232, 235, 240),
+        cardSuccessColor: Colors.green.withOpacity(0.8),
+        cardErrorColor: Colors.red.withOpacity(0.8),
+      ),
     ],
     textTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.black, fontSize: 12),

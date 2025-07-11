@@ -9,8 +9,10 @@ import 'package:injectable/injectable.dart';
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final AuthBlocSetupUserUseCase setupApp;
   final AuthBlocLoginUseCase loginUseCase;
+  final AuthBlocResetPasswordUseCase resetPasswordUseCase;
 
-  AuthBloc(this.setupApp, this.loginUseCase) : super(AuthBlocState()) {
+  AuthBloc(this.setupApp, this.loginUseCase, this.resetPasswordUseCase)
+    : super(AuthBlocState()) {
     on<SetupUserEvent>((event, emit) async {
       await setupApp.call();
     });
@@ -24,6 +26,11 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
           emit(state.copyWith(errorText: message));
           break;
       }
+    });
+    on<ResetPasswordEvent>((event, emit) async {
+      final result = await resetPasswordUseCase.call(event.email);
+
+      emit(state.copyWith(forgotPasswordResult: result));
     });
   }
 }

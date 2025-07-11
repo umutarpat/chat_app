@@ -8,3 +8,9 @@ final class LoginEvent extends AuthBlocEvent {
 
   LoginEvent({required this.email, required this.password});
 }
+
+final class ResetPasswordEvent extends AuthBlocEvent {
+  final String email;
+
+  ResetPasswordEvent({required this.email});
+}

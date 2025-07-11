@@ -151,6 +151,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Send reset password email'**
   String get sendResetPasswordEmail;
+
+  /// No description provided for @emailNotRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'Email not registered'**
+  String get emailNotRegistered;
+
+  /// No description provided for @resetPasswordEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password email has been sent'**
+  String get resetPasswordEmailSent;
 }
 
 class _AppLocalizationsDelegate

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthBlocState {
 
- bool? get loginSuccessful; String? get errorText;
+ bool? get loginSuccessful; String? get errorText; ForgotPasswordResult? get forgotPasswordResult;
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AuthBlocStateCopyWith<AuthBlocState> get copyWith => _$AuthBlocStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthBlocState&&(identical(other.loginSuccessful, loginSuccessful) || other.loginSuccessful == loginSuccessful)&&(identical(other.errorText, errorText) || other.errorText == errorText));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthBlocState&&(identical(other.loginSuccessful, loginSuccessful) || other.loginSuccessful == loginSuccessful)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,loginSuccessful,errorText);
+int get hashCode => Object.hash(runtimeType,loginSuccessful,errorText,forgotPasswordResult);
 
 @override
 String toString() {
-  return 'AuthBlocState(loginSuccessful: $loginSuccessful, errorText: $errorText)';
+  return 'AuthBlocState(loginSuccessful: $loginSuccessful, errorText: $errorText, forgotPasswordResult: $forgotPasswordResult)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AuthBlocStateCopyWith<$Res>  {
   factory $AuthBlocStateCopyWith(AuthBlocState value, $Res Function(AuthBlocState) _then) = _$AuthBlocStateCopyWithImpl;
 @useResult
 $Res call({
- bool? loginSuccessful, String? errorText
+ bool? loginSuccessful, String? errorText, ForgotPasswordResult? forgotPasswordResult
 });
 
 
@@ -62,11 +62,12 @@ class _$AuthBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? loginSuccessful = freezed,Object? errorText = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? loginSuccessful = freezed,Object? errorText = freezed,Object? forgotPasswordResult = freezed,}) {
   return _then(_self.copyWith(
 loginSuccessful: freezed == loginSuccessful ? _self.loginSuccessful : loginSuccessful // ignore: cast_nullable_to_non_nullable
 as bool?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
+as ForgotPasswordResult?,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool? loginSuccessful,  String? errorText)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool? loginSuccessful,  String? errorText,  ForgotPasswordResult? forgotPasswordResult)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthBlocState() when $default != null:
-return $default(_that.loginSuccessful,_that.errorText);case _:
+return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.loginSuccessful,_that.errorText);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool? loginSuccessful,  String? errorText)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool? loginSuccessful,  String? errorText,  ForgotPasswordResult? forgotPasswordResult)  $default,) {final _that = this;
 switch (_that) {
 case _AuthBlocState():
-return $default(_that.loginSuccessful,_that.errorText);case _:
+return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.loginSuccessful,_that.errorText);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool? loginSuccessful,  String? errorText)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool? loginSuccessful,  String? errorText,  ForgotPasswordResult? forgotPasswordResult)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthBlocState() when $default != null:
-return $default(_that.loginSuccessful,_that.errorText);case _:
+return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult);case _:
   return null;
 
 }
@@ -207,11 +208,12 @@ return $default(_that.loginSuccessful,_that.errorText);case _:
 
 
 class _AuthBlocState implements AuthBlocState {
-   _AuthBlocState({this.loginSuccessful = false, this.errorText});
+   _AuthBlocState({this.loginSuccessful = false, this.errorText, this.forgotPasswordResult});
   
 
 @override@JsonKey() final  bool? loginSuccessful;
 @override final  String? errorText;
+@override final  ForgotPasswordResult? forgotPasswordResult;
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ _$AuthBlocStateCopyWith<_AuthBlocState> get copyWith => __$AuthBlocStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthBlocState&&(identical(other.loginSuccessful, loginSuccessful) || other.loginSuccessful == loginSuccessful)&&(identical(other.errorText, errorText) || other.errorText == errorText));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthBlocState&&(identical(other.loginSuccessful, loginSuccessful) || other.loginSuccessful == loginSuccessful)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,loginSuccessful,errorText);
+int get hashCode => Object.hash(runtimeType,loginSuccessful,errorText,forgotPasswordResult);
 
 @override
 String toString() {
-  return 'AuthBlocState(loginSuccessful: $loginSuccessful, errorText: $errorText)';
+  return 'AuthBlocState(loginSuccessful: $loginSuccessful, errorText: $errorText, forgotPasswordResult: $forgotPasswordResult)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$AuthBlocStateCopyWith<$Res> implements $AuthBlocStateCopy
   factory _$AuthBlocStateCopyWith(_AuthBlocState value, $Res Function(_AuthBlocState) _then) = __$AuthBlocStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool? loginSuccessful, String? errorText
+ bool? loginSuccessful, String? errorText, ForgotPasswordResult? forgotPasswordResult
 });
 
 
@@ -260,11 +262,12 @@ class __$AuthBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? loginSuccessful = freezed,Object? errorText = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? loginSuccessful = freezed,Object? errorText = freezed,Object? forgotPasswordResult = freezed,}) {
   return _then(_AuthBlocState(
 loginSuccessful: freezed == loginSuccessful ? _self.loginSuccessful : loginSuccessful // ignore: cast_nullable_to_non_nullable
 as bool?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
+as ForgotPasswordResult?,
   ));
 }
 

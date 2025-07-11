@@ -34,4 +34,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sendResetPasswordEmail => 'Send reset password email';
+
+  @override
+  String get emailNotRegistered => 'Email not registered';
+
+  @override
+  String get resetPasswordEmailSent => 'Reset password email has been sent';
 }
