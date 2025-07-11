@@ -145,6 +145,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forgot password?'**
   String get forgotPassword;
+
+  /// No description provided for @sendResetPasswordEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reset password email'**
+  String get sendResetPasswordEmail;
 }
 
 class _AppLocalizationsDelegate

@@ -1,3 +1,4 @@
+import 'package:chat_app/global/themes/extensions/design_colors.dart';
 import 'package:flutter/material.dart';
 
 const _primaryColor = Colors.blue;
@@ -15,6 +16,9 @@ ThemeData lightTheme(BuildContext context) {
     // Flutter uses roboto by default already, but we can override it with our own font in the future when necessary
     // if gets the font through assets, this way online internet connection will not be necessary if we change the font in future.
     fontFamily: 'roboto',
+    extensions: <ThemeExtension<dynamic>>[
+      DesignColors(cardColor: Color.fromARGB(255, 232, 235, 240)),
+    ],
     textTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.black, fontSize: 12),
       titleMedium: TextStyle(fontSize: 16, color: Colors.white),
@@ -34,6 +38,7 @@ ThemeData lightTheme(BuildContext context) {
     ),
     iconTheme: IconThemeData(color: Colors.blue),
     inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(color: Colors.grey),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
         borderSide: BorderSide(color: Colors.grey.shade300),

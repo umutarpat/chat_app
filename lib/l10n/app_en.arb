@@ -6,5 +6,6 @@
   "emailProvideValid": "Please provide a valid email.",
   "passwordProvideValid": "Please provide a valid password.",
   "emailInvalid": "This field requires a valid email address.",
-  "forgotPassword": "Forgot password?"
+  "forgotPassword": "Forgot password?",
+  "sendResetPasswordEmail": "Send reset password email"
 }

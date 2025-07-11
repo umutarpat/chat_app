@@ -1,3 +1,5 @@
+import 'package:chat_app/global/core/routes.dart';
+import 'package:chat_app/global/themes/extensions/design_colors.dart';
 import 'package:chat_app/global/utils/logger.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,7 +24,6 @@ class _LoginPageState extends State<LoginPage>
   bool _obscurePassword = true;
   late AnimationController _animationController;
   late Animation<double> _heightAnimation;
-  final Color _cardColor = Color.fromARGB(255, 232, 235, 240);
 
   @override
   void initState() {
@@ -61,9 +63,12 @@ class _LoginPageState extends State<LoginPage>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final Color cardColor = Theme.of(
+      context,
+    ).extension<DesignColors>()!.cardColor!;
 
     return Scaffold(
-      backgroundColor: _cardColor,
+      backgroundColor: cardColor,
       body: SafeArea(
         top: false,
         child: Stack(
@@ -92,7 +97,7 @@ class _LoginPageState extends State<LoginPage>
                       key: _formKey,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _cardColor,
+                          color: cardColor,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20),
@@ -156,23 +161,30 @@ class _LoginPageState extends State<LoginPage>
                                     ),
                                   ],
                                 ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: InkWell(
-                                  onTap: () {
-                                    logIt().d("Forgot password");
-                                  },
-                                  child: Text(
-                                    l10n.forgotPassword,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall!
-                                        .copyWith(
-                                          color: Theme.of(context).primaryColor,
-                                        ),
+                              if (_showTextFields) ...[
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: InkWell(
+                                    onTap: () {
+                                      logIt().d("Forgot password clicked");
+                                      context.goNamed(
+                                        '/${AppRoute.forgotPassword.name}',
+                                      );
+                                    },
+                                    child: Text(
+                                      l10n.forgotPassword,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall!
+                                          .copyWith(
+                                            color: Theme.of(
+                                              context,
+                                            ).primaryColor,
+                                          ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
 
                               Column(
                                 spacing: 16,

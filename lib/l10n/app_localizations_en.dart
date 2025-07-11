@@ -31,4 +31,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get sendResetPasswordEmail => 'Send reset password email';
 }
