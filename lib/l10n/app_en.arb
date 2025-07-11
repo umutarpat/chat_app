@@ -3,6 +3,7 @@
   "signup": "Sign up",
   "email": "Email",
   "password": "Password",
-  "emailInvalid": "Please provide a valid Email",
-  "passwordInvalid": "Please provide a valid Password"
+  "emailProvideValid": "Please provide a valid email.",
+  "passwordProvideValid": "Please provide a valid password.",
+  "emailInvalid": "This field requires a valid email address."
 }

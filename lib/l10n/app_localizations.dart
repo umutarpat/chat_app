@@ -122,17 +122,23 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get password;
 
+  /// No description provided for @emailProvideValid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please provide a valid email.'**
+  String get emailProvideValid;
+
+  /// No description provided for @passwordProvideValid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please provide a valid password.'**
+  String get passwordProvideValid;
+
   /// No description provided for @emailInvalid.
   ///
   /// In en, this message translates to:
-  /// **'Please provide a valid Email'**
+  /// **'This field requires a valid email address.'**
   String get emailInvalid;
-
-  /// No description provided for @passwordInvalid.
-  ///
-  /// In en, this message translates to:
-  /// **'Please provide a valid Password'**
-  String get passwordInvalid;
 }
 
 class _AppLocalizationsDelegate

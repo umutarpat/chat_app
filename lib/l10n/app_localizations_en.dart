@@ -21,8 +21,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
-  String get emailInvalid => 'Please provide a valid Email';
+  String get emailProvideValid => 'Please provide a valid email.';
 
   @override
-  String get passwordInvalid => 'Please provide a valid Password';
+  String get passwordProvideValid => 'Please provide a valid password.';
+
+  @override
+  String get emailInvalid => 'This field requires a valid email address.';
 }

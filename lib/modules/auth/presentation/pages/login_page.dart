@@ -117,9 +117,11 @@ class _LoginPageState extends State<LoginPage>
                                     FormBuilderTextField(
                                       validator: FormBuilderValidators.compose([
                                         FormBuilderValidators.required(
+                                          errorText: l10n.emailProvideValid,
+                                        ),
+                                        FormBuilderValidators.email(
                                           errorText: l10n.emailInvalid,
                                         ),
-                                        FormBuilderValidators.email(),
                                       ]),
                                       name: "email",
                                       decoration: InputDecoration(
@@ -131,7 +133,7 @@ class _LoginPageState extends State<LoginPage>
                                     FormBuilderTextField(
                                       validator: FormBuilderValidators.compose([
                                         FormBuilderValidators.required(
-                                          errorText: l10n.passwordInvalid,
+                                          errorText: l10n.passwordProvideValid,
                                         ),
                                         FormBuilderValidators.password(),
                                       ]),
