@@ -109,6 +109,7 @@ class _LoginPageState extends State<LoginPage>
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
+                            spacing: 16,
                             children: [
                               if (_showTextFields)
                                 Column(
@@ -135,7 +136,6 @@ class _LoginPageState extends State<LoginPage>
                                         FormBuilderValidators.required(
                                           errorText: l10n.passwordProvideValid,
                                         ),
-                                        FormBuilderValidators.password(),
                                       ]),
                                       name: "password",
                                       obscureText: _obscurePassword,
@@ -156,8 +156,24 @@ class _LoginPageState extends State<LoginPage>
                                     ),
                                   ],
                                 ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                  onTap: () {
+                                    logIt().d("Forgot password");
+                                  },
+                                  child: Text(
+                                    l10n.forgotPassword,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                  ),
+                                ),
+                              ),
 
-                              SizedBox(height: 16),
                               Column(
                                 spacing: 16,
                                 children: [

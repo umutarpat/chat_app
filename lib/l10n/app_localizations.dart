@@ -139,6 +139,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This field requires a valid email address.'**
   String get emailInvalid;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgotPassword;
 }
 
 class _AppLocalizationsDelegate

@@ -28,4 +28,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get emailInvalid => 'This field requires a valid email address.';
+
+  @override
+  String get forgotPassword => 'Forgot password?';
 }
