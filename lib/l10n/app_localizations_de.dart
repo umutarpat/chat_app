@@ -19,4 +19,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get password => 'Password';
+
+  @override
+  String get emailInvalid => 'Please provide a valid Email';
+
+  @override
+  String get passwordInvalid => 'Please provide a valid Password';
 }

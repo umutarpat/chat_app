@@ -6,6 +6,7 @@ import 'package:chat_app/modules/auth/application/auth_bloc_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -114,36 +115,33 @@ class _LoginPageState extends State<LoginPage>
                                   spacing: 16,
                                   children: [
                                     FormBuilderTextField(
+                                      validator: FormBuilderValidators.compose([
+                                        FormBuilderValidators.required(
+                                          errorText: l10n.emailInvalid,
+                                        ),
+                                        FormBuilderValidators.email(),
+                                      ]),
                                       name: "email",
                                       decoration: InputDecoration(
                                         hintText: l10n.email,
                                         filled: true,
                                         fillColor: Colors.white,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            5,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: Colors.grey.shade300,
-                                          ),
-                                        ),
                                       ),
                                     ),
                                     FormBuilderTextField(
+                                      validator: FormBuilderValidators.compose([
+                                        FormBuilderValidators.required(
+                                          errorText: l10n.passwordInvalid,
+                                        ),
+                                        FormBuilderValidators.password(),
+                                      ]),
                                       name: "password",
                                       obscureText: _obscurePassword,
                                       decoration: InputDecoration(
                                         hintText: l10n.password,
                                         filled: true,
                                         fillColor: Colors.white,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            5,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: Colors.grey.shade300,
-                                          ),
-                                        ),
+
                                         suffixIcon: IconButton(
                                           onPressed: _togglePasswordVisibility,
                                           icon: Icon(

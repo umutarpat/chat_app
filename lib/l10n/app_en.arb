@@ -2,6 +2,7 @@
   "login": "Log in",
   "signup": "Sign up",
   "email": "Email",
-  "password": "Password"
-
+  "password": "Password",
+  "emailInvalid": "Please provide a valid Email",
+  "passwordInvalid": "Please provide a valid Password"
 }
