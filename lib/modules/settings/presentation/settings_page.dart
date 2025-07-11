@@ -6,7 +6,37 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Column(children: [Text("Logout")])),
+      appBar: AppBar(
+        title: Text(
+          "Settings",
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              ListTile(
+                leading: Icon(
+                  Icons.logout,
+                  color: Theme.of(context).primaryColor,
+                ),
+                title: Text(
+                  "Logout",
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

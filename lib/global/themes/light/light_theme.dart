@@ -11,6 +11,7 @@ ThemeData lightTheme(BuildContext context) {
       // on surface: if background is white, use it
       primary: _primaryColor,
       onSurface: Colors.blue,
+      onSurfaceVariant: Colors.black,
       seedColor: Colors.blue,
     ),
     // Flutter uses roboto by default already, but we can override it with our own font in the future when necessary
