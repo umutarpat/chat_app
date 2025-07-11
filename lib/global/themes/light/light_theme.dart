@@ -29,5 +29,9 @@ ThemeData lightTheme(BuildContext context) {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       ),
     ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(iconSize: 24, foregroundColor: Colors.blue),
+    ),
+    iconTheme: IconThemeData(color: Colors.blue),
   );
 }
