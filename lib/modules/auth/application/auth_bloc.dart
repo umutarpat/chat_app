@@ -11,12 +11,14 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final AuthBlocLoginUseCase loginUseCase;
   final AuthBlocResetPasswordUseCase resetPasswordUseCase;
   final AuthBlocSetLoggedInUseCase setLoggedInUseCase;
+  final AuthBlocSignupUseCase signupUseCase;
 
   AuthBloc(
     this.setupApp,
     this.loginUseCase,
     this.resetPasswordUseCase,
     this.setLoggedInUseCase,
+    this.signupUseCase,
   ) : super(AuthBlocState()) {
     on<SetupUserEvent>((event, emit) async {
       await setupApp.call();
@@ -34,6 +36,19 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       final result = await resetPasswordUseCase.call(event.email);
 
       emit(state.copyWith(forgotPasswordResult: result));
+    });
+
+    on<SignupEvent>((event, emit) async {
+      final result = await signupUseCase.call(
+        event.firstName,
+        event.lastName,
+        event.email,
+        event.password,
+        event.accountType,
+        event.phoneNumber,
+      );
+
+      emit(state.copyWith(signupResult: result));
     });
   }
 }

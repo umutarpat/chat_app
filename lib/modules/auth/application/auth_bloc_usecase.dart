@@ -1,5 +1,6 @@
 import 'package:chat_app/modules/auth/domain/entities/forgot_password_result.dart';
 import 'package:chat_app/modules/auth/domain/entities/login_result.dart';
+import 'package:chat_app/modules/auth/domain/entities/signup_result.dart';
 import 'package:chat_app/modules/auth/domain/repositories/auth_repository_interface.dart';
 import 'package:injectable/injectable.dart';
 
@@ -44,5 +45,30 @@ class AuthBlocResetPasswordUseCase {
 
   Future<ForgotPasswordResult> call(String email) async {
     return await repository.resetPassword(email);
+  }
+}
+
+@injectable
+class AuthBlocSignupUseCase {
+  final AuthRepositoryInterface repository;
+
+  AuthBlocSignupUseCase(this.repository);
+
+  Future<SignupResult> call(
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+    String accountType,
+    String phoneNumber,
+  ) async {
+    return await repository.signup(
+      firstName,
+      lastName,
+      email,
+      password,
+      accountType,
+      phoneNumber,
+    );
   }
 }

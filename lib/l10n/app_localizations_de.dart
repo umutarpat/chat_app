@@ -93,5 +93,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get phoneNumber => 'Phone Number';
 
   @override
-  String get phoneNumberNotValid => 'Invalid phone number';
+  String get phoneNumberNotValid => 'Invalid phone number.';
+
+  @override
+  String get userAlreadyExist => 'This user already exists.';
+
+  @override
+  String get registerSuccessful =>
+      'Register successful, please check your email for verification link.';
 }

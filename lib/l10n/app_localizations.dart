@@ -269,8 +269,20 @@ abstract class AppLocalizations {
   /// No description provided for @phoneNumberNotValid.
   ///
   /// In en, this message translates to:
-  /// **'Invalid phone number'**
+  /// **'Invalid phone number.'**
   String get phoneNumberNotValid;
+
+  /// No description provided for @userAlreadyExist.
+  ///
+  /// In en, this message translates to:
+  /// **'This user already exists.'**
+  String get userAlreadyExist;
+
+  /// No description provided for @registerSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Register successful, please check your email for verification link.'**
+  String get registerSuccessful;
 }
 
 class _AppLocalizationsDelegate

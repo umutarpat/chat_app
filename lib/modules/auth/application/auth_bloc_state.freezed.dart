@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthBlocState {
 
- ForgotPasswordResult? get forgotPasswordResult; LoginResult? get loginResult;
+ ForgotPasswordResult? get forgotPasswordResult; LoginResult? get loginResult; SignupResult? get signupResult;
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AuthBlocStateCopyWith<AuthBlocState> get copyWith => _$AuthBlocStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthBlocState&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult)&&(identical(other.loginResult, loginResult) || other.loginResult == loginResult));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthBlocState&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult)&&(identical(other.loginResult, loginResult) || other.loginResult == loginResult)&&(identical(other.signupResult, signupResult) || other.signupResult == signupResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,forgotPasswordResult,loginResult);
+int get hashCode => Object.hash(runtimeType,forgotPasswordResult,loginResult,signupResult);
 
 @override
 String toString() {
-  return 'AuthBlocState(forgotPasswordResult: $forgotPasswordResult, loginResult: $loginResult)';
+  return 'AuthBlocState(forgotPasswordResult: $forgotPasswordResult, loginResult: $loginResult, signupResult: $signupResult)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AuthBlocStateCopyWith<$Res>  {
   factory $AuthBlocStateCopyWith(AuthBlocState value, $Res Function(AuthBlocState) _then) = _$AuthBlocStateCopyWithImpl;
 @useResult
 $Res call({
- ForgotPasswordResult? forgotPasswordResult, LoginResult? loginResult
+ ForgotPasswordResult? forgotPasswordResult, LoginResult? loginResult, SignupResult? signupResult
 });
 
 
@@ -62,11 +62,12 @@ class _$AuthBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? forgotPasswordResult = freezed,Object? loginResult = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? forgotPasswordResult = freezed,Object? loginResult = freezed,Object? signupResult = freezed,}) {
   return _then(_self.copyWith(
 forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
 as ForgotPasswordResult?,loginResult: freezed == loginResult ? _self.loginResult : loginResult // ignore: cast_nullable_to_non_nullable
-as LoginResult?,
+as LoginResult?,signupResult: freezed == signupResult ? _self.signupResult : signupResult // ignore: cast_nullable_to_non_nullable
+as SignupResult?,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult,  SignupResult? signupResult)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthBlocState() when $default != null:
-return $default(_that.forgotPasswordResult,_that.loginResult);case _:
+return $default(_that.forgotPasswordResult,_that.loginResult,_that.signupResult);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.forgotPasswordResult,_that.loginResult);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult,  SignupResult? signupResult)  $default,) {final _that = this;
 switch (_that) {
 case _AuthBlocState():
-return $default(_that.forgotPasswordResult,_that.loginResult);case _:
+return $default(_that.forgotPasswordResult,_that.loginResult,_that.signupResult);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.forgotPasswordResult,_that.loginResult);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult,  SignupResult? signupResult)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthBlocState() when $default != null:
-return $default(_that.forgotPasswordResult,_that.loginResult);case _:
+return $default(_that.forgotPasswordResult,_that.loginResult,_that.signupResult);case _:
   return null;
 
 }
@@ -207,11 +208,12 @@ return $default(_that.forgotPasswordResult,_that.loginResult);case _:
 
 
 class _AuthBlocState implements AuthBlocState {
-   _AuthBlocState({this.forgotPasswordResult, this.loginResult});
+   _AuthBlocState({this.forgotPasswordResult, this.loginResult, this.signupResult});
   
 
 @override final  ForgotPasswordResult? forgotPasswordResult;
 @override final  LoginResult? loginResult;
+@override final  SignupResult? signupResult;
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ _$AuthBlocStateCopyWith<_AuthBlocState> get copyWith => __$AuthBlocStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthBlocState&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult)&&(identical(other.loginResult, loginResult) || other.loginResult == loginResult));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthBlocState&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult)&&(identical(other.loginResult, loginResult) || other.loginResult == loginResult)&&(identical(other.signupResult, signupResult) || other.signupResult == signupResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,forgotPasswordResult,loginResult);
+int get hashCode => Object.hash(runtimeType,forgotPasswordResult,loginResult,signupResult);
 
 @override
 String toString() {
-  return 'AuthBlocState(forgotPasswordResult: $forgotPasswordResult, loginResult: $loginResult)';
+  return 'AuthBlocState(forgotPasswordResult: $forgotPasswordResult, loginResult: $loginResult, signupResult: $signupResult)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$AuthBlocStateCopyWith<$Res> implements $AuthBlocStateCopy
   factory _$AuthBlocStateCopyWith(_AuthBlocState value, $Res Function(_AuthBlocState) _then) = __$AuthBlocStateCopyWithImpl;
 @override @useResult
 $Res call({
- ForgotPasswordResult? forgotPasswordResult, LoginResult? loginResult
+ ForgotPasswordResult? forgotPasswordResult, LoginResult? loginResult, SignupResult? signupResult
 });
 
 
@@ -260,11 +262,12 @@ class __$AuthBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? forgotPasswordResult = freezed,Object? loginResult = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? forgotPasswordResult = freezed,Object? loginResult = freezed,Object? signupResult = freezed,}) {
   return _then(_AuthBlocState(
 forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
 as ForgotPasswordResult?,loginResult: freezed == loginResult ? _self.loginResult : loginResult // ignore: cast_nullable_to_non_nullable
-as LoginResult?,
+as LoginResult?,signupResult: freezed == signupResult ? _self.signupResult : signupResult // ignore: cast_nullable_to_non_nullable
+as SignupResult?,
   ));
 }
 

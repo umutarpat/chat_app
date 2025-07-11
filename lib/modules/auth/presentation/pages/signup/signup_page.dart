@@ -3,7 +3,7 @@ import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_event.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_state.dart';
-import 'package:chat_app/modules/auth/domain/entities/forgot_password_result.dart';
+import 'package:chat_app/modules/auth/domain/entities/signup_result.dart';
 import 'package:chat_app/modules/auth/presentation/pages/signup/widgets/account_type_dropdown.dart';
 import 'package:chat_app/modules/auth/presentation/pages/signup/widgets/email_textfield.dart';
 import 'package:chat_app/modules/auth/presentation/pages/signup/widgets/first_name_textfield.dart';
@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 class SignupPage extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
@@ -95,8 +96,7 @@ class SignupPage extends StatelessWidget {
                             mainAxisSize: MainAxisSize.max,
                             spacing: 16,
                             children: [
-                              if (state.forgotPasswordResult
-                                  is ForgotPasswordUserDoesntExist)
+                              if (state.signupResult is UserAlreadyExists)
                                 Container(
                                   height: 40,
                                   decoration: BoxDecoration(
@@ -108,7 +108,7 @@ class SignupPage extends StatelessWidget {
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: Text(
-                                    l10n.emailNotRegistered,
+                                    l10n.userAlreadyExist,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
@@ -116,10 +116,9 @@ class SignupPage extends StatelessWidget {
                                   ),
                                 ),
 
-                              if (state.forgotPasswordResult
-                                  is ForgotPasswordSuccess)
+                              if (state.signupResult is SignupSuccess)
                                 Container(
-                                  height: 40,
+                                  height: 50,
                                   decoration: BoxDecoration(
                                     color: Theme.of(context)
                                         .extension<DesignColors>()!
@@ -128,12 +127,15 @@ class SignupPage extends StatelessWidget {
                                   ),
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text(
-                                    l10n.resetPasswordEmailSent,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall!
-                                        .copyWith(color: Colors.white),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Text(
+                                      l10n.registerSuccessful,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall!
+                                          .copyWith(color: Colors.white),
+                                    ),
                                   ),
                                 ),
 
@@ -166,9 +168,17 @@ class SignupPage extends StatelessWidget {
                                     final formData =
                                         _formKey.currentState!.value;
 
+                                    final number =
+                                        formData['phone_number'] as PhoneNumber;
+
                                     context.read<AuthBloc>().add(
-                                      ResetPasswordEvent(
+                                      SignupEvent(
                                         email: formData['email'],
+                                        firstName: formData['firstname'],
+                                        lastName: formData['lastname'],
+                                        password: formData['password'],
+                                        accountType: formData['accounttype'],
+                                        phoneNumber: number.international,
                                       ),
                                     );
                                   }

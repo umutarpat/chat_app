@@ -63,12 +63,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i462.AuthRepositoryInterface>(),
       ),
     );
+    gh.factory<_i114.AuthBlocSignupUseCase>(
+      () => _i114.AuthBlocSignupUseCase(gh<_i462.AuthRepositoryInterface>()),
+    );
     gh.factory<_i156.AuthBloc>(
       () => _i156.AuthBloc(
         gh<_i114.AuthBlocSetupUserUseCase>(),
         gh<_i114.AuthBlocLoginUseCase>(),
         gh<_i114.AuthBlocResetPasswordUseCase>(),
         gh<_i114.AuthBlocSetLoggedInUseCase>(),
+        gh<_i114.AuthBlocSignupUseCase>(),
       ),
     );
     return this;

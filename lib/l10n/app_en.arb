@@ -27,6 +27,8 @@
   "accountType": "Account Type",
   "accountTypePersonal": "Personal",
   "phoneNumber": "Phone Number",
-  "phoneNumberNotValid": "Invalid phone number"
+  "phoneNumberNotValid": "Invalid phone number.",
+  "userAlreadyExist": "This user already exists.",
+  "registerSuccessful": "Register successful, please check your email for verification link."
 
 }
