@@ -7,7 +7,9 @@
   "passwordProvideValid": "Please provide a valid password.",
   "emailInvalid": "This field requires a valid email address.",
   "forgotPassword": "Forgot password?",
-  "sendResetPasswordEmail": "Send reset password email",
-  "emailNotRegistered": "Email not registered",
-  "resetPasswordEmailSent": "Reset password email has been sent"
+  "sendResetPasswordEmail": "Send reset password email.",
+  "emailNotRegistered": "Email not registered.",
+  "resetPasswordEmailSent": "Reset password email has been sent.",
+  "loginSuccessful": "Trying to login...",
+  "loginError": "Email or password doesnt exist."
 }

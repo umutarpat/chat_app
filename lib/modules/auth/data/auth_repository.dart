@@ -34,7 +34,7 @@ class AuthRepository extends AuthRepositoryInterface {
             ))
             .getSingleOrNull();
 
-    if (user == null) return LoginFailure("User not found");
+    if (user == null) return LoginFailure();
 
     logIt().d("User login: $user");
     return LoginSuccess();

@@ -149,20 +149,32 @@ abstract class AppLocalizations {
   /// No description provided for @sendResetPasswordEmail.
   ///
   /// In en, this message translates to:
-  /// **'Send reset password email'**
+  /// **'Send reset password email.'**
   String get sendResetPasswordEmail;
 
   /// No description provided for @emailNotRegistered.
   ///
   /// In en, this message translates to:
-  /// **'Email not registered'**
+  /// **'Email not registered.'**
   String get emailNotRegistered;
 
   /// No description provided for @resetPasswordEmailSent.
   ///
   /// In en, this message translates to:
-  /// **'Reset password email has been sent'**
+  /// **'Reset password email has been sent.'**
   String get resetPasswordEmailSent;
+
+  /// No description provided for @loginSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Trying to login...'**
+  String get loginSuccessful;
+
+  /// No description provided for @loginError.
+  ///
+  /// In en, this message translates to:
+  /// **'Email or password doesnt exist.'**
+  String get loginError;
 }
 
 class _AppLocalizationsDelegate

@@ -5,6 +5,7 @@ import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_event.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_state.dart';
+import 'package:chat_app/modules/auth/domain/entities/login_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -86,14 +87,16 @@ class _LoginPageState extends State<LoginPage>
               child: AnimatedBuilder(
                 animation: _heightAnimation,
                 builder: (context, child) {
-                  return BlocListener<AuthBloc, AuthBlocState>(
+                  return BlocConsumer<AuthBloc, AuthBlocState>(
                     listener: (context, state) {
                       logIt().d(
-                        "Bloc listener:Login state: ${state.loginSuccessful}",
+                        "Bloc listener:Login state: ${state.loginResult}",
                       );
-                      if (state.loginSuccessful ?? false) {}
+                      if (state.loginResult is LoginSuccess) {
+                        // context.goNamed(AppRoute.home.name);
+                      }
                     },
-                    child: FormBuilder(
+                    builder: (context, state) => FormBuilder(
                       key: _formKey,
                       child: Container(
                         decoration: BoxDecoration(
@@ -116,6 +119,46 @@ class _LoginPageState extends State<LoginPage>
                             mainAxisSize: MainAxisSize.max,
                             spacing: 16,
                             children: [
+                              if (state.loginResult is LoginFailure)
+                                Container(
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(
+                                      context,
+                                    ).extension<DesignColors>()!.cardErrorColor,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    l10n.loginError,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(color: Colors.white),
+                                  ),
+                                ),
+
+                              if (state.loginResult is LoginSuccess)
+                                Container(
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .extension<DesignColors>()!
+                                        .cardSuccessColor,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    l10n.loginSuccessful,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(color: Colors.white),
+                                  ),
+                                ),
+
                               if (_showTextFields)
                                 Column(
                                   spacing: 16,

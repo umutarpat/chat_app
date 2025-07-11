@@ -33,11 +33,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get forgotPassword => 'Forgot password?';
 
   @override
-  String get sendResetPasswordEmail => 'Send reset password email';
+  String get sendResetPasswordEmail => 'Send reset password email.';
 
   @override
-  String get emailNotRegistered => 'Email not registered';
+  String get emailNotRegistered => 'Email not registered.';
 
   @override
-  String get resetPasswordEmailSent => 'Reset password email has been sent';
+  String get resetPasswordEmailSent => 'Reset password email has been sent.';
+
+  @override
+  String get loginSuccessful => 'Trying to login...';
+
+  @override
+  String get loginError => 'Email or password doesnt exist.';
 }

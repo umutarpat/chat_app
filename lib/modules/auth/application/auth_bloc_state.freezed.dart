@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthBlocState {
 
- bool? get loginSuccessful; String? get errorText; ForgotPasswordResult? get forgotPasswordResult;
+ ForgotPasswordResult? get forgotPasswordResult; LoginResult? get loginResult;
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AuthBlocStateCopyWith<AuthBlocState> get copyWith => _$AuthBlocStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthBlocState&&(identical(other.loginSuccessful, loginSuccessful) || other.loginSuccessful == loginSuccessful)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthBlocState&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult)&&(identical(other.loginResult, loginResult) || other.loginResult == loginResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,loginSuccessful,errorText,forgotPasswordResult);
+int get hashCode => Object.hash(runtimeType,forgotPasswordResult,loginResult);
 
 @override
 String toString() {
-  return 'AuthBlocState(loginSuccessful: $loginSuccessful, errorText: $errorText, forgotPasswordResult: $forgotPasswordResult)';
+  return 'AuthBlocState(forgotPasswordResult: $forgotPasswordResult, loginResult: $loginResult)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AuthBlocStateCopyWith<$Res>  {
   factory $AuthBlocStateCopyWith(AuthBlocState value, $Res Function(AuthBlocState) _then) = _$AuthBlocStateCopyWithImpl;
 @useResult
 $Res call({
- bool? loginSuccessful, String? errorText, ForgotPasswordResult? forgotPasswordResult
+ ForgotPasswordResult? forgotPasswordResult, LoginResult? loginResult
 });
 
 
@@ -62,12 +62,11 @@ class _$AuthBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? loginSuccessful = freezed,Object? errorText = freezed,Object? forgotPasswordResult = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? forgotPasswordResult = freezed,Object? loginResult = freezed,}) {
   return _then(_self.copyWith(
-loginSuccessful: freezed == loginSuccessful ? _self.loginSuccessful : loginSuccessful // ignore: cast_nullable_to_non_nullable
-as bool?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
-as String?,forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
-as ForgotPasswordResult?,
+forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
+as ForgotPasswordResult?,loginResult: freezed == loginResult ? _self.loginResult : loginResult // ignore: cast_nullable_to_non_nullable
+as LoginResult?,
   ));
 }
 
@@ -152,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool? loginSuccessful,  String? errorText,  ForgotPasswordResult? forgotPasswordResult)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthBlocState() when $default != null:
-return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult);case _:
+return $default(_that.forgotPasswordResult,_that.loginResult);case _:
   return orElse();
 
 }
@@ -173,10 +172,10 @@ return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool? loginSuccessful,  String? errorText,  ForgotPasswordResult? forgotPasswordResult)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult)  $default,) {final _that = this;
 switch (_that) {
 case _AuthBlocState():
-return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult);case _:
+return $default(_that.forgotPasswordResult,_that.loginResult);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +192,10 @@ return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool? loginSuccessful,  String? errorText,  ForgotPasswordResult? forgotPasswordResult)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ForgotPasswordResult? forgotPasswordResult,  LoginResult? loginResult)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthBlocState() when $default != null:
-return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult);case _:
+return $default(_that.forgotPasswordResult,_that.loginResult);case _:
   return null;
 
 }
@@ -208,12 +207,11 @@ return $default(_that.loginSuccessful,_that.errorText,_that.forgotPasswordResult
 
 
 class _AuthBlocState implements AuthBlocState {
-   _AuthBlocState({this.loginSuccessful = false, this.errorText, this.forgotPasswordResult});
+   _AuthBlocState({this.forgotPasswordResult, this.loginResult});
   
 
-@override@JsonKey() final  bool? loginSuccessful;
-@override final  String? errorText;
 @override final  ForgotPasswordResult? forgotPasswordResult;
+@override final  LoginResult? loginResult;
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +223,16 @@ _$AuthBlocStateCopyWith<_AuthBlocState> get copyWith => __$AuthBlocStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthBlocState&&(identical(other.loginSuccessful, loginSuccessful) || other.loginSuccessful == loginSuccessful)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthBlocState&&(identical(other.forgotPasswordResult, forgotPasswordResult) || other.forgotPasswordResult == forgotPasswordResult)&&(identical(other.loginResult, loginResult) || other.loginResult == loginResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,loginSuccessful,errorText,forgotPasswordResult);
+int get hashCode => Object.hash(runtimeType,forgotPasswordResult,loginResult);
 
 @override
 String toString() {
-  return 'AuthBlocState(loginSuccessful: $loginSuccessful, errorText: $errorText, forgotPasswordResult: $forgotPasswordResult)';
+  return 'AuthBlocState(forgotPasswordResult: $forgotPasswordResult, loginResult: $loginResult)';
 }
 
 
@@ -245,7 +243,7 @@ abstract mixin class _$AuthBlocStateCopyWith<$Res> implements $AuthBlocStateCopy
   factory _$AuthBlocStateCopyWith(_AuthBlocState value, $Res Function(_AuthBlocState) _then) = __$AuthBlocStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool? loginSuccessful, String? errorText, ForgotPasswordResult? forgotPasswordResult
+ ForgotPasswordResult? forgotPasswordResult, LoginResult? loginResult
 });
 
 
@@ -262,12 +260,11 @@ class __$AuthBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthBlocState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? loginSuccessful = freezed,Object? errorText = freezed,Object? forgotPasswordResult = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? forgotPasswordResult = freezed,Object? loginResult = freezed,}) {
   return _then(_AuthBlocState(
-loginSuccessful: freezed == loginSuccessful ? _self.loginSuccessful : loginSuccessful // ignore: cast_nullable_to_non_nullable
-as bool?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
-as String?,forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
-as ForgotPasswordResult?,
+forgotPasswordResult: freezed == forgotPasswordResult ? _self.forgotPasswordResult : forgotPasswordResult // ignore: cast_nullable_to_non_nullable
+as ForgotPasswordResult?,loginResult: freezed == loginResult ? _self.loginResult : loginResult // ignore: cast_nullable_to_non_nullable
+as LoginResult?,
   ));
 }
 
