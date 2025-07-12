@@ -101,4 +101,13 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get registerSuccessful =>
       'Register successful, please check your email for verification link.';
+
+  @override
+  String get newChat => 'New Chat';
+
+  @override
+  String get message => 'Message';
+
+  @override
+  String get chat => 'Chat';
 }

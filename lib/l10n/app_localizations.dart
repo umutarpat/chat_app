@@ -283,6 +283,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Register successful, please check your email for verification link.'**
   String get registerSuccessful;
+
+  /// No description provided for @newChat.
+  ///
+  /// In en, this message translates to:
+  /// **'New Chat'**
+  String get newChat;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// No description provided for @chat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get chat;
 }
 
 class _AppLocalizationsDelegate

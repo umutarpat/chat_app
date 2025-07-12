@@ -19,6 +19,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ChatBlocState {
   FetchUserResult? get fetchUserResult => throw _privateConstructorUsedError;
   List<UserListModel>? get userList => throw _privateConstructorUsedError;
+  SendMessageResult? get sendMessageResult =>
+      throw _privateConstructorUsedError;
+  GetMessagesResult? get getMessagesResult =>
+      throw _privateConstructorUsedError;
+  List<MessageModel>? get messages => throw _privateConstructorUsedError;
 
   /// Create a copy of ChatBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -34,7 +39,13 @@ abstract class $ChatBlocStateCopyWith<$Res> {
     $Res Function(ChatBlocState) then,
   ) = _$ChatBlocStateCopyWithImpl<$Res, ChatBlocState>;
   @useResult
-  $Res call({FetchUserResult? fetchUserResult, List<UserListModel>? userList});
+  $Res call({
+    FetchUserResult? fetchUserResult,
+    List<UserListModel>? userList,
+    SendMessageResult? sendMessageResult,
+    GetMessagesResult? getMessagesResult,
+    List<MessageModel>? messages,
+  });
 }
 
 /// @nodoc
@@ -51,7 +62,13 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? fetchUserResult = freezed, Object? userList = freezed}) {
+  $Res call({
+    Object? fetchUserResult = freezed,
+    Object? userList = freezed,
+    Object? sendMessageResult = freezed,
+    Object? getMessagesResult = freezed,
+    Object? messages = freezed,
+  }) {
     return _then(
       _value.copyWith(
             fetchUserResult: freezed == fetchUserResult
@@ -62,6 +79,18 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
                 ? _value.userList
                 : userList // ignore: cast_nullable_to_non_nullable
                       as List<UserListModel>?,
+            sendMessageResult: freezed == sendMessageResult
+                ? _value.sendMessageResult
+                : sendMessageResult // ignore: cast_nullable_to_non_nullable
+                      as SendMessageResult?,
+            getMessagesResult: freezed == getMessagesResult
+                ? _value.getMessagesResult
+                : getMessagesResult // ignore: cast_nullable_to_non_nullable
+                      as GetMessagesResult?,
+            messages: freezed == messages
+                ? _value.messages
+                : messages // ignore: cast_nullable_to_non_nullable
+                      as List<MessageModel>?,
           )
           as $Val,
     );
@@ -77,7 +106,13 @@ abstract class _$$ChatBlocStateImplCopyWith<$Res>
   ) = __$$ChatBlocStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({FetchUserResult? fetchUserResult, List<UserListModel>? userList});
+  $Res call({
+    FetchUserResult? fetchUserResult,
+    List<UserListModel>? userList,
+    SendMessageResult? sendMessageResult,
+    GetMessagesResult? getMessagesResult,
+    List<MessageModel>? messages,
+  });
 }
 
 /// @nodoc
@@ -93,7 +128,13 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? fetchUserResult = freezed, Object? userList = freezed}) {
+  $Res call({
+    Object? fetchUserResult = freezed,
+    Object? userList = freezed,
+    Object? sendMessageResult = freezed,
+    Object? getMessagesResult = freezed,
+    Object? messages = freezed,
+  }) {
     return _then(
       _$ChatBlocStateImpl(
         fetchUserResult: freezed == fetchUserResult
@@ -104,6 +145,18 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
             ? _value._userList
             : userList // ignore: cast_nullable_to_non_nullable
                   as List<UserListModel>?,
+        sendMessageResult: freezed == sendMessageResult
+            ? _value.sendMessageResult
+            : sendMessageResult // ignore: cast_nullable_to_non_nullable
+                  as SendMessageResult?,
+        getMessagesResult: freezed == getMessagesResult
+            ? _value.getMessagesResult
+            : getMessagesResult // ignore: cast_nullable_to_non_nullable
+                  as GetMessagesResult?,
+        messages: freezed == messages
+            ? _value._messages
+            : messages // ignore: cast_nullable_to_non_nullable
+                  as List<MessageModel>?,
       ),
     );
   }
@@ -115,7 +168,11 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
   _$ChatBlocStateImpl({
     this.fetchUserResult,
     final List<UserListModel>? userList,
-  }) : _userList = userList;
+    this.sendMessageResult,
+    this.getMessagesResult,
+    final List<MessageModel>? messages,
+  }) : _userList = userList,
+       _messages = messages;
 
   @override
   final FetchUserResult? fetchUserResult;
@@ -130,8 +187,22 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
   }
 
   @override
+  final SendMessageResult? sendMessageResult;
+  @override
+  final GetMessagesResult? getMessagesResult;
+  final List<MessageModel>? _messages;
+  @override
+  List<MessageModel>? get messages {
+    final value = _messages;
+    if (value == null) return null;
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
   String toString() {
-    return 'ChatBlocState(fetchUserResult: $fetchUserResult, userList: $userList)';
+    return 'ChatBlocState(fetchUserResult: $fetchUserResult, userList: $userList, sendMessageResult: $sendMessageResult, getMessagesResult: $getMessagesResult, messages: $messages)';
   }
 
   @override
@@ -141,7 +212,12 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
             other is _$ChatBlocStateImpl &&
             (identical(other.fetchUserResult, fetchUserResult) ||
                 other.fetchUserResult == fetchUserResult) &&
-            const DeepCollectionEquality().equals(other._userList, _userList));
+            const DeepCollectionEquality().equals(other._userList, _userList) &&
+            (identical(other.sendMessageResult, sendMessageResult) ||
+                other.sendMessageResult == sendMessageResult) &&
+            (identical(other.getMessagesResult, getMessagesResult) ||
+                other.getMessagesResult == getMessagesResult) &&
+            const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
   @override
@@ -149,6 +225,9 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
     runtimeType,
     fetchUserResult,
     const DeepCollectionEquality().hash(_userList),
+    sendMessageResult,
+    getMessagesResult,
+    const DeepCollectionEquality().hash(_messages),
   );
 
   /// Create a copy of ChatBlocState
@@ -164,12 +243,21 @@ abstract class _ChatBlocState implements ChatBlocState {
   factory _ChatBlocState({
     final FetchUserResult? fetchUserResult,
     final List<UserListModel>? userList,
+    final SendMessageResult? sendMessageResult,
+    final GetMessagesResult? getMessagesResult,
+    final List<MessageModel>? messages,
   }) = _$ChatBlocStateImpl;
 
   @override
   FetchUserResult? get fetchUserResult;
   @override
   List<UserListModel>? get userList;
+  @override
+  SendMessageResult? get sendMessageResult;
+  @override
+  GetMessagesResult? get getMessagesResult;
+  @override
+  List<MessageModel>? get messages;
 
   /// Create a copy of ChatBlocState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,4 +1,5 @@
 import 'package:chat_app/global/core/routes.dart';
+import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_event.dart';
 import 'package:chat_app/modules/chat/presentation/widgets/new_chat_sheet.dart';
@@ -22,10 +23,11 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Chat',
+          l10n.chat,
           style: Theme.of(
             context,
           ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),

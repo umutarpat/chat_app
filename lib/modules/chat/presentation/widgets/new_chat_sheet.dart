@@ -1,4 +1,5 @@
 import 'package:chat_app/global/core/routes.dart';
+import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_state.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +11,14 @@ class ChatPageNewChatSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'New Chat',
+            l10n.newChat,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,

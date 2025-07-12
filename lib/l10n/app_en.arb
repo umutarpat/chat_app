@@ -29,6 +29,9 @@
   "phoneNumber": "Phone Number",
   "phoneNumberNotValid": "Invalid phone number.",
   "userAlreadyExist": "This user already exists.",
-  "registerSuccessful": "Register successful, please check your email for verification link."
+  "registerSuccessful": "Register successful, please check your email for verification link.",
+  "newChat": "New Chat",
+  "message": "Message",
+  "chat": "Chat"
 
 }
