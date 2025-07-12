@@ -17,6 +17,11 @@ import '../../modules/auth/application/auth_bloc_usecase.dart' as _i114;
 import '../../modules/auth/data/auth_repository.dart' as _i927;
 import '../../modules/auth/domain/repositories/auth_repository_interface.dart'
     as _i462;
+import '../../modules/chat/application/chat_bloc.dart' as _i405;
+import '../../modules/chat/application/chat_bloc_usecase.dart' as _i428;
+import '../../modules/chat/data/chat_repository.dart' as _i199;
+import '../../modules/chat/domain/repositories/chat_repository_interface.dart'
+    as _i455;
 import '../../modules/settings/application/settings_bloc.dart' as _i893;
 import '../../modules/settings/application/settings_bloc_usecase.dart' as _i473;
 import '../../modules/settings/data/settings_repository.dart' as _i55;
@@ -37,6 +42,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i462.AuthRepositoryInterface>(
       () => _i927.AuthRepository(gh<_i875.AppDatabase>()),
     );
+    gh.lazySingleton<_i455.ChatRepositoryInterface>(
+      () => _i199.ChatRepository(gh<_i875.AppDatabase>()),
+    );
+    gh.factory<_i428.ChatBlocFetchUserListUseCase>(
+      () => _i428.ChatBlocFetchUserListUseCase(
+        gh<_i455.ChatRepositoryInterface>(),
+      ),
+    );
     gh.lazySingleton<_i1024.SettingsRepositoryInterface>(
       () => _i55.SettingsRepository(gh<_i875.AppDatabase>()),
     );
@@ -47,6 +60,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i893.SettingsBloc>(
       () => _i893.SettingsBloc(gh<_i473.SettingsBlocLogoutUseCase>()),
+    );
+    gh.factory<_i405.ChatBloc>(
+      () => _i405.ChatBloc(gh<_i428.ChatBlocFetchUserListUseCase>()),
     );
     gh.factory<_i114.AuthBlocSetupUserUseCase>(
       () => _i114.AuthBlocSetupUserUseCase(gh<_i462.AuthRepositoryInterface>()),

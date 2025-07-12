@@ -329,6 +329,28 @@ class $UsersTableTable extends UsersTable
       'PRIMARY KEY AUTOINCREMENT',
     ),
   );
+  static const VerificationMeta _firstNameMeta = const VerificationMeta(
+    'firstName',
+  );
+  @override
+  late final GeneratedColumn<String> firstName = GeneratedColumn<String>(
+    'first_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lastNameMeta = const VerificationMeta(
+    'lastName',
+  );
+  @override
+  late final GeneratedColumn<String> lastName = GeneratedColumn<String>(
+    'last_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _emailMeta = const VerificationMeta('email');
   @override
   late final GeneratedColumn<String> email = GeneratedColumn<String>(
@@ -336,8 +358,7 @@ class $UsersTableTable extends UsersTable
     aliasedName,
     false,
     type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('en'),
+    requiredDuringInsert: true,
   );
   static const VerificationMeta _passwordMeta = const VerificationMeta(
     'password',
@@ -348,8 +369,7 @@ class $UsersTableTable extends UsersTable
     aliasedName,
     false,
     type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('en'),
+    requiredDuringInsert: true,
   );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
@@ -362,8 +382,31 @@ class $UsersTableTable extends UsersTable
     type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _loginPossibleMeta = const VerificationMeta(
+    'loginPossible',
+  );
   @override
-  List<GeneratedColumn> get $columns => [id, email, password, createdAt];
+  late final GeneratedColumn<bool> loginPossible = GeneratedColumn<bool>(
+    'login_possible',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("login_possible" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    firstName,
+    lastName,
+    email,
+    password,
+    createdAt,
+    loginPossible,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -379,22 +422,51 @@ class $UsersTableTable extends UsersTable
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
+    if (data.containsKey('first_name')) {
+      context.handle(
+        _firstNameMeta,
+        firstName.isAcceptableOrUnknown(data['first_name']!, _firstNameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_firstNameMeta);
+    }
+    if (data.containsKey('last_name')) {
+      context.handle(
+        _lastNameMeta,
+        lastName.isAcceptableOrUnknown(data['last_name']!, _lastNameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_lastNameMeta);
+    }
     if (data.containsKey('email')) {
       context.handle(
         _emailMeta,
         email.isAcceptableOrUnknown(data['email']!, _emailMeta),
       );
+    } else if (isInserting) {
+      context.missing(_emailMeta);
     }
     if (data.containsKey('password')) {
       context.handle(
         _passwordMeta,
         password.isAcceptableOrUnknown(data['password']!, _passwordMeta),
       );
+    } else if (isInserting) {
+      context.missing(_passwordMeta);
     }
     if (data.containsKey('created_at')) {
       context.handle(
         _createdAtMeta,
         createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('login_possible')) {
+      context.handle(
+        _loginPossibleMeta,
+        loginPossible.isAcceptableOrUnknown(
+          data['login_possible']!,
+          _loginPossibleMeta,
+        ),
       );
     }
     return context;
@@ -410,6 +482,14 @@ class $UsersTableTable extends UsersTable
         DriftSqlType.int,
         data['${effectivePrefix}id'],
       )!,
+      firstName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}first_name'],
+      )!,
+      lastName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}last_name'],
+      )!,
       email: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}email'],
@@ -422,6 +502,10 @@ class $UsersTableTable extends UsersTable
         DriftSqlType.dateTime,
         data['${effectivePrefix}created_at'],
       ),
+      loginPossible: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}login_possible'],
+      )!,
     );
   }
 
@@ -433,35 +517,47 @@ class $UsersTableTable extends UsersTable
 
 class UsersTableData extends DataClass implements Insertable<UsersTableData> {
   final int id;
+  final String firstName;
+  final String lastName;
   final String email;
   final String password;
   final DateTime? createdAt;
+  final bool loginPossible;
   const UsersTableData({
     required this.id,
+    required this.firstName,
+    required this.lastName,
     required this.email,
     required this.password,
     this.createdAt,
+    required this.loginPossible,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    map['first_name'] = Variable<String>(firstName);
+    map['last_name'] = Variable<String>(lastName);
     map['email'] = Variable<String>(email);
     map['password'] = Variable<String>(password);
     if (!nullToAbsent || createdAt != null) {
       map['created_at'] = Variable<DateTime>(createdAt);
     }
+    map['login_possible'] = Variable<bool>(loginPossible);
     return map;
   }
 
   UsersTableCompanion toCompanion(bool nullToAbsent) {
     return UsersTableCompanion(
       id: Value(id),
+      firstName: Value(firstName),
+      lastName: Value(lastName),
       email: Value(email),
       password: Value(password),
       createdAt: createdAt == null && nullToAbsent
           ? const Value.absent()
           : Value(createdAt),
+      loginPossible: Value(loginPossible),
     );
   }
 
@@ -472,9 +568,12 @@ class UsersTableData extends DataClass implements Insertable<UsersTableData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return UsersTableData(
       id: serializer.fromJson<int>(json['id']),
+      firstName: serializer.fromJson<String>(json['firstName']),
+      lastName: serializer.fromJson<String>(json['lastName']),
       email: serializer.fromJson<String>(json['email']),
       password: serializer.fromJson<String>(json['password']),
       createdAt: serializer.fromJson<DateTime?>(json['createdAt']),
+      loginPossible: serializer.fromJson<bool>(json['loginPossible']),
     );
   }
   @override
@@ -482,29 +581,43 @@ class UsersTableData extends DataClass implements Insertable<UsersTableData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
+      'firstName': serializer.toJson<String>(firstName),
+      'lastName': serializer.toJson<String>(lastName),
       'email': serializer.toJson<String>(email),
       'password': serializer.toJson<String>(password),
       'createdAt': serializer.toJson<DateTime?>(createdAt),
+      'loginPossible': serializer.toJson<bool>(loginPossible),
     };
   }
 
   UsersTableData copyWith({
     int? id,
+    String? firstName,
+    String? lastName,
     String? email,
     String? password,
     Value<DateTime?> createdAt = const Value.absent(),
+    bool? loginPossible,
   }) => UsersTableData(
     id: id ?? this.id,
+    firstName: firstName ?? this.firstName,
+    lastName: lastName ?? this.lastName,
     email: email ?? this.email,
     password: password ?? this.password,
     createdAt: createdAt.present ? createdAt.value : this.createdAt,
+    loginPossible: loginPossible ?? this.loginPossible,
   );
   UsersTableData copyWithCompanion(UsersTableCompanion data) {
     return UsersTableData(
       id: data.id.present ? data.id.value : this.id,
+      firstName: data.firstName.present ? data.firstName.value : this.firstName,
+      lastName: data.lastName.present ? data.lastName.value : this.lastName,
       email: data.email.present ? data.email.value : this.email,
       password: data.password.present ? data.password.value : this.password,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      loginPossible: data.loginPossible.present
+          ? data.loginPossible.value
+          : this.loginPossible,
     );
   }
 
@@ -512,67 +625,105 @@ class UsersTableData extends DataClass implements Insertable<UsersTableData> {
   String toString() {
     return (StringBuffer('UsersTableData(')
           ..write('id: $id, ')
+          ..write('firstName: $firstName, ')
+          ..write('lastName: $lastName, ')
           ..write('email: $email, ')
           ..write('password: $password, ')
-          ..write('createdAt: $createdAt')
+          ..write('createdAt: $createdAt, ')
+          ..write('loginPossible: $loginPossible')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, email, password, createdAt);
+  int get hashCode => Object.hash(
+    id,
+    firstName,
+    lastName,
+    email,
+    password,
+    createdAt,
+    loginPossible,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is UsersTableData &&
           other.id == this.id &&
+          other.firstName == this.firstName &&
+          other.lastName == this.lastName &&
           other.email == this.email &&
           other.password == this.password &&
-          other.createdAt == this.createdAt);
+          other.createdAt == this.createdAt &&
+          other.loginPossible == this.loginPossible);
 }
 
 class UsersTableCompanion extends UpdateCompanion<UsersTableData> {
   final Value<int> id;
+  final Value<String> firstName;
+  final Value<String> lastName;
   final Value<String> email;
   final Value<String> password;
   final Value<DateTime?> createdAt;
+  final Value<bool> loginPossible;
   const UsersTableCompanion({
     this.id = const Value.absent(),
+    this.firstName = const Value.absent(),
+    this.lastName = const Value.absent(),
     this.email = const Value.absent(),
     this.password = const Value.absent(),
     this.createdAt = const Value.absent(),
+    this.loginPossible = const Value.absent(),
   });
   UsersTableCompanion.insert({
     this.id = const Value.absent(),
-    this.email = const Value.absent(),
-    this.password = const Value.absent(),
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
     this.createdAt = const Value.absent(),
-  });
+    this.loginPossible = const Value.absent(),
+  }) : firstName = Value(firstName),
+       lastName = Value(lastName),
+       email = Value(email),
+       password = Value(password);
   static Insertable<UsersTableData> custom({
     Expression<int>? id,
+    Expression<String>? firstName,
+    Expression<String>? lastName,
     Expression<String>? email,
     Expression<String>? password,
     Expression<DateTime>? createdAt,
+    Expression<bool>? loginPossible,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (firstName != null) 'first_name': firstName,
+      if (lastName != null) 'last_name': lastName,
       if (email != null) 'email': email,
       if (password != null) 'password': password,
       if (createdAt != null) 'created_at': createdAt,
+      if (loginPossible != null) 'login_possible': loginPossible,
     });
   }
 
   UsersTableCompanion copyWith({
     Value<int>? id,
+    Value<String>? firstName,
+    Value<String>? lastName,
     Value<String>? email,
     Value<String>? password,
     Value<DateTime?>? createdAt,
+    Value<bool>? loginPossible,
   }) {
     return UsersTableCompanion(
       id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
       email: email ?? this.email,
       password: password ?? this.password,
       createdAt: createdAt ?? this.createdAt,
+      loginPossible: loginPossible ?? this.loginPossible,
     );
   }
 
@@ -581,6 +732,12 @@ class UsersTableCompanion extends UpdateCompanion<UsersTableData> {
     final map = <String, Expression>{};
     if (id.present) {
       map['id'] = Variable<int>(id.value);
+    }
+    if (firstName.present) {
+      map['first_name'] = Variable<String>(firstName.value);
+    }
+    if (lastName.present) {
+      map['last_name'] = Variable<String>(lastName.value);
     }
     if (email.present) {
       map['email'] = Variable<String>(email.value);
@@ -591,6 +748,9 @@ class UsersTableCompanion extends UpdateCompanion<UsersTableData> {
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
+    if (loginPossible.present) {
+      map['login_possible'] = Variable<bool>(loginPossible.value);
+    }
     return map;
   }
 
@@ -598,8 +758,364 @@ class UsersTableCompanion extends UpdateCompanion<UsersTableData> {
   String toString() {
     return (StringBuffer('UsersTableCompanion(')
           ..write('id: $id, ')
+          ..write('firstName: $firstName, ')
+          ..write('lastName: $lastName, ')
           ..write('email: $email, ')
           ..write('password: $password, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('loginPossible: $loginPossible')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $MessagesTableTable extends MessagesTable
+    with TableInfo<$MessagesTableTable, MessagesTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MessagesTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _senderIdMeta = const VerificationMeta(
+    'senderId',
+  );
+  @override
+  late final GeneratedColumn<int> senderId = GeneratedColumn<int>(
+    'sender_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _receiverIdMeta = const VerificationMeta(
+    'receiverId',
+  );
+  @override
+  late final GeneratedColumn<int> receiverId = GeneratedColumn<int>(
+    'receiver_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _messageMeta = const VerificationMeta(
+    'message',
+  );
+  @override
+  late final GeneratedColumn<String> message = GeneratedColumn<String>(
+    'message',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    senderId,
+    receiverId,
+    message,
+    createdAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'messages_table';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<MessagesTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('sender_id')) {
+      context.handle(
+        _senderIdMeta,
+        senderId.isAcceptableOrUnknown(data['sender_id']!, _senderIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_senderIdMeta);
+    }
+    if (data.containsKey('receiver_id')) {
+      context.handle(
+        _receiverIdMeta,
+        receiverId.isAcceptableOrUnknown(data['receiver_id']!, _receiverIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_receiverIdMeta);
+    }
+    if (data.containsKey('message')) {
+      context.handle(
+        _messageMeta,
+        message.isAcceptableOrUnknown(data['message']!, _messageMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_messageMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  MessagesTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MessagesTableData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      senderId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sender_id'],
+      )!,
+      receiverId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}receiver_id'],
+      )!,
+      message: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}message'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  $MessagesTableTable createAlias(String alias) {
+    return $MessagesTableTable(attachedDatabase, alias);
+  }
+}
+
+class MessagesTableData extends DataClass
+    implements Insertable<MessagesTableData> {
+  final int id;
+  final int senderId;
+  final int receiverId;
+  final String message;
+  final DateTime createdAt;
+  const MessagesTableData({
+    required this.id,
+    required this.senderId,
+    required this.receiverId,
+    required this.message,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['sender_id'] = Variable<int>(senderId);
+    map['receiver_id'] = Variable<int>(receiverId);
+    map['message'] = Variable<String>(message);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  MessagesTableCompanion toCompanion(bool nullToAbsent) {
+    return MessagesTableCompanion(
+      id: Value(id),
+      senderId: Value(senderId),
+      receiverId: Value(receiverId),
+      message: Value(message),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory MessagesTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return MessagesTableData(
+      id: serializer.fromJson<int>(json['id']),
+      senderId: serializer.fromJson<int>(json['senderId']),
+      receiverId: serializer.fromJson<int>(json['receiverId']),
+      message: serializer.fromJson<String>(json['message']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'senderId': serializer.toJson<int>(senderId),
+      'receiverId': serializer.toJson<int>(receiverId),
+      'message': serializer.toJson<String>(message),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  MessagesTableData copyWith({
+    int? id,
+    int? senderId,
+    int? receiverId,
+    String? message,
+    DateTime? createdAt,
+  }) => MessagesTableData(
+    id: id ?? this.id,
+    senderId: senderId ?? this.senderId,
+    receiverId: receiverId ?? this.receiverId,
+    message: message ?? this.message,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  MessagesTableData copyWithCompanion(MessagesTableCompanion data) {
+    return MessagesTableData(
+      id: data.id.present ? data.id.value : this.id,
+      senderId: data.senderId.present ? data.senderId.value : this.senderId,
+      receiverId: data.receiverId.present
+          ? data.receiverId.value
+          : this.receiverId,
+      message: data.message.present ? data.message.value : this.message,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MessagesTableData(')
+          ..write('id: $id, ')
+          ..write('senderId: $senderId, ')
+          ..write('receiverId: $receiverId, ')
+          ..write('message: $message, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, senderId, receiverId, message, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MessagesTableData &&
+          other.id == this.id &&
+          other.senderId == this.senderId &&
+          other.receiverId == this.receiverId &&
+          other.message == this.message &&
+          other.createdAt == this.createdAt);
+}
+
+class MessagesTableCompanion extends UpdateCompanion<MessagesTableData> {
+  final Value<int> id;
+  final Value<int> senderId;
+  final Value<int> receiverId;
+  final Value<String> message;
+  final Value<DateTime> createdAt;
+  const MessagesTableCompanion({
+    this.id = const Value.absent(),
+    this.senderId = const Value.absent(),
+    this.receiverId = const Value.absent(),
+    this.message = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  });
+  MessagesTableCompanion.insert({
+    this.id = const Value.absent(),
+    required int senderId,
+    required int receiverId,
+    required String message,
+    this.createdAt = const Value.absent(),
+  }) : senderId = Value(senderId),
+       receiverId = Value(receiverId),
+       message = Value(message);
+  static Insertable<MessagesTableData> custom({
+    Expression<int>? id,
+    Expression<int>? senderId,
+    Expression<int>? receiverId,
+    Expression<String>? message,
+    Expression<DateTime>? createdAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (senderId != null) 'sender_id': senderId,
+      if (receiverId != null) 'receiver_id': receiverId,
+      if (message != null) 'message': message,
+      if (createdAt != null) 'created_at': createdAt,
+    });
+  }
+
+  MessagesTableCompanion copyWith({
+    Value<int>? id,
+    Value<int>? senderId,
+    Value<int>? receiverId,
+    Value<String>? message,
+    Value<DateTime>? createdAt,
+  }) {
+    return MessagesTableCompanion(
+      id: id ?? this.id,
+      senderId: senderId ?? this.senderId,
+      receiverId: receiverId ?? this.receiverId,
+      message: message ?? this.message,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (senderId.present) {
+      map['sender_id'] = Variable<int>(senderId.value);
+    }
+    if (receiverId.present) {
+      map['receiver_id'] = Variable<int>(receiverId.value);
+    }
+    if (message.present) {
+      map['message'] = Variable<String>(message.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MessagesTableCompanion(')
+          ..write('id: $id, ')
+          ..write('senderId: $senderId, ')
+          ..write('receiverId: $receiverId, ')
+          ..write('message: $message, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
@@ -611,6 +1127,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $SettingsTableTable settingsTable = $SettingsTableTable(this);
   late final $UsersTableTable usersTable = $UsersTableTable(this);
+  late final $MessagesTableTable messagesTable = $MessagesTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -618,6 +1135,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     settingsTable,
     usersTable,
+    messagesTable,
   ];
 }
 
@@ -805,16 +1323,22 @@ typedef $$SettingsTableTableProcessedTableManager =
 typedef $$UsersTableTableCreateCompanionBuilder =
     UsersTableCompanion Function({
       Value<int> id,
-      Value<String> email,
-      Value<String> password,
+      required String firstName,
+      required String lastName,
+      required String email,
+      required String password,
       Value<DateTime?> createdAt,
+      Value<bool> loginPossible,
     });
 typedef $$UsersTableTableUpdateCompanionBuilder =
     UsersTableCompanion Function({
       Value<int> id,
+      Value<String> firstName,
+      Value<String> lastName,
       Value<String> email,
       Value<String> password,
       Value<DateTime?> createdAt,
+      Value<bool> loginPossible,
     });
 
 class $$UsersTableTableFilterComposer
@@ -831,6 +1355,16 @@ class $$UsersTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<String> get firstName => $composableBuilder(
+    column: $table.firstName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get lastName => $composableBuilder(
+    column: $table.lastName,
+    builder: (column) => ColumnFilters(column),
+  );
+
   ColumnFilters<String> get email => $composableBuilder(
     column: $table.email,
     builder: (column) => ColumnFilters(column),
@@ -843,6 +1377,11 @@ class $$UsersTableTableFilterComposer
 
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get loginPossible => $composableBuilder(
+    column: $table.loginPossible,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -861,6 +1400,16 @@ class $$UsersTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get firstName => $composableBuilder(
+    column: $table.firstName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get lastName => $composableBuilder(
+    column: $table.lastName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get email => $composableBuilder(
     column: $table.email,
     builder: (column) => ColumnOrderings(column),
@@ -873,6 +1422,11 @@ class $$UsersTableTableOrderingComposer
 
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get loginPossible => $composableBuilder(
+    column: $table.loginPossible,
     builder: (column) => ColumnOrderings(column),
   );
 }
@@ -889,6 +1443,12 @@ class $$UsersTableTableAnnotationComposer
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
+  GeneratedColumn<String> get firstName =>
+      $composableBuilder(column: $table.firstName, builder: (column) => column);
+
+  GeneratedColumn<String> get lastName =>
+      $composableBuilder(column: $table.lastName, builder: (column) => column);
+
   GeneratedColumn<String> get email =>
       $composableBuilder(column: $table.email, builder: (column) => column);
 
@@ -897,6 +1457,11 @@ class $$UsersTableTableAnnotationComposer
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get loginPossible => $composableBuilder(
+    column: $table.loginPossible,
+    builder: (column) => column,
+  );
 }
 
 class $$UsersTableTableTableManager
@@ -931,26 +1496,38 @@ class $$UsersTableTableTableManager
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
+                Value<String> firstName = const Value.absent(),
+                Value<String> lastName = const Value.absent(),
                 Value<String> email = const Value.absent(),
                 Value<String> password = const Value.absent(),
                 Value<DateTime?> createdAt = const Value.absent(),
+                Value<bool> loginPossible = const Value.absent(),
               }) => UsersTableCompanion(
                 id: id,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password,
                 createdAt: createdAt,
+                loginPossible: loginPossible,
               ),
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                Value<String> email = const Value.absent(),
-                Value<String> password = const Value.absent(),
+                required String firstName,
+                required String lastName,
+                required String email,
+                required String password,
                 Value<DateTime?> createdAt = const Value.absent(),
+                Value<bool> loginPossible = const Value.absent(),
               }) => UsersTableCompanion.insert(
                 id: id,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password,
                 createdAt: createdAt,
+                loginPossible: loginPossible,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -977,6 +1554,206 @@ typedef $$UsersTableTableProcessedTableManager =
       UsersTableData,
       PrefetchHooks Function()
     >;
+typedef $$MessagesTableTableCreateCompanionBuilder =
+    MessagesTableCompanion Function({
+      Value<int> id,
+      required int senderId,
+      required int receiverId,
+      required String message,
+      Value<DateTime> createdAt,
+    });
+typedef $$MessagesTableTableUpdateCompanionBuilder =
+    MessagesTableCompanion Function({
+      Value<int> id,
+      Value<int> senderId,
+      Value<int> receiverId,
+      Value<String> message,
+      Value<DateTime> createdAt,
+    });
+
+class $$MessagesTableTableFilterComposer
+    extends Composer<_$AppDatabase, $MessagesTableTable> {
+  $$MessagesTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get senderId => $composableBuilder(
+    column: $table.senderId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get receiverId => $composableBuilder(
+    column: $table.receiverId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get message => $composableBuilder(
+    column: $table.message,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$MessagesTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $MessagesTableTable> {
+  $$MessagesTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get senderId => $composableBuilder(
+    column: $table.senderId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get receiverId => $composableBuilder(
+    column: $table.receiverId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get message => $composableBuilder(
+    column: $table.message,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$MessagesTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $MessagesTableTable> {
+  $$MessagesTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get senderId =>
+      $composableBuilder(column: $table.senderId, builder: (column) => column);
+
+  GeneratedColumn<int> get receiverId => $composableBuilder(
+    column: $table.receiverId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get message =>
+      $composableBuilder(column: $table.message, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$MessagesTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $MessagesTableTable,
+          MessagesTableData,
+          $$MessagesTableTableFilterComposer,
+          $$MessagesTableTableOrderingComposer,
+          $$MessagesTableTableAnnotationComposer,
+          $$MessagesTableTableCreateCompanionBuilder,
+          $$MessagesTableTableUpdateCompanionBuilder,
+          (
+            MessagesTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $MessagesTableTable,
+              MessagesTableData
+            >,
+          ),
+          MessagesTableData,
+          PrefetchHooks Function()
+        > {
+  $$MessagesTableTableTableManager(_$AppDatabase db, $MessagesTableTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$MessagesTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MessagesTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MessagesTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> senderId = const Value.absent(),
+                Value<int> receiverId = const Value.absent(),
+                Value<String> message = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+              }) => MessagesTableCompanion(
+                id: id,
+                senderId: senderId,
+                receiverId: receiverId,
+                message: message,
+                createdAt: createdAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int senderId,
+                required int receiverId,
+                required String message,
+                Value<DateTime> createdAt = const Value.absent(),
+              }) => MessagesTableCompanion.insert(
+                id: id,
+                senderId: senderId,
+                receiverId: receiverId,
+                message: message,
+                createdAt: createdAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$MessagesTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $MessagesTableTable,
+      MessagesTableData,
+      $$MessagesTableTableFilterComposer,
+      $$MessagesTableTableOrderingComposer,
+      $$MessagesTableTableAnnotationComposer,
+      $$MessagesTableTableCreateCompanionBuilder,
+      $$MessagesTableTableUpdateCompanionBuilder,
+      (
+        MessagesTableData,
+        BaseReferences<_$AppDatabase, $MessagesTableTable, MessagesTableData>,
+      ),
+      MessagesTableData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -985,4 +1762,6 @@ class $AppDatabaseManager {
       $$SettingsTableTableTableManager(_db, _db.settingsTable);
   $$UsersTableTableTableManager get usersTable =>
       $$UsersTableTableTableManager(_db, _db.usersTable);
+  $$MessagesTableTableTableManager get messagesTable =>
+      $$MessagesTableTableTableManager(_db, _db.messagesTable);
 }

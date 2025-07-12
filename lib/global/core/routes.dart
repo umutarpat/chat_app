@@ -4,6 +4,7 @@ import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/presentation/pages/forgot_password.dart';
 import 'package:chat_app/modules/auth/presentation/pages/login_page.dart';
 import 'package:chat_app/modules/auth/presentation/pages/signup/signup_page.dart';
+import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/presentation/chat_page.dart';
 import 'package:chat_app/modules/settings/application/settings_bloc.dart';
 import 'package:chat_app/modules/settings/presentation/settings_page.dart';
@@ -59,7 +60,10 @@ final router = GoRouter(
     GoRoute(
       path: '/${AppRoute.chat.name}',
       name: '/${AppRoute.chat.name}',
-      builder: (context, state) => ChatPage(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => getIt<ChatBloc>(),
+        child: ChatPage(),
+      ),
     ),
     GoRoute(
       path: '/${AppRoute.settings.name}',

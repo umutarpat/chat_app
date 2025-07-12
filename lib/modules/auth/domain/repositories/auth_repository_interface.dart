@@ -3,7 +3,7 @@ import 'package:chat_app/modules/auth/domain/entities/login_result.dart';
 import 'package:chat_app/modules/auth/domain/entities/signup_result.dart';
 
 abstract class AuthRepositoryInterface {
-  Future<void> setupUser();
+  Future<void> setupUsers();
 
   Future<LoginResult> login(String email, String password);
 

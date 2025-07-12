@@ -1,9 +1,24 @@
 import 'package:chat_app/global/core/routes.dart';
+import 'package:chat_app/modules/chat/application/chat_bloc.dart';
+import 'package:chat_app/modules/chat/application/chat_bloc_event.dart';
+import 'package:chat_app/modules/chat/presentation/widgets/new_chat_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ChatBloc>(context).add(FetchUserListEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +31,7 @@ class ChatPage extends StatelessWidget {
           ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: false,
+
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.person)),
           IconButton(
@@ -25,6 +41,22 @@ class ChatPage extends StatelessWidget {
             icon: Icon(Icons.settings),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final chatBloc = context.read<ChatBloc>();
+
+          showModalBottomSheet(
+            context: context,
+            builder: (bottomSheetContext) {
+              return BlocProvider.value(
+                value: chatBloc,
+                child: const ChatPageNewChatSheet(),
+              );
+            },
+          );
+        },
+        child: Icon(Icons.chat),
       ),
     );
   }

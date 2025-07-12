@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,263 +9,145 @@ part of 'settings_bloc_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
 /// @nodoc
 mixin _$SettingsBlocState {
+  LogoutResult? get logoutResult => throw _privateConstructorUsedError;
 
- LogoutResult? get logoutResult;
-/// Create a copy of SettingsBlocState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SettingsBlocStateCopyWith<SettingsBlocState> get copyWith => _$SettingsBlocStateCopyWithImpl<SettingsBlocState>(this as SettingsBlocState, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsBlocState&&(identical(other.logoutResult, logoutResult) || other.logoutResult == logoutResult));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,logoutResult);
-
-@override
-String toString() {
-  return 'SettingsBlocState(logoutResult: $logoutResult)';
-}
-
-
+  /// Create a copy of SettingsBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SettingsBlocStateCopyWith<SettingsBlocState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $SettingsBlocStateCopyWith<$Res>  {
-  factory $SettingsBlocStateCopyWith(SettingsBlocState value, $Res Function(SettingsBlocState) _then) = _$SettingsBlocStateCopyWithImpl;
-@useResult
-$Res call({
- LogoutResult? logoutResult
-});
-
-
-
-
+abstract class $SettingsBlocStateCopyWith<$Res> {
+  factory $SettingsBlocStateCopyWith(
+    SettingsBlocState value,
+    $Res Function(SettingsBlocState) then,
+  ) = _$SettingsBlocStateCopyWithImpl<$Res, SettingsBlocState>;
+  @useResult
+  $Res call({LogoutResult? logoutResult});
 }
+
 /// @nodoc
-class _$SettingsBlocStateCopyWithImpl<$Res>
+class _$SettingsBlocStateCopyWithImpl<$Res, $Val extends SettingsBlocState>
     implements $SettingsBlocStateCopyWith<$Res> {
-  _$SettingsBlocStateCopyWithImpl(this._self, this._then);
+  _$SettingsBlocStateCopyWithImpl(this._value, this._then);
 
-  final SettingsBlocState _self;
-  final $Res Function(SettingsBlocState) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of SettingsBlocState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? logoutResult = freezed,}) {
-  return _then(_self.copyWith(
-logoutResult: freezed == logoutResult ? _self.logoutResult : logoutResult // ignore: cast_nullable_to_non_nullable
-as LogoutResult?,
-  ));
+  /// Create a copy of SettingsBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? logoutResult = freezed}) {
+    return _then(
+      _value.copyWith(
+            logoutResult: freezed == logoutResult
+                ? _value.logoutResult
+                : logoutResult // ignore: cast_nullable_to_non_nullable
+                      as LogoutResult?,
+          )
+          as $Val,
+    );
+  }
 }
 
+/// @nodoc
+abstract class _$$SettingsBlocStateImplCopyWith<$Res>
+    implements $SettingsBlocStateCopyWith<$Res> {
+  factory _$$SettingsBlocStateImplCopyWith(
+    _$SettingsBlocStateImpl value,
+    $Res Function(_$SettingsBlocStateImpl) then,
+  ) = __$$SettingsBlocStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({LogoutResult? logoutResult});
 }
 
+/// @nodoc
+class __$$SettingsBlocStateImplCopyWithImpl<$Res>
+    extends _$SettingsBlocStateCopyWithImpl<$Res, _$SettingsBlocStateImpl>
+    implements _$$SettingsBlocStateImplCopyWith<$Res> {
+  __$$SettingsBlocStateImplCopyWithImpl(
+    _$SettingsBlocStateImpl _value,
+    $Res Function(_$SettingsBlocStateImpl) _then,
+  ) : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [SettingsBlocState].
-extension SettingsBlocStatePatterns on SettingsBlocState {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SettingsBlocState value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _SettingsBlocState() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SettingsBlocState value)  $default,){
-final _that = this;
-switch (_that) {
-case _SettingsBlocState():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SettingsBlocState value)?  $default,){
-final _that = this;
-switch (_that) {
-case _SettingsBlocState() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LogoutResult? logoutResult)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _SettingsBlocState() when $default != null:
-return $default(_that.logoutResult);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LogoutResult? logoutResult)  $default,) {final _that = this;
-switch (_that) {
-case _SettingsBlocState():
-return $default(_that.logoutResult);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LogoutResult? logoutResult)?  $default,) {final _that = this;
-switch (_that) {
-case _SettingsBlocState() when $default != null:
-return $default(_that.logoutResult);case _:
-  return null;
-
-}
-}
-
+  /// Create a copy of SettingsBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? logoutResult = freezed}) {
+    return _then(
+      _$SettingsBlocStateImpl(
+        logoutResult: freezed == logoutResult
+            ? _value.logoutResult
+            : logoutResult // ignore: cast_nullable_to_non_nullable
+                  as LogoutResult?,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
+class _$SettingsBlocStateImpl implements _SettingsBlocState {
+  _$SettingsBlocStateImpl({this.logoutResult});
 
-class _SettingsBlocState implements SettingsBlocState {
-   _SettingsBlocState({this.logoutResult});
-  
+  @override
+  final LogoutResult? logoutResult;
 
-@override final  LogoutResult? logoutResult;
+  @override
+  String toString() {
+    return 'SettingsBlocState(logoutResult: $logoutResult)';
+  }
 
-/// Create a copy of SettingsBlocState
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$SettingsBlocStateCopyWith<_SettingsBlocState> get copyWith => __$SettingsBlocStateCopyWithImpl<_SettingsBlocState>(this, _$identity);
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SettingsBlocStateImpl &&
+            (identical(other.logoutResult, logoutResult) ||
+                other.logoutResult == logoutResult));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType, logoutResult);
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsBlocState&&(identical(other.logoutResult, logoutResult) || other.logoutResult == logoutResult));
+  /// Create a copy of SettingsBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SettingsBlocStateImplCopyWith<_$SettingsBlocStateImpl> get copyWith =>
+      __$$SettingsBlocStateImplCopyWithImpl<_$SettingsBlocStateImpl>(
+        this,
+        _$identity,
+      );
 }
 
+abstract class _SettingsBlocState implements SettingsBlocState {
+  factory _SettingsBlocState({final LogoutResult? logoutResult}) =
+      _$SettingsBlocStateImpl;
 
-@override
-int get hashCode => Object.hash(runtimeType,logoutResult);
+  @override
+  LogoutResult? get logoutResult;
 
-@override
-String toString() {
-  return 'SettingsBlocState(logoutResult: $logoutResult)';
+  /// Create a copy of SettingsBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SettingsBlocStateImplCopyWith<_$SettingsBlocStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-
-}
-
-/// @nodoc
-abstract mixin class _$SettingsBlocStateCopyWith<$Res> implements $SettingsBlocStateCopyWith<$Res> {
-  factory _$SettingsBlocStateCopyWith(_SettingsBlocState value, $Res Function(_SettingsBlocState) _then) = __$SettingsBlocStateCopyWithImpl;
-@override @useResult
-$Res call({
- LogoutResult? logoutResult
-});
-
-
-
-
-}
-/// @nodoc
-class __$SettingsBlocStateCopyWithImpl<$Res>
-    implements _$SettingsBlocStateCopyWith<$Res> {
-  __$SettingsBlocStateCopyWithImpl(this._self, this._then);
-
-  final _SettingsBlocState _self;
-  final $Res Function(_SettingsBlocState) _then;
-
-/// Create a copy of SettingsBlocState
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? logoutResult = freezed,}) {
-  return _then(_SettingsBlocState(
-logoutResult: freezed == logoutResult ? _self.logoutResult : logoutResult // ignore: cast_nullable_to_non_nullable
-as LogoutResult?,
-  ));
-}
-
-
-}
-
-// dart format on

@@ -13,12 +13,25 @@ class SettingsTable extends Table {
 
 class UsersTable extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get email => text().withDefault(const Constant('en'))();
-  TextColumn get password => text().withDefault(const Constant('en'))();
+  TextColumn get firstName => text()();
+  TextColumn get lastName => text()();
+  TextColumn get email => text()();
+  TextColumn get password => text()();
   DateTimeColumn get createdAt => dateTime().nullable()();
+  // for this prototype and because it is prototype, there will be only one user that can login
+  // to achieve this and make second user be only chatable, we will use this column
+  BoolColumn get loginPossible => boolean().withDefault(const Constant(true))();
 }
 
-@DriftDatabase(tables: [SettingsTable, UsersTable])
+class MessagesTable extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get senderId => integer()(); // belongs to id of user
+  IntColumn get receiverId => integer()(); // belongs to id of user
+  TextColumn get message => text()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+}
+
+@DriftDatabase(tables: [SettingsTable, UsersTable, MessagesTable])
 class AppDatabase extends _$AppDatabase {
   // After generating code, this class needs to define a `schemaVersion` getter
   // and a constructor telling drift where the database should be stored.

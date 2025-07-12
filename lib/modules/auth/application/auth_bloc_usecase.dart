@@ -11,7 +11,7 @@ class AuthBlocSetupUserUseCase {
   AuthBlocSetupUserUseCase(this.repository);
 
   Future<void> call() async {
-    await repository.setupUser();
+    await repository.setupUsers();
   }
 }
 
