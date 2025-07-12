@@ -8,7 +8,7 @@ import 'package:chat_app/modules/chat/domain/entities/send_message_result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton()
+@LazySingleton()
 class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
   final ChatBlocFetchUserListUseCase fetchUserListUseCase;
   final ChatBlocSendMessageUseCase sendMessageUseCase;

@@ -72,7 +72,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i893.SettingsBloc>(
       () => _i893.SettingsBloc(gh<_i473.SettingsBlocLogoutUseCase>()),
     );
-    gh.singleton<_i405.ChatBloc>(
+    gh.lazySingleton<_i405.ChatBloc>(
       () => _i405.ChatBloc(
         gh<_i428.ChatBlocFetchUserListUseCase>(),
         gh<_i428.ChatBlocSendMessageUseCase>(),
