@@ -20,8 +20,9 @@ final router = GoRouter(
 
     final result = await database.settingsTable.select().getSingleOrNull();
 
+    // if there is no settings table yet, that means user didn't login yet, continue with default route
     if (result == null) {
-      return "/${AppRoute.login.name}";
+      return state.fullPath;
     }
 
     // if user is logged in and starts from login page (when opens the app) route user to chat page
