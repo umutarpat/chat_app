@@ -1,4 +1,5 @@
 import 'package:chat_app/global/core/routes.dart';
+import 'package:chat_app/global/domain/entities/routes/message_page_routes_model.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_state.dart';
@@ -52,7 +53,12 @@ class ChatPageNewChatSheet extends StatelessWidget {
                         context.pop();
                         context.pushNamed(
                           '/${AppRoute.message.name}',
-                          extra: user,
+                          extra: MessagePageRoutesModel(
+                            userId: user?.id ?? 0,
+                            firstName: user?.firstName ?? '',
+                            lastName: user?.lastName ?? '',
+                            email: user?.email ?? '',
+                          ),
                         );
                       },
                     );

@@ -121,226 +121,230 @@ class _LoginPageState extends State<LoginPage>
                               right: 48,
                               top: 48,
                             ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              spacing: 16,
-                              children: [
-                                if (state.loginResult is LoginFailure)
-                                  Container(
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .extension<DesignColors>()!
-                                          .cardErrorColor,
-                                      borderRadius: BorderRadius.circular(5),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                spacing: 16,
+                                children: [
+                                  if (state.loginResult is LoginFailure)
+                                    Container(
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .extension<DesignColors>()!
+                                            .cardErrorColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        l10n.loginError,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(color: Colors.white),
+                                      ),
                                     ),
-                                    width: double.infinity,
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      l10n.loginError,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(color: Colors.white),
-                                    ),
-                                  ),
 
-                                if (state.loginResult is LoginSuccess)
-                                  Container(
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .extension<DesignColors>()!
-                                          .cardSuccessColor,
-                                      borderRadius: BorderRadius.circular(5),
+                                  if (state.loginResult is LoginSuccess)
+                                    Container(
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .extension<DesignColors>()!
+                                            .cardSuccessColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        l10n.loginSuccessful,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(color: Colors.white),
+                                      ),
                                     ),
-                                    width: double.infinity,
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      l10n.loginSuccessful,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(color: Colors.white),
-                                    ),
-                                  ),
 
-                                if (_showTextFields)
+                                  if (_showTextFields)
+                                    Column(
+                                      spacing: 16,
+                                      children: [
+                                        FormBuilderTextField(
+                                          autofillHints: [AutofillHints.email],
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          validator:
+                                              FormBuilderValidators.compose([
+                                                FormBuilderValidators.required(
+                                                  errorText:
+                                                      l10n.emailProvideValid,
+                                                ),
+                                                FormBuilderValidators.email(
+                                                  errorText: l10n.emailInvalid,
+                                                ),
+                                                FormBuilderValidators.maxLength(
+                                                  32,
+                                                  errorText:
+                                                      l10n.maxThirdyTwoChars,
+                                                ),
+                                              ]),
+                                          name: "email",
+                                          decoration: InputDecoration(
+                                            hintText: l10n.email,
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                          ),
+                                        ),
+                                        FormBuilderTextField(
+                                          autofillHints: [
+                                            AutofillHints.password,
+                                          ],
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          validator:
+                                              FormBuilderValidators.compose([
+                                                FormBuilderValidators.required(
+                                                  errorText:
+                                                      l10n.passwordProvideValid,
+                                                ),
+                                                FormBuilderValidators.maxLength(
+                                                  32,
+                                                  errorText:
+                                                      l10n.maxThirdyTwoChars,
+                                                ),
+                                              ]),
+                                          inputFormatters: [
+                                            dontAllowSpaceInputFormatter,
+                                            dontAllowEmojiInputFormatter,
+                                          ],
+                                          name: "password",
+                                          obscureText: _obscurePassword,
+                                          decoration: InputDecoration(
+                                            hintText: l10n.password,
+                                            filled: true,
+                                            fillColor: Colors.white,
+
+                                            suffixIcon: IconButton(
+                                              onPressed:
+                                                  _togglePasswordVisibility,
+                                              icon: Icon(
+                                                _obscurePassword
+                                                    ? Icons.visibility
+                                                    : Icons.visibility_off,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  if (_showTextFields) ...[
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: InkWell(
+                                        onTap: () {
+                                          logIt().d("Forgot password clicked");
+                                          context.pushNamed(
+                                            '/${AppRoute.forgotPassword.name}',
+                                          );
+                                        },
+                                        child: Text(
+                                          l10n.forgotPassword,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                color: Theme.of(
+                                                  context,
+                                                ).primaryColor,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+
                                   Column(
                                     spacing: 16,
                                     children: [
-                                      FormBuilderTextField(
-                                        autofillHints: [AutofillHints.email],
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                              FormBuilderValidators.required(
-                                                errorText:
-                                                    l10n.emailProvideValid,
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          if (_showTextFields == false) {
+                                            _startTextFieldAnimation();
+                                            return;
+                                          }
+                                          if (_formKey.currentState!
+                                              .saveAndValidate()) {
+                                            final formData =
+                                                _formKey.currentState!.value;
+
+                                            context.read<AuthBloc>().add(
+                                              LoginEvent(
+                                                email: formData['email'],
+                                                password: formData['password'],
                                               ),
-                                              FormBuilderValidators.email(
-                                                errorText: l10n.emailInvalid,
-                                              ),
-                                              FormBuilderValidators.maxLength(
-                                                32,
-                                                errorText:
-                                                    l10n.maxThirdyTwoChars,
-                                              ),
-                                            ]),
-                                        name: "email",
-                                        decoration: InputDecoration(
-                                          hintText: l10n.email,
-                                          filled: true,
-                                          fillColor: Colors.white,
+                                            );
+                                          }
+                                        },
+
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: 45,
+                                          child: Center(
+                                            child: Text(
+                                              l10n.login,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      FormBuilderTextField(
-                                        autofillHints: [AutofillHints.password],
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                              FormBuilderValidators.required(
-                                                errorText:
-                                                    l10n.passwordProvideValid,
-                                              ),
-                                              FormBuilderValidators.maxLength(
-                                                32,
-                                                errorText:
-                                                    l10n.maxThirdyTwoChars,
-                                              ),
-                                            ]),
-                                        inputFormatters: [
-                                          dontAllowSpaceInputFormatter,
-                                          dontAllowEmojiInputFormatter,
-                                        ],
-                                        name: "password",
-                                        obscureText: _obscurePassword,
-                                        decoration: InputDecoration(
-                                          hintText: l10n.password,
-                                          filled: true,
-                                          fillColor: Colors.white,
-
-                                          suffixIcon: IconButton(
-                                            onPressed:
-                                                _togglePasswordVisibility,
-                                            icon: Icon(
-                                              _obscurePassword
-                                                  ? Icons.visibility
-                                                  : Icons.visibility_off,
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          logIt().d("Signup clicked");
+                                          context.pushNamed(
+                                            '/${AppRoute.signup.name}',
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.transparent,
+                                          foregroundColor: Theme.of(
+                                            context,
+                                          ).primaryColor,
+                                          shadowColor: Colors.transparent,
+                                          side: BorderSide(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onSurface,
+                                            width: 1,
+                                          ),
+                                        ),
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: 45,
+                                          child: Center(
+                                            child: Text(
+                                              l10n.signup,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Theme.of(
+                                                      context,
+                                                    ).colorScheme.onSurface,
+                                                  ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                if (_showTextFields) ...[
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: InkWell(
-                                      onTap: () {
-                                        logIt().d("Forgot password clicked");
-                                        context.pushNamed(
-                                          '/${AppRoute.forgotPassword.name}',
-                                        );
-                                      },
-                                      child: Text(
-                                        l10n.forgotPassword,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall!
-                                            .copyWith(
-                                              color: Theme.of(
-                                                context,
-                                              ).primaryColor,
-                                            ),
-                                      ),
-                                    ),
-                                  ),
                                 ],
-
-                                Column(
-                                  spacing: 16,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        if (_showTextFields == false) {
-                                          _startTextFieldAnimation();
-                                          return;
-                                        }
-                                        if (_formKey.currentState!
-                                            .saveAndValidate()) {
-                                          final formData =
-                                              _formKey.currentState!.value;
-
-                                          context.read<AuthBloc>().add(
-                                            LoginEvent(
-                                              email: formData['email'],
-                                              password: formData['password'],
-                                            ),
-                                          );
-                                        }
-                                      },
-
-                                      child: SizedBox(
-                                        width: double.infinity,
-                                        height: 45,
-                                        child: Center(
-                                          child: Text(
-                                            l10n.login,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium!
-                                                .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        logIt().d("Signup clicked");
-                                        context.pushNamed(
-                                          '/${AppRoute.signup.name}',
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Theme.of(
-                                          context,
-                                        ).primaryColor,
-                                        shadowColor: Colors.transparent,
-                                        side: BorderSide(
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.onSurface,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: SizedBox(
-                                        width: double.infinity,
-                                        height: 45,
-                                        child: Center(
-                                          child: Text(
-                                            l10n.signup,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium!
-                                                .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Theme.of(
-                                                    context,
-                                                  ).colorScheme.onSurface,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ),

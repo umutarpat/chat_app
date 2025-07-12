@@ -36,7 +36,7 @@ class AuthRepository extends AuthRepositoryInterface {
       ]);
     });
 
-    final result = await database.usersTable.select().getSingle();
+    final result = await database.usersTable.select().get();
 
     logIt().d("User setup: $result");
   }

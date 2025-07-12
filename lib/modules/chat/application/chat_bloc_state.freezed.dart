@@ -24,6 +24,8 @@ mixin _$ChatBlocState {
   GetMessagesResult? get getMessagesResult =>
       throw _privateConstructorUsedError;
   List<MessageModel>? get messages => throw _privateConstructorUsedError;
+  GetChatsResult? get getChatsResult => throw _privateConstructorUsedError;
+  List<ChatModel>? get chats => throw _privateConstructorUsedError;
 
   /// Create a copy of ChatBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -45,6 +47,8 @@ abstract class $ChatBlocStateCopyWith<$Res> {
     SendMessageResult? sendMessageResult,
     GetMessagesResult? getMessagesResult,
     List<MessageModel>? messages,
+    GetChatsResult? getChatsResult,
+    List<ChatModel>? chats,
   });
 }
 
@@ -68,6 +72,8 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
     Object? sendMessageResult = freezed,
     Object? getMessagesResult = freezed,
     Object? messages = freezed,
+    Object? getChatsResult = freezed,
+    Object? chats = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -91,6 +97,14 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
                 ? _value.messages
                 : messages // ignore: cast_nullable_to_non_nullable
                       as List<MessageModel>?,
+            getChatsResult: freezed == getChatsResult
+                ? _value.getChatsResult
+                : getChatsResult // ignore: cast_nullable_to_non_nullable
+                      as GetChatsResult?,
+            chats: freezed == chats
+                ? _value.chats
+                : chats // ignore: cast_nullable_to_non_nullable
+                      as List<ChatModel>?,
           )
           as $Val,
     );
@@ -112,6 +126,8 @@ abstract class _$$ChatBlocStateImplCopyWith<$Res>
     SendMessageResult? sendMessageResult,
     GetMessagesResult? getMessagesResult,
     List<MessageModel>? messages,
+    GetChatsResult? getChatsResult,
+    List<ChatModel>? chats,
   });
 }
 
@@ -134,6 +150,8 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
     Object? sendMessageResult = freezed,
     Object? getMessagesResult = freezed,
     Object? messages = freezed,
+    Object? getChatsResult = freezed,
+    Object? chats = freezed,
   }) {
     return _then(
       _$ChatBlocStateImpl(
@@ -157,6 +175,14 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
             ? _value._messages
             : messages // ignore: cast_nullable_to_non_nullable
                   as List<MessageModel>?,
+        getChatsResult: freezed == getChatsResult
+            ? _value.getChatsResult
+            : getChatsResult // ignore: cast_nullable_to_non_nullable
+                  as GetChatsResult?,
+        chats: freezed == chats
+            ? _value._chats
+            : chats // ignore: cast_nullable_to_non_nullable
+                  as List<ChatModel>?,
       ),
     );
   }
@@ -171,8 +197,11 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
     this.sendMessageResult,
     this.getMessagesResult,
     final List<MessageModel>? messages,
+    this.getChatsResult,
+    final List<ChatModel>? chats,
   }) : _userList = userList,
-       _messages = messages;
+       _messages = messages,
+       _chats = chats;
 
   @override
   final FetchUserResult? fetchUserResult;
@@ -201,8 +230,20 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
   }
 
   @override
+  final GetChatsResult? getChatsResult;
+  final List<ChatModel>? _chats;
+  @override
+  List<ChatModel>? get chats {
+    final value = _chats;
+    if (value == null) return null;
+    if (_chats is EqualUnmodifiableListView) return _chats;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
   String toString() {
-    return 'ChatBlocState(fetchUserResult: $fetchUserResult, userList: $userList, sendMessageResult: $sendMessageResult, getMessagesResult: $getMessagesResult, messages: $messages)';
+    return 'ChatBlocState(fetchUserResult: $fetchUserResult, userList: $userList, sendMessageResult: $sendMessageResult, getMessagesResult: $getMessagesResult, messages: $messages, getChatsResult: $getChatsResult, chats: $chats)';
   }
 
   @override
@@ -217,7 +258,10 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
                 other.sendMessageResult == sendMessageResult) &&
             (identical(other.getMessagesResult, getMessagesResult) ||
                 other.getMessagesResult == getMessagesResult) &&
-            const DeepCollectionEquality().equals(other._messages, _messages));
+            const DeepCollectionEquality().equals(other._messages, _messages) &&
+            (identical(other.getChatsResult, getChatsResult) ||
+                other.getChatsResult == getChatsResult) &&
+            const DeepCollectionEquality().equals(other._chats, _chats));
   }
 
   @override
@@ -228,6 +272,8 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
     sendMessageResult,
     getMessagesResult,
     const DeepCollectionEquality().hash(_messages),
+    getChatsResult,
+    const DeepCollectionEquality().hash(_chats),
   );
 
   /// Create a copy of ChatBlocState
@@ -246,6 +292,8 @@ abstract class _ChatBlocState implements ChatBlocState {
     final SendMessageResult? sendMessageResult,
     final GetMessagesResult? getMessagesResult,
     final List<MessageModel>? messages,
+    final GetChatsResult? getChatsResult,
+    final List<ChatModel>? chats,
   }) = _$ChatBlocStateImpl;
 
   @override
@@ -258,6 +306,10 @@ abstract class _ChatBlocState implements ChatBlocState {
   GetMessagesResult? get getMessagesResult;
   @override
   List<MessageModel>? get messages;
+  @override
+  GetChatsResult? get getChatsResult;
+  @override
+  List<ChatModel>? get chats;
 
   /// Create a copy of ChatBlocState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,11 +1,11 @@
 import 'package:chat_app/global/domain/entities/database/database.dart';
+import 'package:chat_app/global/domain/entities/routes/message_page_routes_model.dart';
 import 'package:chat_app/global/injection/injection.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/presentation/pages/forgot_password.dart';
 import 'package:chat_app/modules/auth/presentation/pages/login_page.dart';
 import 'package:chat_app/modules/auth/presentation/pages/signup/signup_page.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
-import 'package:chat_app/modules/chat/data/models/user_list_model/user_list_model.dart';
 import 'package:chat_app/modules/chat/presentation/chat_page.dart';
 import 'package:chat_app/modules/chat/presentation/message_page.dart';
 import 'package:chat_app/modules/settings/application/settings_bloc.dart';
@@ -62,19 +62,17 @@ final router = GoRouter(
     GoRoute(
       path: '/${AppRoute.chat.name}',
       name: '/${AppRoute.chat.name}',
-      builder: (context, state) => BlocProvider(
-        create: (context) => getIt<ChatBloc>(),
-        child: ChatPage(),
-      ),
+      builder: (context, state) =>
+          BlocProvider.value(value: getIt<ChatBloc>(), child: ChatPage()),
     ),
     GoRoute(
       path: '/${AppRoute.message.name}',
       name: '/${AppRoute.message.name}',
       builder: (context, state) {
-        final user = state.extra as UserListModel;
-        return BlocProvider(
-          create: (context) => getIt<ChatBloc>(),
-          child: MessagePage(user: user),
+        final extra = state.extra as MessagePageRoutesModel;
+        return BlocProvider.value(
+          value: getIt<ChatBloc>(),
+          child: MessagePage(user: extra),
         );
       },
     ),

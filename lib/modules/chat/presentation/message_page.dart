@@ -1,8 +1,8 @@
+import 'package:chat_app/global/domain/entities/routes/message_page_routes_model.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_event.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_state.dart';
-import 'package:chat_app/modules/chat/data/models/user_list_model/user_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -10,7 +10,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
 class MessagePage extends StatefulWidget {
-  final UserListModel user;
+  final MessagePageRoutesModel user;
+
   const MessagePage({super.key, required this.user});
 
   @override
@@ -26,7 +27,7 @@ class _MessagePageState extends State<MessagePage> {
     super.initState();
     BlocProvider.of<ChatBloc>(
       context,
-    ).add(GetMessagesEvent(receiverId: widget.user.id!));
+    ).add(GetMessagesEvent(receiverId: widget.user.userId));
   }
 
   @override
@@ -49,7 +50,6 @@ class _MessagePageState extends State<MessagePage> {
 
   @override
   Widget build(BuildContext context) {
-    final user = widget.user;
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
@@ -62,13 +62,13 @@ class _MessagePageState extends State<MessagePage> {
         title: ListTile(
           leading: const CircleAvatar(child: Icon(Icons.person)),
           title: Text(
-            "${user.firstName} ${user.lastName}",
+            "${widget.user.firstName} ${widget.user.lastName}",
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           subtitle: Text(
-            user.email ?? '',
+            widget.user.email,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
@@ -147,24 +147,21 @@ class _MessagePageState extends State<MessagePage> {
                   hintText: l10n.message,
                   suffixIcon: IconButton(
                     onPressed: () {
-                      if (user.id == null) {
-                        return;
-                      }
-
                       if (_formKey.currentState?.saveAndValidate() ?? false) {
                         context.read<ChatBloc>().add(
                           SendMessageEvent(
                             message:
                                 _formKey.currentState?.value['message'] ?? '',
-                            receiverId: user.id!,
+                            receiverId: widget.user.userId,
                           ),
                         );
                         // normally you would not call this after sending a message
                         // because you would fetch messages through stream/websocket
                         // but because this is prototype, we will call it here
                         context.read<ChatBloc>().add(
-                          GetMessagesEvent(receiverId: user.id!),
+                          GetMessagesEvent(receiverId: widget.user.userId),
                         );
+                        context.read<ChatBloc>().add(GetChatsEvent(userId: 1));
                         _formKey.currentState?.reset();
                         FocusScope.of(context).unfocus();
                       }

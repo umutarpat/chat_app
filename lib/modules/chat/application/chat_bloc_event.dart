@@ -14,3 +14,9 @@ final class GetMessagesEvent extends ChatBlocEvent {
 
   GetMessagesEvent({required this.receiverId});
 }
+
+final class GetChatsEvent extends ChatBlocEvent {
+  final int userId;
+
+  GetChatsEvent({required this.userId});
+}
