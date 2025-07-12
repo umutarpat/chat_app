@@ -35,7 +35,7 @@ class SignupPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: cardColor,
-
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         top: false,
 
@@ -82,17 +82,20 @@ class SignupPage extends StatelessWidget {
                   ),
                   padding: EdgeInsets.all(0),
                   width: double.infinity,
-                  height: 550,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 48,
-                      right: 48,
-                      top: 48,
-                    ),
-                    child: BlocBuilder<AuthBloc, AuthBlocState>(
-                      builder: (context, state) {
-                        return SingleChildScrollView(
-                          child: Column(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.85,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 48,
+                        right: 48,
+                        top: 48,
+                        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+                      ),
+                      child: BlocBuilder<AuthBloc, AuthBlocState>(
+                        builder: (context, state) {
+                          return Column(
                             mainAxisSize: MainAxisSize.max,
                             spacing: 16,
                             children: [
@@ -201,9 +204,9 @@ class SignupPage extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
