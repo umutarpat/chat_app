@@ -1,7 +1,9 @@
+import 'package:chat_app/global/core/routes.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatPageNewChatSheet extends StatelessWidget {
   const ChatPageNewChatSheet({super.key});
@@ -44,7 +46,13 @@ class ChatPageNewChatSheet extends StatelessWidget {
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        context.pop();
+                        context.pushNamed(
+                          '/${AppRoute.message.name}',
+                          extra: user,
+                        );
+                      },
                     );
                   },
                 );

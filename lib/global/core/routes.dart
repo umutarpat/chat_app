@@ -5,14 +5,16 @@ import 'package:chat_app/modules/auth/presentation/pages/forgot_password.dart';
 import 'package:chat_app/modules/auth/presentation/pages/login_page.dart';
 import 'package:chat_app/modules/auth/presentation/pages/signup/signup_page.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
+import 'package:chat_app/modules/chat/data/models/user_list_model/user_list_model.dart';
 import 'package:chat_app/modules/chat/presentation/chat_page.dart';
+import 'package:chat_app/modules/chat/presentation/message_page.dart';
 import 'package:chat_app/modules/settings/application/settings_bloc.dart';
 import 'package:chat_app/modules/settings/presentation/settings_page.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-enum AppRoute { login, forgotPassword, chat, settings, signup }
+enum AppRoute { login, forgotPassword, chat, settings, signup, message }
 
 final router = GoRouter(
   initialLocation: '/${AppRoute.login.name}',
@@ -64,6 +66,17 @@ final router = GoRouter(
         create: (context) => getIt<ChatBloc>(),
         child: ChatPage(),
       ),
+    ),
+    GoRoute(
+      path: '/${AppRoute.message.name}',
+      name: '/${AppRoute.message.name}',
+      builder: (context, state) {
+        final user = state.extra as UserListModel;
+        return BlocProvider(
+          create: (context) => getIt<ChatBloc>(),
+          child: MessagePage(user: user),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoute.settings.name}',
