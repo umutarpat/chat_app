@@ -95,6 +95,7 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
           lastName: lastName,
         ),
       );
+      context.pop();
     }
   }
 
@@ -105,7 +106,6 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
     return BlocListener<FeedBloc, FeedBlocState>(
       listener: (context, state) {
         if (state.createPostResult is CreatePostSuccess) {
-          context.pop();
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(l10n.postCreationSuccessful)));
@@ -246,17 +246,21 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                               child: BlocBuilder<FeedBloc, FeedBlocState>(
                                 builder: (context, state) {
                                   return ElevatedButton(
-                                    onPressed: () => _submitForm(
-                                      userId: state.currentLoggedInUser!.id!,
-                                      firstName:
-                                          state
-                                              .currentLoggedInUser
-                                              ?.firstName ??
-                                          '',
-                                      lastName:
-                                          state.currentLoggedInUser?.lastName ??
-                                          '',
-                                    ),
+                                    onPressed: () {
+                                      _submitForm(
+                                        userId: state.currentLoggedInUser!.id!,
+                                        firstName:
+                                            state
+                                                .currentLoggedInUser
+                                                ?.firstName ??
+                                            '',
+                                        lastName:
+                                            state
+                                                .currentLoggedInUser
+                                                ?.lastName ??
+                                            '',
+                                      );
+                                    },
                                     child: Text(l10n.createPost),
                                   );
                                 },
