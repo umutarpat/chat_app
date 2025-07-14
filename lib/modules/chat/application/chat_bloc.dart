@@ -84,6 +84,8 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
       final result = await joinMeetingUseCase.call(
         displayName: event.displayName,
         email: event.email,
+        isAudioMuted: event.isAudioMuted,
+        isVideoMuted: event.isVideoMuted,
       );
       emit(state.copyWith(joinMeetingResult: result));
     });

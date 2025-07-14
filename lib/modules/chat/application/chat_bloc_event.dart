@@ -26,6 +26,13 @@ final class GetChatsEvent extends ChatBlocEvent {
 final class JoinMeetingEvent extends ChatBlocEvent {
   final String displayName;
   final String email;
+  final bool isAudioMuted;
+  final bool isVideoMuted;
 
-  JoinMeetingEvent({required this.displayName, required this.email});
+  JoinMeetingEvent({
+    required this.displayName,
+    required this.email,
+    this.isAudioMuted = false,
+    this.isVideoMuted = false,
+  });
 }

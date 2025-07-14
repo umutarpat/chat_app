@@ -100,17 +100,34 @@ class _MessagePageState extends State<MessagePage> {
               }
             },
             builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  context.read<ChatBloc>().add(
-                    JoinMeetingEvent(
-                      displayName:
-                          "${state.currentLoggedInUser?.firstName} ${state.currentLoggedInUser?.lastName}",
-                      email: state.currentLoggedInUser?.email ?? '',
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.call),
+              return Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      context.read<ChatBloc>().add(
+                        JoinMeetingEvent(
+                          displayName:
+                              "${state.currentLoggedInUser?.firstName} ${state.currentLoggedInUser?.lastName}",
+                          email: state.currentLoggedInUser?.email ?? '',
+                          isVideoMuted: true,
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.call),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      context.read<ChatBloc>().add(
+                        JoinMeetingEvent(
+                          displayName:
+                              "${state.currentLoggedInUser?.firstName} ${state.currentLoggedInUser?.lastName}",
+                          email: state.currentLoggedInUser?.email ?? '',
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.videocam),
+                  ),
+                ],
               );
             },
           ),

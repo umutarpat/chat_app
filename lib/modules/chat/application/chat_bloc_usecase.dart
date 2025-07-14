@@ -72,6 +72,10 @@ class ChatBlocJoinMeetingUseCase {
   Future<JoinMeetingResult> call({
     required String displayName,
     required String email,
+
+    /// audio -> mic
+    bool isAudioMuted = false,
+    bool isVideoMuted = false,
   }) async {
     try {
       final statusCamera = await Permission.camera.request();
@@ -83,6 +87,11 @@ class ChatBlocJoinMeetingUseCase {
         var options = JitsiMeetConferenceOptions(
           serverURL: "https://meet.ffmuc.net/",
           room: 'innoscriptatest2025-1',
+          configOverrides: {
+            "startWithAudioMuted": isAudioMuted,
+            "startWithVideoMuted": isVideoMuted,
+            "subject": "Jitsi Meeting",
+          },
           featureFlags: {
             "prejoinpage.enabled": false,
             "lobby-mode.enabled": false,
