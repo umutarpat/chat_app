@@ -38,12 +38,20 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final appModule = _$AppModule();
+    gh.factory<_i428.ChatBlocJoinMeetingUseCase>(
+      () => _i428.ChatBlocJoinMeetingUseCase(),
+    );
     gh.lazySingleton<_i875.AppDatabase>(() => appModule.provideAppDatabase());
     gh.lazySingleton<_i462.AuthRepositoryInterface>(
       () => _i927.AuthRepository(gh<_i875.AppDatabase>()),
     );
     gh.lazySingleton<_i455.ChatRepositoryInterface>(
       () => _i199.ChatRepository(gh<_i875.AppDatabase>()),
+    );
+    gh.factory<_i428.ChatBlocGetCurrentLoggedUserUseCase>(
+      () => _i428.ChatBlocGetCurrentLoggedUserUseCase(
+        gh<_i455.ChatRepositoryInterface>(),
+      ),
     );
     gh.factory<_i428.ChatBlocFetchUserListUseCase>(
       () => _i428.ChatBlocFetchUserListUseCase(
@@ -64,6 +72,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1024.SettingsRepositoryInterface>(
       () => _i55.SettingsRepository(gh<_i875.AppDatabase>()),
     );
+    gh.lazySingleton<_i405.ChatBloc>(
+      () => _i405.ChatBloc(
+        gh<_i428.ChatBlocFetchUserListUseCase>(),
+        gh<_i428.ChatBlocSendMessageUseCase>(),
+        gh<_i428.ChatBlocGetMessagesUseCase>(),
+        gh<_i428.ChatBlocGetChatsUseCase>(),
+        gh<_i428.ChatBlocGetCurrentLoggedUserUseCase>(),
+        gh<_i428.ChatBlocJoinMeetingUseCase>(),
+      ),
+    );
     gh.factory<_i473.SettingsBlocLogoutUseCase>(
       () => _i473.SettingsBlocLogoutUseCase(
         gh<_i1024.SettingsRepositoryInterface>(),
@@ -71,14 +89,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i893.SettingsBloc>(
       () => _i893.SettingsBloc(gh<_i473.SettingsBlocLogoutUseCase>()),
-    );
-    gh.lazySingleton<_i405.ChatBloc>(
-      () => _i405.ChatBloc(
-        gh<_i428.ChatBlocFetchUserListUseCase>(),
-        gh<_i428.ChatBlocSendMessageUseCase>(),
-        gh<_i428.ChatBlocGetMessagesUseCase>(),
-        gh<_i428.ChatBlocGetChatsUseCase>(),
-      ),
     );
     gh.factory<_i114.AuthBlocSetupUserUseCase>(
       () => _i114.AuthBlocSetupUserUseCase(gh<_i462.AuthRepositoryInterface>()),

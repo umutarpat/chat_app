@@ -301,6 +301,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chat'**
   String get chat;
+
+  /// No description provided for @permissionsNeededTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Permissions Needed'**
+  String get permissionsNeededTitle;
+
+  /// No description provided for @micAndCameraPermissionsEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable camera and microphone permissions in Settings to join the meeting.'**
+  String get micAndCameraPermissionsEnable;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get openSettings;
 }
 
 class _AppLocalizationsDelegate

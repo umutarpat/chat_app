@@ -2,6 +2,8 @@ sealed class ChatBlocEvent {}
 
 final class FetchUserListEvent extends ChatBlocEvent {}
 
+final class GetCurrentLoggedInUserEvent extends ChatBlocEvent {}
+
 final class SendMessageEvent extends ChatBlocEvent {
   final String message;
   final int receiverId;
@@ -19,4 +21,11 @@ final class GetChatsEvent extends ChatBlocEvent {
   final int userId;
 
   GetChatsEvent({required this.userId});
+}
+
+final class JoinMeetingEvent extends ChatBlocEvent {
+  final String displayName;
+  final String email;
+
+  JoinMeetingEvent({required this.displayName, required this.email});
 }

@@ -110,4 +110,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chat => 'Chat';
+
+  @override
+  String get permissionsNeededTitle => 'Permissions Needed';
+
+  @override
+  String get micAndCameraPermissionsEnable =>
+      'Please enable camera and microphone permissions in Settings to join the meeting.';
+
+  @override
+  String get openSettings => 'Open Settings';
 }

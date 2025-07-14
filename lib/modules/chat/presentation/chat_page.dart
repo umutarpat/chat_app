@@ -4,6 +4,7 @@ import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_event.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_state.dart';
+import 'package:chat_app/modules/chat/domain/entities/get_current_user_result.dart';
 import 'package:chat_app/modules/chat/presentation/widgets/new_chat_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,8 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<ChatBloc>(context).add(GetCurrentLoggedInUserEvent());
     BlocProvider.of<ChatBloc>(context).add(FetchUserListEvent());
-    BlocProvider.of<ChatBloc>(context).add(GetChatsEvent(userId: 1));
   }
 
   @override
@@ -47,7 +48,24 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ],
       ),
-      body: BlocBuilder<ChatBloc, ChatBlocState>(
+      body: BlocConsumer<ChatBloc, ChatBlocState>(
+        listenWhen: (previous, current) {
+          if (previous.getCurrentLoggedInUserResult
+                  is! GetCurrentLoggedInUserSuccess &&
+              current.getCurrentLoggedInUserResult
+                  is GetCurrentLoggedInUserSuccess) {
+            return true;
+          }
+          return false;
+        },
+        listener: (context, state) {
+          if (state.getCurrentLoggedInUserResult
+              is GetCurrentLoggedInUserSuccess) {
+            context.read<ChatBloc>().add(
+              GetChatsEvent(userId: state.currentLoggedInUser!.id!),
+            );
+          }
+        },
         builder: (context, state) {
           return ListView.builder(
             shrinkWrap: true,
@@ -72,10 +90,10 @@ class _ChatPageState extends State<ChatPage> {
                   context.pushNamed(
                     '/${AppRoute.message.name}',
                     extra: MessagePageRoutesModel(
-                      userId: chat?.userId ?? 0,
-                      firstName: chat?.firstName ?? '',
-                      lastName: chat?.lastName ?? '',
-                      email: chat?.email ?? '',
+                      userId: chat!.userId!,
+                      firstName: chat.firstName ?? '',
+                      lastName: chat.lastName ?? '',
+                      email: chat.email ?? '',
                     ),
                   );
                 },

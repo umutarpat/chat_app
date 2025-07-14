@@ -17,6 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ChatBlocState {
+  GetCurrentLoggedInUserResult? get getCurrentLoggedInUserResult =>
+      throw _privateConstructorUsedError;
+  UserListModel? get currentLoggedInUser => throw _privateConstructorUsedError;
   FetchUserResult? get fetchUserResult => throw _privateConstructorUsedError;
   List<UserListModel>? get userList => throw _privateConstructorUsedError;
   SendMessageResult? get sendMessageResult =>
@@ -26,6 +29,8 @@ mixin _$ChatBlocState {
   List<MessageModel>? get messages => throw _privateConstructorUsedError;
   GetChatsResult? get getChatsResult => throw _privateConstructorUsedError;
   List<ChatModel>? get chats => throw _privateConstructorUsedError;
+  JoinMeetingResult? get joinMeetingResult =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of ChatBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -42,6 +47,8 @@ abstract class $ChatBlocStateCopyWith<$Res> {
   ) = _$ChatBlocStateCopyWithImpl<$Res, ChatBlocState>;
   @useResult
   $Res call({
+    GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult,
+    UserListModel? currentLoggedInUser,
     FetchUserResult? fetchUserResult,
     List<UserListModel>? userList,
     SendMessageResult? sendMessageResult,
@@ -49,7 +56,10 @@ abstract class $ChatBlocStateCopyWith<$Res> {
     List<MessageModel>? messages,
     GetChatsResult? getChatsResult,
     List<ChatModel>? chats,
+    JoinMeetingResult? joinMeetingResult,
   });
+
+  $UserListModelCopyWith<$Res>? get currentLoggedInUser;
 }
 
 /// @nodoc
@@ -67,6 +77,8 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? getCurrentLoggedInUserResult = freezed,
+    Object? currentLoggedInUser = freezed,
     Object? fetchUserResult = freezed,
     Object? userList = freezed,
     Object? sendMessageResult = freezed,
@@ -74,9 +86,19 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
     Object? messages = freezed,
     Object? getChatsResult = freezed,
     Object? chats = freezed,
+    Object? joinMeetingResult = freezed,
   }) {
     return _then(
       _value.copyWith(
+            getCurrentLoggedInUserResult:
+                freezed == getCurrentLoggedInUserResult
+                ? _value.getCurrentLoggedInUserResult
+                : getCurrentLoggedInUserResult // ignore: cast_nullable_to_non_nullable
+                      as GetCurrentLoggedInUserResult?,
+            currentLoggedInUser: freezed == currentLoggedInUser
+                ? _value.currentLoggedInUser
+                : currentLoggedInUser // ignore: cast_nullable_to_non_nullable
+                      as UserListModel?,
             fetchUserResult: freezed == fetchUserResult
                 ? _value.fetchUserResult
                 : fetchUserResult // ignore: cast_nullable_to_non_nullable
@@ -105,9 +127,27 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
                 ? _value.chats
                 : chats // ignore: cast_nullable_to_non_nullable
                       as List<ChatModel>?,
+            joinMeetingResult: freezed == joinMeetingResult
+                ? _value.joinMeetingResult
+                : joinMeetingResult // ignore: cast_nullable_to_non_nullable
+                      as JoinMeetingResult?,
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of ChatBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserListModelCopyWith<$Res>? get currentLoggedInUser {
+    if (_value.currentLoggedInUser == null) {
+      return null;
+    }
+
+    return $UserListModelCopyWith<$Res>(_value.currentLoggedInUser!, (value) {
+      return _then(_value.copyWith(currentLoggedInUser: value) as $Val);
+    });
   }
 }
 
@@ -121,6 +161,8 @@ abstract class _$$ChatBlocStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
+    GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult,
+    UserListModel? currentLoggedInUser,
     FetchUserResult? fetchUserResult,
     List<UserListModel>? userList,
     SendMessageResult? sendMessageResult,
@@ -128,7 +170,11 @@ abstract class _$$ChatBlocStateImplCopyWith<$Res>
     List<MessageModel>? messages,
     GetChatsResult? getChatsResult,
     List<ChatModel>? chats,
+    JoinMeetingResult? joinMeetingResult,
   });
+
+  @override
+  $UserListModelCopyWith<$Res>? get currentLoggedInUser;
 }
 
 /// @nodoc
@@ -145,6 +191,8 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? getCurrentLoggedInUserResult = freezed,
+    Object? currentLoggedInUser = freezed,
     Object? fetchUserResult = freezed,
     Object? userList = freezed,
     Object? sendMessageResult = freezed,
@@ -152,9 +200,18 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
     Object? messages = freezed,
     Object? getChatsResult = freezed,
     Object? chats = freezed,
+    Object? joinMeetingResult = freezed,
   }) {
     return _then(
       _$ChatBlocStateImpl(
+        getCurrentLoggedInUserResult: freezed == getCurrentLoggedInUserResult
+            ? _value.getCurrentLoggedInUserResult
+            : getCurrentLoggedInUserResult // ignore: cast_nullable_to_non_nullable
+                  as GetCurrentLoggedInUserResult?,
+        currentLoggedInUser: freezed == currentLoggedInUser
+            ? _value.currentLoggedInUser
+            : currentLoggedInUser // ignore: cast_nullable_to_non_nullable
+                  as UserListModel?,
         fetchUserResult: freezed == fetchUserResult
             ? _value.fetchUserResult
             : fetchUserResult // ignore: cast_nullable_to_non_nullable
@@ -183,6 +240,10 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
             ? _value._chats
             : chats // ignore: cast_nullable_to_non_nullable
                   as List<ChatModel>?,
+        joinMeetingResult: freezed == joinMeetingResult
+            ? _value.joinMeetingResult
+            : joinMeetingResult // ignore: cast_nullable_to_non_nullable
+                  as JoinMeetingResult?,
       ),
     );
   }
@@ -192,6 +253,8 @@ class __$$ChatBlocStateImplCopyWithImpl<$Res>
 
 class _$ChatBlocStateImpl implements _ChatBlocState {
   _$ChatBlocStateImpl({
+    this.getCurrentLoggedInUserResult,
+    this.currentLoggedInUser,
     this.fetchUserResult,
     final List<UserListModel>? userList,
     this.sendMessageResult,
@@ -199,10 +262,15 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
     final List<MessageModel>? messages,
     this.getChatsResult,
     final List<ChatModel>? chats,
+    this.joinMeetingResult,
   }) : _userList = userList,
        _messages = messages,
        _chats = chats;
 
+  @override
+  final GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult;
+  @override
+  final UserListModel? currentLoggedInUser;
   @override
   final FetchUserResult? fetchUserResult;
   final List<UserListModel>? _userList;
@@ -242,8 +310,11 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
   }
 
   @override
+  final JoinMeetingResult? joinMeetingResult;
+
+  @override
   String toString() {
-    return 'ChatBlocState(fetchUserResult: $fetchUserResult, userList: $userList, sendMessageResult: $sendMessageResult, getMessagesResult: $getMessagesResult, messages: $messages, getChatsResult: $getChatsResult, chats: $chats)';
+    return 'ChatBlocState(getCurrentLoggedInUserResult: $getCurrentLoggedInUserResult, currentLoggedInUser: $currentLoggedInUser, fetchUserResult: $fetchUserResult, userList: $userList, sendMessageResult: $sendMessageResult, getMessagesResult: $getMessagesResult, messages: $messages, getChatsResult: $getChatsResult, chats: $chats, joinMeetingResult: $joinMeetingResult)';
   }
 
   @override
@@ -251,6 +322,14 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChatBlocStateImpl &&
+            (identical(
+                  other.getCurrentLoggedInUserResult,
+                  getCurrentLoggedInUserResult,
+                ) ||
+                other.getCurrentLoggedInUserResult ==
+                    getCurrentLoggedInUserResult) &&
+            (identical(other.currentLoggedInUser, currentLoggedInUser) ||
+                other.currentLoggedInUser == currentLoggedInUser) &&
             (identical(other.fetchUserResult, fetchUserResult) ||
                 other.fetchUserResult == fetchUserResult) &&
             const DeepCollectionEquality().equals(other._userList, _userList) &&
@@ -261,12 +340,16 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
             const DeepCollectionEquality().equals(other._messages, _messages) &&
             (identical(other.getChatsResult, getChatsResult) ||
                 other.getChatsResult == getChatsResult) &&
-            const DeepCollectionEquality().equals(other._chats, _chats));
+            const DeepCollectionEquality().equals(other._chats, _chats) &&
+            (identical(other.joinMeetingResult, joinMeetingResult) ||
+                other.joinMeetingResult == joinMeetingResult));
   }
 
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    getCurrentLoggedInUserResult,
+    currentLoggedInUser,
     fetchUserResult,
     const DeepCollectionEquality().hash(_userList),
     sendMessageResult,
@@ -274,6 +357,7 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
     const DeepCollectionEquality().hash(_messages),
     getChatsResult,
     const DeepCollectionEquality().hash(_chats),
+    joinMeetingResult,
   );
 
   /// Create a copy of ChatBlocState
@@ -287,6 +371,8 @@ class _$ChatBlocStateImpl implements _ChatBlocState {
 
 abstract class _ChatBlocState implements ChatBlocState {
   factory _ChatBlocState({
+    final GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult,
+    final UserListModel? currentLoggedInUser,
     final FetchUserResult? fetchUserResult,
     final List<UserListModel>? userList,
     final SendMessageResult? sendMessageResult,
@@ -294,8 +380,13 @@ abstract class _ChatBlocState implements ChatBlocState {
     final List<MessageModel>? messages,
     final GetChatsResult? getChatsResult,
     final List<ChatModel>? chats,
+    final JoinMeetingResult? joinMeetingResult,
   }) = _$ChatBlocStateImpl;
 
+  @override
+  GetCurrentLoggedInUserResult? get getCurrentLoggedInUserResult;
+  @override
+  UserListModel? get currentLoggedInUser;
   @override
   FetchUserResult? get fetchUserResult;
   @override
@@ -310,6 +401,8 @@ abstract class _ChatBlocState implements ChatBlocState {
   GetChatsResult? get getChatsResult;
   @override
   List<ChatModel>? get chats;
+  @override
+  JoinMeetingResult? get joinMeetingResult;
 
   /// Create a copy of ChatBlocState
   /// with the given fields replaced by the non-null parameter values.

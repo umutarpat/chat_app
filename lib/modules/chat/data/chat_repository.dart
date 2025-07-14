@@ -5,6 +5,7 @@ import 'package:chat_app/modules/chat/data/models/message_model/message_model.da
 import 'package:chat_app/modules/chat/data/models/user_list_model/user_list_model.dart';
 import 'package:chat_app/modules/chat/domain/entities/fetch_user_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/get_chats_result.dart';
+import 'package:chat_app/modules/chat/domain/entities/get_current_user_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/get_messages_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/send_message_result.dart';
 import 'package:chat_app/modules/chat/domain/repositories/chat_repository_interface.dart';
@@ -16,6 +17,31 @@ class ChatRepository extends ChatRepositoryInterface {
   final AppDatabase database;
 
   ChatRepository(this.database);
+
+  @override
+  Future<GetCurrentLoggedInUserResult> getCurrentLoggedUser() async {
+    try {
+      final result = await (database.select(
+        database.usersTable,
+      )..where((u) => u.id.equals(1))).getSingleOrNull();
+
+      if (result == null) {
+        return GetCurrentLoggedInUserFailure();
+      }
+
+      return GetCurrentLoggedInUserSuccess(
+        currentLoggedInUser: UserListModel(
+          id: result.id,
+          firstName: result.firstName,
+          lastName: result.lastName,
+          email: result.email,
+        ),
+      );
+    } catch (e) {
+      logIt().e("Error fetching current logged user: $e");
+      return GetCurrentLoggedInUserFailure();
+    }
+  }
 
   @override
   Future<FetchUserResult> fetchUserList() async {

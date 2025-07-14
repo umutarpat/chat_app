@@ -32,6 +32,9 @@
   "registerSuccessful": "Register successful, please check your email for verification link.",
   "newChat": "New Chat",
   "message": "Message",
-  "chat": "Chat"
+  "chat": "Chat",
+  "permissionsNeededTitle": "Permissions Needed",
+  "micAndCameraPermissionsEnable": "Please enable camera and microphone permissions in Settings to join the meeting.",
+  "openSettings": "Open Settings"
 
 }

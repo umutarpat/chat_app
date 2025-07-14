@@ -3,6 +3,7 @@ import 'package:chat_app/modules/chat/application/chat_bloc_state.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_usecase.dart';
 import 'package:chat_app/modules/chat/domain/entities/fetch_user_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/get_chats_result.dart';
+import 'package:chat_app/modules/chat/domain/entities/get_current_user_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/get_messages_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/send_message_result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,13 +15,30 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
   final ChatBlocSendMessageUseCase sendMessageUseCase;
   final ChatBlocGetMessagesUseCase getMessagesUseCase;
   final ChatBlocGetChatsUseCase getChatsUseCase;
+  final ChatBlocGetCurrentLoggedUserUseCase getCurrentLoggedInUserUseCase;
+  final ChatBlocJoinMeetingUseCase joinMeetingUseCase;
 
   ChatBloc(
     this.fetchUserListUseCase,
     this.sendMessageUseCase,
     this.getMessagesUseCase,
     this.getChatsUseCase,
+    this.getCurrentLoggedInUserUseCase,
+    this.joinMeetingUseCase,
   ) : super(ChatBlocState()) {
+    on<GetCurrentLoggedInUserEvent>((event, emit) async {
+      final result = await getCurrentLoggedInUserUseCase.call();
+      if (result is GetCurrentLoggedInUserSuccess) {
+        emit(
+          state.copyWith(
+            getCurrentLoggedInUserResult: result,
+            currentLoggedInUser: result.currentLoggedInUser,
+          ),
+        );
+      } else {
+        emit(state.copyWith(getCurrentLoggedInUserResult: result));
+      }
+    });
     on<FetchUserListEvent>((event, emit) async {
       final result = await fetchUserListUseCase.call();
 
@@ -61,6 +79,13 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
       } else {
         emit(state.copyWith(getChatsResult: result));
       }
+    });
+    on<JoinMeetingEvent>((event, emit) async {
+      final result = await joinMeetingUseCase.call(
+        displayName: event.displayName,
+        email: event.email,
+      );
+      emit(state.copyWith(joinMeetingResult: result));
     });
   }
 }

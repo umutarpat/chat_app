@@ -72,7 +72,7 @@ final router = GoRouter(
         final extra = state.extra as MessagePageRoutesModel;
         return BlocProvider.value(
           value: getIt<ChatBloc>(),
-          child: MessagePage(user: extra),
+          child: MessagePage(receiverUser: extra),
         );
       },
     ),
