@@ -24,6 +24,7 @@ import '../../modules/chat/domain/repositories/chat_repository_interface.dart'
     as _i455;
 import '../../modules/feed/application/feed_bloc.dart' as _i201;
 import '../../modules/feed/application/feed_bloc_usecase.dart' as _i84;
+import '../../modules/feed/data/feed_repository.dart' as _i450;
 import '../../modules/feed/domain/repositories/feed_repository_interface.dart'
     as _i606;
 import '../../modules/settings/application/settings_bloc.dart' as _i893;
@@ -86,6 +87,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i428.ChatBlocJoinMeetingUseCase>(),
       ),
     );
+    gh.lazySingleton<_i606.FeedRepositoryInterface>(
+      () => _i450.FeedRepository(gh<_i875.AppDatabase>()),
+    );
     gh.factory<_i473.SettingsBlocLogoutUseCase>(
       () => _i473.SettingsBlocLogoutUseCase(
         gh<_i1024.SettingsRepositoryInterface>(),
@@ -96,6 +100,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i84.FeedBlocGetFeedUseCase>(
       () => _i84.FeedBlocGetFeedUseCase(gh<_i606.FeedRepositoryInterface>()),
+    );
+    gh.factory<_i84.FeedBlocCreatePostUseCase>(
+      () => _i84.FeedBlocCreatePostUseCase(gh<_i606.FeedRepositoryInterface>()),
+    );
+    gh.factory<_i84.FeedBlocGetCurrentLoggedUserUseCase>(
+      () => _i84.FeedBlocGetCurrentLoggedUserUseCase(
+        gh<_i606.FeedRepositoryInterface>(),
+      ),
     );
     gh.factory<_i114.AuthBlocSetupUserUseCase>(
       () => _i114.AuthBlocSetupUserUseCase(gh<_i462.AuthRepositoryInterface>()),
@@ -115,8 +127,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i114.AuthBlocSignupUseCase>(
       () => _i114.AuthBlocSignupUseCase(gh<_i462.AuthRepositoryInterface>()),
     );
-    gh.lazySingleton<_i201.FeedBloc>(
-      () => _i201.FeedBloc(getFeedUseCase: gh<_i84.FeedBlocGetFeedUseCase>()),
+    gh.factory<_i201.FeedBloc>(
+      () => _i201.FeedBloc(
+        getFeedUseCase: gh<_i84.FeedBlocGetFeedUseCase>(),
+        createPostUseCase: gh<_i84.FeedBlocCreatePostUseCase>(),
+        getCurrentLoggedUserUseCase:
+            gh<_i84.FeedBlocGetCurrentLoggedUserUseCase>(),
+      ),
     );
     gh.factory<_i156.AuthBloc>(
       () => _i156.AuthBloc(

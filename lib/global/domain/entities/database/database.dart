@@ -31,7 +31,18 @@ class MessagesTable extends Table {
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }
 
-@DriftDatabase(tables: [SettingsTable, UsersTable, MessagesTable])
+class PostsTable extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get title => text()();
+  TextColumn get description => text()();
+  TextColumn get imagePath => text().nullable()();
+  IntColumn get userId => integer()();
+  TextColumn get firstName => text()();
+  TextColumn get lastName => text()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+}
+
+@DriftDatabase(tables: [SettingsTable, UsersTable, MessagesTable, PostsTable])
 class AppDatabase extends _$AppDatabase {
   // After generating code, this class needs to define a `schemaVersion` getter
   // and a constructor telling drift where the database should be stored.

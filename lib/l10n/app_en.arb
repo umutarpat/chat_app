@@ -36,6 +36,17 @@
   "permissionsNeededTitle": "Permissions Needed",
   "micAndCameraPermissionsEnable": "Please enable camera and microphone permissions in Settings to join the meeting.",
   "openSettings": "Open Settings",
-  "feed": "Feed"
+  "feed": "Feed",
+  "noPostsYet": "No posts yet.",
+  "postCreationSuccessful": "Post created successfully!",
+  "postCreationFailed": "Failed to create post.",
+  "newPost": "New Post",
+  "title": "Title",
+  "description": "Description",
+  "optionalImage": "Image (Optional)",
+  "changeImage": "Change Image",
+  "addImage": "Add Image",
+  "cancel": "Cancel",
+  "createPost": "Create Post"
 
 }

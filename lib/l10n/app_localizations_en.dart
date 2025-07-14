@@ -123,4 +123,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feed => 'Feed';
+
+  @override
+  String get noPostsYet => 'No posts yet.';
+
+  @override
+  String get postCreationSuccessful => 'Post created successfully!';
+
+  @override
+  String get postCreationFailed => 'Failed to create post.';
+
+  @override
+  String get newPost => 'New Post';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get optionalImage => 'Image (Optional)';
+
+  @override
+  String get changeImage => 'Change Image';
+
+  @override
+  String get addImage => 'Add Image';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get createPost => 'Create Post';
 }

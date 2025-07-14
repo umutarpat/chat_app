@@ -2,6 +2,8 @@ PODS:
   - Flutter (1.0.0)
   - Giphy (2.2.12):
     - libwebp
+  - image_picker_ios (0.0.1):
+    - Flutter
   - jitsi_meet_flutter_sdk (11.2.0):
     - Flutter
     - JitsiMeetSDK (= 11.2.0)
@@ -51,6 +53,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - jitsi_meet_flutter_sdk (from `.symlinks/plugins/jitsi_meet_flutter_sdk/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -67,6 +70,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   jitsi_meet_flutter_sdk:
     :path: ".symlinks/plugins/jitsi_meet_flutter_sdk/ios"
   path_provider_foundation:
@@ -79,6 +84,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   Giphy: 83628960ed04e1c3428ff1b4fb2b027f65e82f50
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
   jitsi_meet_flutter_sdk: 5358245bcdd36dcf4db2f2f1b623adb3803d27ee
   JitsiMeetSDK: 414bcd948c2fd082a4078bc16813cb36936d868a
   JitsiWebRTC: b47805ab5668be38e7ee60e2258f49badfe8e1d0

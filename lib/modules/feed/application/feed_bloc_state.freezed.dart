@@ -17,7 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FeedBlocState {
-  String? get getFeedResult => throw _privateConstructorUsedError;
+  GetPostsResult? get getPostsResult => throw _privateConstructorUsedError;
+  List<FeedPostModel>? get posts => throw _privateConstructorUsedError;
+  CreatePostResult? get createPostResult => throw _privateConstructorUsedError;
+  GetCurrentLoggedInUserResult? get getCurrentLoggedInUserResult =>
+      throw _privateConstructorUsedError;
+  UserListModel? get currentLoggedInUser => throw _privateConstructorUsedError;
 
   /// Create a copy of FeedBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +38,15 @@ abstract class $FeedBlocStateCopyWith<$Res> {
     $Res Function(FeedBlocState) then,
   ) = _$FeedBlocStateCopyWithImpl<$Res, FeedBlocState>;
   @useResult
-  $Res call({String? getFeedResult});
+  $Res call({
+    GetPostsResult? getPostsResult,
+    List<FeedPostModel>? posts,
+    CreatePostResult? createPostResult,
+    GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult,
+    UserListModel? currentLoggedInUser,
+  });
+
+  $UserListModelCopyWith<$Res>? get currentLoggedInUser;
 }
 
 /// @nodoc
@@ -50,16 +63,53 @@ class _$FeedBlocStateCopyWithImpl<$Res, $Val extends FeedBlocState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? getFeedResult = freezed}) {
+  $Res call({
+    Object? getPostsResult = freezed,
+    Object? posts = freezed,
+    Object? createPostResult = freezed,
+    Object? getCurrentLoggedInUserResult = freezed,
+    Object? currentLoggedInUser = freezed,
+  }) {
     return _then(
       _value.copyWith(
-            getFeedResult: freezed == getFeedResult
-                ? _value.getFeedResult
-                : getFeedResult // ignore: cast_nullable_to_non_nullable
-                      as String?,
+            getPostsResult: freezed == getPostsResult
+                ? _value.getPostsResult
+                : getPostsResult // ignore: cast_nullable_to_non_nullable
+                      as GetPostsResult?,
+            posts: freezed == posts
+                ? _value.posts
+                : posts // ignore: cast_nullable_to_non_nullable
+                      as List<FeedPostModel>?,
+            createPostResult: freezed == createPostResult
+                ? _value.createPostResult
+                : createPostResult // ignore: cast_nullable_to_non_nullable
+                      as CreatePostResult?,
+            getCurrentLoggedInUserResult:
+                freezed == getCurrentLoggedInUserResult
+                ? _value.getCurrentLoggedInUserResult
+                : getCurrentLoggedInUserResult // ignore: cast_nullable_to_non_nullable
+                      as GetCurrentLoggedInUserResult?,
+            currentLoggedInUser: freezed == currentLoggedInUser
+                ? _value.currentLoggedInUser
+                : currentLoggedInUser // ignore: cast_nullable_to_non_nullable
+                      as UserListModel?,
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of FeedBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserListModelCopyWith<$Res>? get currentLoggedInUser {
+    if (_value.currentLoggedInUser == null) {
+      return null;
+    }
+
+    return $UserListModelCopyWith<$Res>(_value.currentLoggedInUser!, (value) {
+      return _then(_value.copyWith(currentLoggedInUser: value) as $Val);
+    });
   }
 }
 
@@ -72,7 +122,16 @@ abstract class _$$FeedBlocStateImplCopyWith<$Res>
   ) = __$$FeedBlocStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? getFeedResult});
+  $Res call({
+    GetPostsResult? getPostsResult,
+    List<FeedPostModel>? posts,
+    CreatePostResult? createPostResult,
+    GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult,
+    UserListModel? currentLoggedInUser,
+  });
+
+  @override
+  $UserListModelCopyWith<$Res>? get currentLoggedInUser;
 }
 
 /// @nodoc
@@ -88,13 +147,35 @@ class __$$FeedBlocStateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? getFeedResult = freezed}) {
+  $Res call({
+    Object? getPostsResult = freezed,
+    Object? posts = freezed,
+    Object? createPostResult = freezed,
+    Object? getCurrentLoggedInUserResult = freezed,
+    Object? currentLoggedInUser = freezed,
+  }) {
     return _then(
       _$FeedBlocStateImpl(
-        getFeedResult: freezed == getFeedResult
-            ? _value.getFeedResult
-            : getFeedResult // ignore: cast_nullable_to_non_nullable
-                  as String?,
+        getPostsResult: freezed == getPostsResult
+            ? _value.getPostsResult
+            : getPostsResult // ignore: cast_nullable_to_non_nullable
+                  as GetPostsResult?,
+        posts: freezed == posts
+            ? _value._posts
+            : posts // ignore: cast_nullable_to_non_nullable
+                  as List<FeedPostModel>?,
+        createPostResult: freezed == createPostResult
+            ? _value.createPostResult
+            : createPostResult // ignore: cast_nullable_to_non_nullable
+                  as CreatePostResult?,
+        getCurrentLoggedInUserResult: freezed == getCurrentLoggedInUserResult
+            ? _value.getCurrentLoggedInUserResult
+            : getCurrentLoggedInUserResult // ignore: cast_nullable_to_non_nullable
+                  as GetCurrentLoggedInUserResult?,
+        currentLoggedInUser: freezed == currentLoggedInUser
+            ? _value.currentLoggedInUser
+            : currentLoggedInUser // ignore: cast_nullable_to_non_nullable
+                  as UserListModel?,
       ),
     );
   }
@@ -103,14 +184,36 @@ class __$$FeedBlocStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FeedBlocStateImpl implements _FeedBlocState {
-  _$FeedBlocStateImpl({this.getFeedResult});
+  _$FeedBlocStateImpl({
+    this.getPostsResult,
+    final List<FeedPostModel>? posts,
+    this.createPostResult,
+    this.getCurrentLoggedInUserResult,
+    this.currentLoggedInUser,
+  }) : _posts = posts;
 
   @override
-  final String? getFeedResult;
+  final GetPostsResult? getPostsResult;
+  final List<FeedPostModel>? _posts;
+  @override
+  List<FeedPostModel>? get posts {
+    final value = _posts;
+    if (value == null) return null;
+    if (_posts is EqualUnmodifiableListView) return _posts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final CreatePostResult? createPostResult;
+  @override
+  final GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult;
+  @override
+  final UserListModel? currentLoggedInUser;
 
   @override
   String toString() {
-    return 'FeedBlocState(getFeedResult: $getFeedResult)';
+    return 'FeedBlocState(getPostsResult: $getPostsResult, posts: $posts, createPostResult: $createPostResult, getCurrentLoggedInUserResult: $getCurrentLoggedInUserResult, currentLoggedInUser: $currentLoggedInUser)';
   }
 
   @override
@@ -118,12 +221,30 @@ class _$FeedBlocStateImpl implements _FeedBlocState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FeedBlocStateImpl &&
-            (identical(other.getFeedResult, getFeedResult) ||
-                other.getFeedResult == getFeedResult));
+            (identical(other.getPostsResult, getPostsResult) ||
+                other.getPostsResult == getPostsResult) &&
+            const DeepCollectionEquality().equals(other._posts, _posts) &&
+            (identical(other.createPostResult, createPostResult) ||
+                other.createPostResult == createPostResult) &&
+            (identical(
+                  other.getCurrentLoggedInUserResult,
+                  getCurrentLoggedInUserResult,
+                ) ||
+                other.getCurrentLoggedInUserResult ==
+                    getCurrentLoggedInUserResult) &&
+            (identical(other.currentLoggedInUser, currentLoggedInUser) ||
+                other.currentLoggedInUser == currentLoggedInUser));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, getFeedResult);
+  int get hashCode => Object.hash(
+    runtimeType,
+    getPostsResult,
+    const DeepCollectionEquality().hash(_posts),
+    createPostResult,
+    getCurrentLoggedInUserResult,
+    currentLoggedInUser,
+  );
 
   /// Create a copy of FeedBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -135,10 +256,24 @@ class _$FeedBlocStateImpl implements _FeedBlocState {
 }
 
 abstract class _FeedBlocState implements FeedBlocState {
-  factory _FeedBlocState({final String? getFeedResult}) = _$FeedBlocStateImpl;
+  factory _FeedBlocState({
+    final GetPostsResult? getPostsResult,
+    final List<FeedPostModel>? posts,
+    final CreatePostResult? createPostResult,
+    final GetCurrentLoggedInUserResult? getCurrentLoggedInUserResult,
+    final UserListModel? currentLoggedInUser,
+  }) = _$FeedBlocStateImpl;
 
   @override
-  String? get getFeedResult;
+  GetPostsResult? get getPostsResult;
+  @override
+  List<FeedPostModel>? get posts;
+  @override
+  CreatePostResult? get createPostResult;
+  @override
+  GetCurrentLoggedInUserResult? get getCurrentLoggedInUserResult;
+  @override
+  UserListModel? get currentLoggedInUser;
 
   /// Create a copy of FeedBlocState
   /// with the given fields replaced by the non-null parameter values.

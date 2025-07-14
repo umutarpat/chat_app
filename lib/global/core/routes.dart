@@ -8,6 +8,7 @@ import 'package:chat_app/modules/auth/presentation/pages/signup/signup_page.dart
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/presentation/chat_page.dart';
 import 'package:chat_app/modules/chat/presentation/message_page.dart';
+import 'package:chat_app/modules/feed/application/feed_bloc.dart';
 import 'package:chat_app/modules/feed/presentation/feed_page.dart';
 import 'package:chat_app/modules/settings/application/settings_bloc.dart';
 import 'package:chat_app/modules/settings/presentation/settings_page.dart';
@@ -89,7 +90,12 @@ final router = GoRouter(
     GoRoute(
       path: '/${AppRoute.feed.name}',
       name: '/${AppRoute.feed.name}',
-      pageBuilder: (context, state) => NoTransitionPage(child: FeedPage()),
+      pageBuilder: (context, state) => NoTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<FeedBloc>(),
+          child: FeedPage(),
+        ),
+      ),
     ),
   ],
 );

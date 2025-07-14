@@ -1,9 +1,9 @@
+import 'package:chat_app/global/domain/entities/get_current_user_result.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_event.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_state.dart';
 import 'package:chat_app/modules/chat/application/chat_bloc_usecase.dart';
 import 'package:chat_app/modules/chat/domain/entities/fetch_user_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/get_chats_result.dart';
-import 'package:chat_app/modules/chat/domain/entities/get_current_user_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/get_messages_result.dart';
 import 'package:chat_app/modules/chat/domain/entities/send_message_result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
