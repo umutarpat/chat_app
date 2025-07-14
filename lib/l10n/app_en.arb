@@ -35,6 +35,7 @@
   "chat": "Chat",
   "permissionsNeededTitle": "Permissions Needed",
   "micAndCameraPermissionsEnable": "Please enable camera and microphone permissions in Settings to join the meeting.",
-  "openSettings": "Open Settings"
+  "openSettings": "Open Settings",
+  "feed": "Feed"
 
 }

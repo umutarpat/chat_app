@@ -1,3 +1,4 @@
+import 'package:chat_app/global/common/bottom_nav_bar.dart';
 import 'package:chat_app/global/core/routes.dart';
 import 'package:chat_app/global/domain/entities/routes/message_page_routes_model.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
@@ -39,7 +40,6 @@ class _ChatPageState extends State<ChatPage> {
         centerTitle: false,
 
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.person)),
           IconButton(
             onPressed: () {
               context.pushNamed('/${AppRoute.settings.name}');
@@ -102,6 +102,7 @@ class _ChatPageState extends State<ChatPage> {
           );
         },
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           final chatBloc = context.read<ChatBloc>();
@@ -118,6 +119,7 @@ class _ChatPageState extends State<ChatPage> {
         },
         child: Icon(Icons.chat),
       ),
+      bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
   }
 }

@@ -319,6 +319,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open Settings'**
   String get openSettings;
+
+  /// No description provided for @feed.
+  ///
+  /// In en, this message translates to:
+  /// **'Feed'**
+  String get feed;
 }
 
 class _AppLocalizationsDelegate

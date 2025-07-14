@@ -22,6 +22,10 @@ import '../../modules/chat/application/chat_bloc_usecase.dart' as _i428;
 import '../../modules/chat/data/chat_repository.dart' as _i199;
 import '../../modules/chat/domain/repositories/chat_repository_interface.dart'
     as _i455;
+import '../../modules/feed/application/feed_bloc.dart' as _i201;
+import '../../modules/feed/application/feed_bloc_usecase.dart' as _i84;
+import '../../modules/feed/domain/repositories/feed_repository_interface.dart'
+    as _i606;
 import '../../modules/settings/application/settings_bloc.dart' as _i893;
 import '../../modules/settings/application/settings_bloc_usecase.dart' as _i473;
 import '../../modules/settings/data/settings_repository.dart' as _i55;
@@ -90,6 +94,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i893.SettingsBloc>(
       () => _i893.SettingsBloc(gh<_i473.SettingsBlocLogoutUseCase>()),
     );
+    gh.factory<_i84.FeedBlocGetFeedUseCase>(
+      () => _i84.FeedBlocGetFeedUseCase(gh<_i606.FeedRepositoryInterface>()),
+    );
     gh.factory<_i114.AuthBlocSetupUserUseCase>(
       () => _i114.AuthBlocSetupUserUseCase(gh<_i462.AuthRepositoryInterface>()),
     );
@@ -107,6 +114,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i114.AuthBlocSignupUseCase>(
       () => _i114.AuthBlocSignupUseCase(gh<_i462.AuthRepositoryInterface>()),
+    );
+    gh.lazySingleton<_i201.FeedBloc>(
+      () => _i201.FeedBloc(getFeedUseCase: gh<_i84.FeedBlocGetFeedUseCase>()),
     );
     gh.factory<_i156.AuthBloc>(
       () => _i156.AuthBloc(

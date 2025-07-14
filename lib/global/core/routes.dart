@@ -8,13 +8,14 @@ import 'package:chat_app/modules/auth/presentation/pages/signup/signup_page.dart
 import 'package:chat_app/modules/chat/application/chat_bloc.dart';
 import 'package:chat_app/modules/chat/presentation/chat_page.dart';
 import 'package:chat_app/modules/chat/presentation/message_page.dart';
+import 'package:chat_app/modules/feed/presentation/feed_page.dart';
 import 'package:chat_app/modules/settings/application/settings_bloc.dart';
 import 'package:chat_app/modules/settings/presentation/settings_page.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-enum AppRoute { login, forgotPassword, chat, settings, signup, message }
+enum AppRoute { login, forgotPassword, chat, settings, signup, message, feed }
 
 final router = GoRouter(
   initialLocation: '/${AppRoute.login.name}',
@@ -62,8 +63,9 @@ final router = GoRouter(
     GoRoute(
       path: '/${AppRoute.chat.name}',
       name: '/${AppRoute.chat.name}',
-      builder: (context, state) =>
-          BlocProvider.value(value: getIt<ChatBloc>(), child: ChatPage()),
+      pageBuilder: (context, state) => NoTransitionPage(
+        child: BlocProvider.value(value: getIt<ChatBloc>(), child: ChatPage()),
+      ),
     ),
     GoRoute(
       path: '/${AppRoute.message.name}',
@@ -83,6 +85,11 @@ final router = GoRouter(
         create: (context) => getIt<SettingsBloc>(),
         child: SettingsPage(),
       ),
+    ),
+    GoRoute(
+      path: '/${AppRoute.feed.name}',
+      name: '/${AppRoute.feed.name}',
+      pageBuilder: (context, state) => NoTransitionPage(child: FeedPage()),
     ),
   ],
 );
