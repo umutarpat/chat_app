@@ -134,7 +134,9 @@ class _MessagePageState extends State<MessagePage> {
         ],
         centerTitle: false,
         title: ListTile(
+          contentPadding: EdgeInsets.zero,
           leading: const CircleAvatar(child: Icon(Icons.person)),
+
           title: Text(
             "${widget.receiverUser.firstName} ${widget.receiverUser.lastName}",
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
