@@ -32,6 +32,11 @@ import '../../modules/settings/application/settings_bloc_usecase.dart' as _i473;
 import '../../modules/settings/data/settings_repository.dart' as _i55;
 import '../../modules/settings/domain/repositories/settings_repository_interface.dart'
     as _i1024;
+import '../../modules/todo/application/todo_bloc.dart' as _i397;
+import '../../modules/todo/application/todo_bloc_usecase.dart' as _i674;
+import '../../modules/todo/data/todo_repository.dart' as _i382;
+import '../../modules/todo/domain/repositories/todo_repository_interface.dart'
+    as _i714;
 import '../domain/entities/database/database.dart' as _i875;
 import 'app_module.dart' as _i460;
 
@@ -98,6 +103,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i893.SettingsBloc>(
       () => _i893.SettingsBloc(gh<_i473.SettingsBlocLogoutUseCase>()),
     );
+    gh.lazySingleton<_i714.TodoRepositoryInterface>(
+      () => _i382.TodoRepository(gh<_i875.AppDatabase>()),
+    );
+    gh.factory<_i674.TodoBlocGetCurrentLoggedUserUseCase>(
+      () => _i674.TodoBlocGetCurrentLoggedUserUseCase(
+        gh<_i714.TodoRepositoryInterface>(),
+      ),
+    );
+    gh.factory<_i674.TodoBlocGetTodosUseCase>(
+      () => _i674.TodoBlocGetTodosUseCase(gh<_i714.TodoRepositoryInterface>()),
+    );
+    gh.factory<_i674.TodoBlocCreateTodoUseCase>(
+      () =>
+          _i674.TodoBlocCreateTodoUseCase(gh<_i714.TodoRepositoryInterface>()),
+    );
+    gh.factory<_i674.TodoBlocUpdateTodoUseCase>(
+      () =>
+          _i674.TodoBlocUpdateTodoUseCase(gh<_i714.TodoRepositoryInterface>()),
+    );
+    gh.factory<_i674.TodoBlocDeleteTodoUseCase>(
+      () =>
+          _i674.TodoBlocDeleteTodoUseCase(gh<_i714.TodoRepositoryInterface>()),
+    );
     gh.factory<_i84.FeedBlocGetFeedUseCase>(
       () => _i84.FeedBlocGetFeedUseCase(gh<_i606.FeedRepositoryInterface>()),
     );
@@ -133,6 +161,16 @@ extension GetItInjectableX on _i174.GetIt {
         createPostUseCase: gh<_i84.FeedBlocCreatePostUseCase>(),
         getCurrentLoggedUserUseCase:
             gh<_i84.FeedBlocGetCurrentLoggedUserUseCase>(),
+      ),
+    );
+    gh.factory<_i397.TodoBloc>(
+      () => _i397.TodoBloc(
+        getCurrentLoggedUserUseCase:
+            gh<_i674.TodoBlocGetCurrentLoggedUserUseCase>(),
+        getTodosUseCase: gh<_i674.TodoBlocGetTodosUseCase>(),
+        createTodoUseCase: gh<_i674.TodoBlocCreateTodoUseCase>(),
+        updateTodoUseCase: gh<_i674.TodoBlocUpdateTodoUseCase>(),
+        deleteTodoUseCase: gh<_i674.TodoBlocDeleteTodoUseCase>(),
       ),
     );
     gh.factory<_i156.AuthBloc>(

@@ -47,6 +47,11 @@
   "changeImage": "Change Image",
   "addImage": "Add Image",
   "cancel": "Cancel",
-  "createPost": "Create Post"
-
+  "createPost": "Create Post",
+  "todo": "Todo",
+  "addNewTodo": "Add New Todo",
+  "addTodo": "Add Todo",
+  "noTodosYet": "No todos yet.",
+  "todoCreated": "Todo created successfully!",
+  "todoCreationFailed": "Failed to create todo."
 }

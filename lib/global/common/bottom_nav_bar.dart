@@ -1,4 +1,5 @@
 import 'package:chat_app/global/core/routes.dart';
+import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,17 +18,22 @@ class BottomNavBar extends StatelessWidget {
       case 1:
         context.go('/${AppRoute.feed.name}');
         break;
+      case 2:
+        context.go('/${AppRoute.todo.name}');
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: (index) => _onTap(context, index),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-        BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: 'Feed'),
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.chat), label: l10n.chat),
+        BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: l10n.feed),
+        BottomNavigationBarItem(icon: Icon(Icons.list), label: l10n.todo),
       ],
     );
   }

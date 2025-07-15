@@ -42,7 +42,19 @@ class PostsTable extends Table {
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }
 
-@DriftDatabase(tables: [SettingsTable, UsersTable, MessagesTable, PostsTable])
+class TodosTable extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get title => text()();
+  TextColumn get description => text().nullable()();
+  BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
+  IntColumn get userId => integer()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+}
+
+@DriftDatabase(
+  tables: [SettingsTable, UsersTable, MessagesTable, PostsTable, TodosTable],
+)
 class AppDatabase extends _$AppDatabase {
   // After generating code, this class needs to define a `schemaVersion` getter
   // and a constructor telling drift where the database should be stored.

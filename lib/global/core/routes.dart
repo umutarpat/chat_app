@@ -12,11 +12,22 @@ import 'package:chat_app/modules/feed/application/feed_bloc.dart';
 import 'package:chat_app/modules/feed/presentation/feed_page.dart';
 import 'package:chat_app/modules/settings/application/settings_bloc.dart';
 import 'package:chat_app/modules/settings/presentation/settings_page.dart';
+import 'package:chat_app/modules/todo/application/todo_bloc.dart';
+import 'package:chat_app/modules/todo/presentation/todo_page.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-enum AppRoute { login, forgotPassword, chat, settings, signup, message, feed }
+enum AppRoute {
+  login,
+  forgotPassword,
+  chat,
+  settings,
+  signup,
+  message,
+  feed,
+  todo,
+}
 
 final router = GoRouter(
   initialLocation: '/${AppRoute.login.name}',
@@ -94,6 +105,16 @@ final router = GoRouter(
         child: BlocProvider(
           create: (context) => getIt<FeedBloc>(),
           child: FeedPage(),
+        ),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRoute.todo.name}',
+      name: '/${AppRoute.todo.name}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<TodoBloc>(),
+          child: TodoPage(),
         ),
       ),
     ),

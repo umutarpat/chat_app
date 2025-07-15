@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chat_app/global/themes/extensions/design_text_styles.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/feed/application/feed_bloc.dart';
 import 'package:chat_app/modules/feed/application/feed_bloc_event.dart';
@@ -227,6 +228,9 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                             _selectedImage != null
                                 ? l10n.changeImage
                                 : l10n.addImage,
+                            style: Theme.of(
+                              context,
+                            ).extension<DesignTextStyles>()?.buttonTextStyle,
                           ),
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(double.infinity, 48),
@@ -238,7 +242,12 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                             Expanded(
                               child: OutlinedButton(
                                 onPressed: () => context.pop(),
-                                child: Text(l10n.cancel),
+                                child: Text(
+                                  l10n.cancel,
+                                  style: Theme.of(context)
+                                      .extension<DesignTextStyles>()
+                                      ?.secondaryButtonTextStyle,
+                                ),
                               ),
                             ),
                             const SizedBox(width: 16),
@@ -261,7 +270,12 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                                             '',
                                       );
                                     },
-                                    child: Text(l10n.createPost),
+                                    child: Text(
+                                      l10n.createPost,
+                                      style: Theme.of(context)
+                                          .extension<DesignTextStyles>()
+                                          ?.buttonTextStyle,
+                                    ),
                                   );
                                 },
                               ),

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 const _primaryColor = Colors.blue;
 const _fieldHintTextStyle = TextStyle(color: Colors.grey, fontSize: 16);
 const _fieldErrorTextStyle = TextStyle(color: Colors.red, fontSize: 12);
+const _buttonTextStyle = TextStyle(color: Colors.white, fontSize: 14);
+const _secondaryButtonTextStyle = TextStyle(color: Colors.blue, fontSize: 14);
 
 ThemeData lightTheme(BuildContext context) {
   return ThemeData(
@@ -29,6 +31,8 @@ ThemeData lightTheme(BuildContext context) {
       DesignTextStyles(
         fieldHintTextStyle: _fieldHintTextStyle,
         fieldErrorTextStyle: _fieldErrorTextStyle,
+        buttonTextStyle: _buttonTextStyle,
+        secondaryButtonTextStyle: _secondaryButtonTextStyle,
       ),
     ],
     textTheme: TextTheme(

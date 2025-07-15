@@ -391,6 +391,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create Post'**
   String get createPost;
+
+  /// No description provided for @todo.
+  ///
+  /// In en, this message translates to:
+  /// **'Todo'**
+  String get todo;
+
+  /// No description provided for @addNewTodo.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Todo'**
+  String get addNewTodo;
+
+  /// No description provided for @addTodo.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Todo'**
+  String get addTodo;
+
+  /// No description provided for @noTodosYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No todos yet.'**
+  String get noTodosYet;
+
+  /// No description provided for @todoCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Todo created successfully!'**
+  String get todoCreated;
+
+  /// No description provided for @todoCreationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create todo.'**
+  String get todoCreationFailed;
 }
 
 class _AppLocalizationsDelegate

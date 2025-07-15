@@ -156,4 +156,22 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get createPost => 'Create Post';
+
+  @override
+  String get todo => 'Todo';
+
+  @override
+  String get addNewTodo => 'Add New Todo';
+
+  @override
+  String get addTodo => 'Add Todo';
+
+  @override
+  String get noTodosYet => 'No todos yet.';
+
+  @override
+  String get todoCreated => 'Todo created successfully!';
+
+  @override
+  String get todoCreationFailed => 'Failed to create todo.';
 }
