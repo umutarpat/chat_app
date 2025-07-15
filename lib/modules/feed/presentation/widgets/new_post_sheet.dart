@@ -154,6 +154,10 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                             FormBuilderValidators.required(
                               errorText: l10n.cannotBeEmpty,
                             ),
+                            FormBuilderValidators.maxLength(
+                              40,
+                              errorText: l10n.maxFortyChars,
+                            ),
                           ]),
                         ),
                         const SizedBox(height: 16),
@@ -169,6 +173,10 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                           validator: FormBuilderValidators.compose([
                             FormBuilderValidators.required(
                               errorText: l10n.cannotBeEmpty,
+                            ),
+                            FormBuilderValidators.maxLength(
+                              200,
+                              errorText: l10n.maxTwoHunderedChars,
                             ),
                           ]),
                         ),

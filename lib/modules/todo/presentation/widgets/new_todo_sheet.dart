@@ -87,9 +87,14 @@ class _TodoPageNewTodoSheetState extends State<TodoPageNewTodoSheet> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: FormBuilderValidators.compose([
                             FormBuilderValidators.required(
                               errorText: l10n.cannotBeEmpty,
+                            ),
+                            FormBuilderValidators.maxLength(
+                              40,
+                              errorText: l10n.maxFortyChars,
                             ),
                           ]),
                         ),
@@ -102,6 +107,15 @@ class _TodoPageNewTodoSheetState extends State<TodoPageNewTodoSheet> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) return null;
+                            if (value.length > 200) {
+                              return l10n.maxTwoHunderedChars;
+                            }
+
+                            return null;
+                          },
                           maxLines: 3,
                         ),
                         const SizedBox(height: 24),

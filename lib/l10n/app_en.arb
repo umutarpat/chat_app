@@ -54,5 +54,7 @@
   "addTodo": "Add Todo",
   "noTodosYet": "No todos yet.",
   "todoCreated": "Todo created successfully!",
-  "todoCreationFailed": "Failed to create todo."
+  "todoCreationFailed": "Failed to create todo.",
+  "maxFortyChars": "Max 40 characters.",
+  "maxTwoHunderedChars": "Max 200 characters."
 }
