@@ -1,5 +1,6 @@
 import 'package:chat_app/global/core/routes.dart';
 import 'package:chat_app/global/themes/extensions/design_colors.dart';
+import 'package:chat_app/global/themes/extensions/design_text_styles.dart';
 import 'package:chat_app/global/utils/logger.dart';
 import 'package:chat_app/global/utils/validations/input_formatters.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
@@ -293,9 +294,10 @@ class _LoginPageState extends State<LoginPage>
                                             child: Text(
                                               l10n.login,
                                               style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
+                                                  .extension<DesignTextStyles>()
+                                                  ?.buttonTextStyle
                                                   .copyWith(
+                                                    fontSize: 16,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                             ),
@@ -329,9 +331,10 @@ class _LoginPageState extends State<LoginPage>
                                             child: Text(
                                               l10n.signup,
                                               style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
+                                                  .extension<DesignTextStyles>()
+                                                  ?.buttonTextStyle
                                                   .copyWith(
+                                                    fontSize: 16,
                                                     fontWeight: FontWeight.bold,
                                                     color: Theme.of(
                                                       context,

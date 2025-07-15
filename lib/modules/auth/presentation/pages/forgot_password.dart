@@ -1,4 +1,5 @@
 import 'package:chat_app/global/themes/extensions/design_colors.dart';
+import 'package:chat_app/global/themes/extensions/design_text_styles.dart';
 import 'package:chat_app/l10n/app_localizations.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc.dart';
 import 'package:chat_app/modules/auth/application/auth_bloc_event.dart';
@@ -158,9 +159,12 @@ class ForgotPasswordPage extends StatelessWidget {
                                   child: Text(
                                     l10n.sendResetPasswordEmail,
                                     style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
+                                        .extension<DesignTextStyles>()
+                                        ?.buttonTextStyle
+                                        .copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                 ),
                               ),
