@@ -284,6 +284,12 @@ abstract class AppLocalizations {
   /// **'Register successful, please check your email for verification link.'**
   String get registerSuccessful;
 
+  /// No description provided for @noChatsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No chats yet.'**
+  String get noChatsYet;
+
   /// No description provided for @newChat.
   ///
   /// In en, this message translates to:

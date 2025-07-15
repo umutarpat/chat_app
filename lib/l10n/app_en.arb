@@ -30,6 +30,7 @@
   "phoneNumberNotValid": "Invalid phone number.",
   "userAlreadyExist": "This user already exists.",
   "registerSuccessful": "Register successful, please check your email for verification link.",
+  "noChatsYet": "No chats yet.",
   "newChat": "New Chat",
   "message": "Message",
   "chat": "Chat",
