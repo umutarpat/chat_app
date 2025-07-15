@@ -434,17 +434,23 @@ abstract class AppLocalizations {
   /// **'Failed to create todo.'**
   String get todoCreationFailed;
 
-  /// No description provided for @maxFortyChars.
+  /// No description provided for @maxHunderedChars.
   ///
   /// In en, this message translates to:
-  /// **'Max 40 characters.'**
-  String get maxFortyChars;
+  /// **'Max 100 characters.'**
+  String get maxHunderedChars;
 
-  /// No description provided for @maxTwoHunderedChars.
+  /// No description provided for @maxThreeHunderedFiftyChars.
   ///
   /// In en, this message translates to:
-  /// **'Max 200 characters.'**
-  String get maxTwoHunderedChars;
+  /// **'Max 350 characters.'**
+  String get maxThreeHunderedFiftyChars;
+
+  /// No description provided for @maxFiveHunderedChars.
+  ///
+  /// In en, this message translates to:
+  /// **'Max 500 characters'**
+  String get maxFiveHunderedChars;
 }
 
 class _AppLocalizationsDelegate

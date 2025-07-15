@@ -155,8 +155,8 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                               errorText: l10n.cannotBeEmpty,
                             ),
                             FormBuilderValidators.maxLength(
-                              40,
-                              errorText: l10n.maxFortyChars,
+                              100,
+                              errorText: l10n.maxHunderedChars,
                             ),
                           ]),
                         ),
@@ -175,8 +175,8 @@ class _FeedPageNewPostSheetState extends State<FeedPageNewPostSheet> {
                               errorText: l10n.cannotBeEmpty,
                             ),
                             FormBuilderValidators.maxLength(
-                              200,
-                              errorText: l10n.maxTwoHunderedChars,
+                              500,
+                              errorText: l10n.maxFiveHunderedChars,
                             ),
                           ]),
                         ),

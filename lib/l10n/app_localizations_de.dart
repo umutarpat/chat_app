@@ -179,8 +179,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get todoCreationFailed => 'Failed to create todo.';
 
   @override
-  String get maxFortyChars => 'Max 40 characters.';
+  String get maxHunderedChars => 'Max 100 characters.';
 
   @override
-  String get maxTwoHunderedChars => 'Max 200 characters.';
+  String get maxThreeHunderedFiftyChars => 'Max 350 characters.';
+
+  @override
+  String get maxFiveHunderedChars => 'Max 500 characters';
 }

@@ -55,6 +55,7 @@
   "noTodosYet": "No todos yet.",
   "todoCreated": "Todo created successfully!",
   "todoCreationFailed": "Failed to create todo.",
-  "maxFortyChars": "Max 40 characters.",
-  "maxTwoHunderedChars": "Max 200 characters."
+  "maxHunderedChars": "Max 100 characters.",
+  "maxThreeHunderedFiftyChars": "Max 350 characters.",
+  "maxFiveHunderedChars": "Max 500 characters"
 }

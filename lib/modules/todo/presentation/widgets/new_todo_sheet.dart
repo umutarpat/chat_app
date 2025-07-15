@@ -93,8 +93,8 @@ class _TodoPageNewTodoSheetState extends State<TodoPageNewTodoSheet> {
                               errorText: l10n.cannotBeEmpty,
                             ),
                             FormBuilderValidators.maxLength(
-                              40,
-                              errorText: l10n.maxFortyChars,
+                              100,
+                              errorText: l10n.maxHunderedChars,
                             ),
                           ]),
                         ),
@@ -110,8 +110,8 @@ class _TodoPageNewTodoSheetState extends State<TodoPageNewTodoSheet> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             if (value == null || value.isEmpty) return null;
-                            if (value.length > 200) {
-                              return l10n.maxTwoHunderedChars;
+                            if (value.length > 350) {
+                              return l10n.maxThreeHunderedFiftyChars;
                             }
 
                             return null;
