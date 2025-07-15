@@ -55,6 +55,7 @@ dependencies:
   jitsi_meet_flutter_sdk: ^11.2.0
   image_picker: ^1.0.4
   intl: ^0.20.2
+  
 
 dev_dependencies:
   flutter_test:
@@ -72,11 +73,15 @@ dev_dependencies:
   drift_dev: ^2.27.0
   injectable_generator:
   json_serializable: ^6.9.5
+  flutter_launcher_icons: ^0.14.4
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_logo.png"
+  min_sdk_android: 26 
 
-# The following section is specific to Flutter packages.
+
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -86,6 +91,7 @@ flutter:
 
   assets:
     - assets/fonts/
+    - assets/images/
 
   fonts:
     - family: roboto
